@@ -1,0 +1,24 @@
+.logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: red;
+    font-family: "Paytone One", sans-serif;
+    font-weight: 700;
+}
+.icon {
+    width: 20px;
+}
+.links {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Paytone One", sans-serif;
+}
+.links span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav {
+    box-shadow: 0 0 5px #ccc;
+    margin-bottom: 20px;
+}

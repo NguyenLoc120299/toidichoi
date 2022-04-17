@@ -1,0 +1,27 @@
+.banner {
+    width: 100%;
+    background: url("/public/assets/img/banner.png");
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+}
+.text1 {
+    display: none;
+}
+@media (min-width: 992px) {
+    .banner {
+        height: 500px;
+    }
+    .text1 {
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        display: block;
+    }
+}

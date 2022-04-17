@@ -1,0 +1,50 @@
+.footer {
+    display: none;
+}
+@media (min-width: 992px) {
+    .footer {
+        display: block;
+        height: 30vh;
+        width: 100%;
+        background: rgb(59, 56, 56);
+        position: relative;
+        display: grid;
+        align-items: center;
+        padding: 0 20px;
+        font-family: "Paytone One", sans-serif;
+    }
+    .contact {
+        border: 2px solid #fff;
+        max-width: 250px;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .contact:hover {
+        border: 2px solid rgb(236, 41, 41);
+    }
+    .title {
+        font-size: 20px;
+        line-height: 24px;
+        color: #fff;
+    }
+    ul.text li {
+        list-style: none;
+        font-size: 15px;
+        color: #fff;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    ul.text li span {
+        font-size: 15px;
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,87 @@
+.Typewriter__wrapper {
+  font-size: 35px;
+  color: #fff;
+  text-transform: capitalize;
+  font-family: "Paytone One", sans-serif;
+}
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+.swiper-button-next,
+.swiper-button-prev,
+.swiper-button-prev,
+.swiper-button-next {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  z-index: 1;
+  width: 40px !important;
+  position: absolute;
+  height: 40px !important;
+  background: #fff;
+  border-radius: 50%;
+}
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after,
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  color: #000;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+  padding: 30px 0 !important;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-pagination-bullet-active {
+  background: rgb(205, 34, 34) !important;
+}
+.upload_file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.alert__modal {
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+  z-index: 20;
+  max-width: 500px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+@media (min-width: 992px) {
+  .Typewriter__wrapper {
+    font-size: 40px;
+  }
+}

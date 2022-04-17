@@ -1,0 +1,112 @@
+.card_slide {
+    max-width: 450px;
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    position: relative;
+
+    transition: all 0.3s ease-in-out;
+}
+.card_slide img {
+    max-width: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    height: 100%;
+}
+.card_slide .category {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+.card_slide::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(182, 134, 134);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+}
+.card_slide .category span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.card_slide .category p {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.card_slide:hover .card_slide img {
+    transform: scale(1.1);
+}
+.card_trending {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    color: inherit;
+    background: #fff;
+    margin: 0 12px 24px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transition: all 0.5s ease-in-out;
+}
+.card_image {
+    width: 100%;
+    background-color: #eee;
+    overflow: hidden;
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 240px;
+}
+.cardImage_wrappeer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.load_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.load_image img {
+    max-width: 100%;
+    min-width: 100%;
+    object-fit: cover;
+}
+.card_body {
+    padding: 2px 15px;
+}
+.card_title {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 6px 0 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.card_text {
+    color: #000;
+    font-size: 14px;
+    padding-bottom: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.card_trending:hover {
+    transform: translateY(-10px);
+}
