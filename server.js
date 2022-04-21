@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -9,10 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
 
-app.use('/api', require('./routes/CategoryRouter'))
-app.use('/api', require('./routes/AreaRouter'))
-app.use('/api', require('./routes/UtilitiesRouter'))
-app.use('/api', require('./routes/PlaceRouter'))
+app.use('/api', require('./routes/index'))
 
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI,

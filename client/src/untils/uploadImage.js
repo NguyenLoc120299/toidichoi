@@ -1,31 +1,35 @@
 
-// import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-// import { storage } from '../firebase.config'
-// export const uploadImage = (files) => {
-//     let imgArr = [];
-//     for (const item of files) {
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '../firebase'
+export const uploadImage = async (files) => {
+    const promises = []
+    for (const item of files) {
 
-//         const storageRef = ref(storage, `/files/${item.name}`)
-//         const uploadTask = uploadBytesResumable(storageRef, item)
+        const storageRef = ref(storage, `/files/${item.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, item)
+        promises.push(uploadTask)
+    }
+    const result = [];
+    await Promise.allSettled(promises).then(res => {
+        res.forEach(item => {
+            if (item.status === 'fulfilled') {
+                result.push(item.value)
+            }
+        })
+    })
 
-//         uploadTask.on(
-//             "state_changed",
-//             (snapshot) => {
-//                 const prog = Math.round(
-//                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-//                 );
-//                 // setProgress(prog);
-//                 console.log(prog);
-//             },
-//             (error) => console.log(error),
-//             () => {
-//                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//                     // imgArr.push(downloadURL);
-//                     imgArr.push(downloadURL);
-//                 });
-//             }
-//         );
-//     }
+    const urlPromises = result.map(item => {
+        const path = item.ref.toString()
+        return getDownloadURL(ref(storage, path))
+    })
+    const urls = []
+    await Promise.allSettled(urlPromises).then(res => {
+        res.forEach(item => {
+            if (item.status === 'fulfilled') {
+                urls.push(item.value)
+            }
+        })
+    })
+    return urls;
 
-//     return imgArr
-// }
+}

@@ -72,7 +72,8 @@ const UploadImage = (props) => {
                 <label htmlFor={props.name} className='upload_file'>
                     <input type="file"
                         name='file'
-                        multiple accept="image/*"
+                        multiple 
+                        accept="image/*"
                         onChange={handleChangeImages}
                         style={{ display: "none" }}
                         id={props.name}></input>

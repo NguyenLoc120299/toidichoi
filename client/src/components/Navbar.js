@@ -6,6 +6,17 @@ import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { IconButton } from '@chakra-ui/react'
+import { useColorMode } from '@chakra-ui/react';
+import { BsSun, BsMoonStarsFill } from 'react-icons/bs';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+} from '@chakra-ui/react'
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '100 %' }} alt='' />
@@ -18,6 +29,8 @@ export const logo = (
 
 )
 const Navbar = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
+    // const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Container maxW={"100%"} className={style.nav}>
             <Flex justifyContent="space-between" >
@@ -37,6 +50,18 @@ const Navbar = () => {
                     </Center>
                 </Box>
                 <Box display={["none", "flex"]}>
+                    <Center>
+                        <Button
+                            aria-label="Toggle Color Mode"
+                            onClick={toggleColorMode}
+                            _focus={{ boxShadow: 'none' }}
+                            w="fit-content"
+                            mr='3'
+                            >
+                            {colorMode === 'light' ? <BsMoonStarsFill /> : <BsSun />}
+                        </Button>
+                    </Center>
+
                     <Center h={"100%"}>
                         <Button colorScheme='red' mr='3' borderRadius={"12px"} >
                             <BsPencil style={{ marginRight: "5px" }} /> Viết review
@@ -83,6 +108,23 @@ const Navbar = () => {
                     </Center>
                 </Box>
             </Flex>
+            {/* <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Lorem count={2} />
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button variant='ghost'>Secondary Action</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal> */}
         </Container>
     )
 }

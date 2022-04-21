@@ -8,10 +8,11 @@ import { useDispatch } from 'react-redux';
 import { getCategories } from './redux/actions/categoriesAction';
 import { useEffect } from 'react';
 import { getArea } from './redux/actions/areaAction';
-import Alert from './components/AlertModal';
+
 
 
 function App() {
+  
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategories())
