@@ -18,11 +18,11 @@ export default function NotFound() {
                         Không tìm thấy trang
                     </Text>
                     <Text color={'gray.500'} mb={6}>
-                       Trang bạn đãng em hiện không tồn tại
+                        Trang này  hiện không tồn tại
                     </Text>
 
                     <Button
-                        colorScheme="teal"
+                        colorScheme="red"
                         bgGradient="linear(to-r, red.400, red.500, red.600)"
                         color="white"
                         variant="solid">

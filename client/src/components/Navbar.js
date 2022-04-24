@@ -6,17 +6,10 @@ import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { IconButton } from '@chakra-ui/react'
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import { BsSun, BsMoonStarsFill } from 'react-icons/bs';
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
+import LoginModal from './LoginModal'
+
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '100 %' }} alt='' />
@@ -30,9 +23,10 @@ export const logo = (
 )
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
-    // const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Container maxW={"100%"} className={style.nav}>
+            <LoginModal isOpen={isOpen} onClose={onClose} />
             <Flex justifyContent="space-between" >
                 <Box p='2' display={'flex'}>
                     {logo}
@@ -57,7 +51,7 @@ const Navbar = () => {
                             _focus={{ boxShadow: 'none' }}
                             w="fit-content"
                             mr='3'
-                            >
+                        >
                             {colorMode === 'light' ? <BsMoonStarsFill /> : <BsSun />}
                         </Button>
                     </Center>
@@ -66,7 +60,7 @@ const Navbar = () => {
                         <Button colorScheme='red' mr='3' borderRadius={"12px"} >
                             <BsPencil style={{ marginRight: "5px" }} /> Viết review
                         </Button>
-                        <Button colorScheme='red' mr='3' borderRadius={"12px"} variant='outline'>
+                        <Button colorScheme='red' mr='3' borderRadius={"12px"} variant='outline' onClick={onOpen}>
                             Đăng nhập
                         </Button>
                     </Center>
@@ -108,23 +102,6 @@ const Navbar = () => {
                     </Center>
                 </Box>
             </Flex>
-            {/* <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Lorem count={2} />
-                    </ModalBody>
-
-                    <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant='ghost'>Secondary Action</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal> */}
         </Container>
     )
 }
