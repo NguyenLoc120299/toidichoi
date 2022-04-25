@@ -1,15 +1,78 @@
 import { uploadImage } from "../../untils/uploadImage"
-
-export const PLACE_ACTIONS={
-    ADD_PLACE:"ADD_PLACE"
+import { getDataAPI, postDataAPI } from '../../untils/fetchData'
+import { ALERT_ACTION } from '../actions/alertAction'
+import { checkLogin } from "./authAction"
+export const PLACE_ACTIONS = {
+    ADD_PLACE: "ADD_PLACE",
+    GET_PLACES: "GET_PLACES"
 }
 
-export const addPlace= (formInput,displayImage,menUImage)=>  async(dispatch)=>{
+export const addPlace = (formInput, displayImage, auth) => async (dispatch) => {
     try {
         const display_image = await uploadImage(displayImage)
-        const menu_image= await uploadImage(menUImage)
+        if (dispatch(checkLogin(auth))){
+            dispatch({
+                type: ALERT_ACTION.ALERT,
+                payload: {
+                    loading: true
+                }
+            })
+            const res = await postDataAPI('places', {
+                name: formInput.name,
+                area: formInput.area,
+                address: formInput.address,
+                direct: formInput.direct,
+                intro: formInput.intro,
+                owner: '',
+                time: {
+                    min: formInput.time_min,
+                    max: formInput.time_max
+                },
+                price: {
+                    min: formInput.price_min,
+                    max: formInput.price_max
+                },
+                type: formInput.typePlace,
+                utities: formInput.utities,
+                phone: formInput.phone,
+                facbook: formInput.facebook,
+                instagram: formInput.instagram,
+                email: formInput.email,
+                website: formInput.website,
+                images: display_image
+            })
+            dispatch({
+                type: ALERT_ACTION.ALERT,
+                payload: {
+                    success: res.data.msg
+                }
+            })
+        }
+
     } catch (error) {
-      
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
     }
-  
+
+}
+
+export const getPlaces = () => async (dispatch) => {
+    try {
+        const result = await getDataAPI('places')
+        dispatch({
+            type: PLACE_ACTIONS.GET_PLACES,
+            payload: result.data
+        })
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
 }

@@ -8,7 +8,10 @@ import { useDispatch } from 'react-redux';
 import { getCategories } from './redux/actions/categoriesAction';
 import { useEffect } from 'react';
 import { getArea } from './redux/actions/areaAction';
-import Alert from './helper/toast'
+import AlertModal from './components/AlertModal';
+import { refreshToken } from './redux/actions/authAction';
+import { getPlaces } from './redux/actions/placeAction';
+
 
 
 function App() {
@@ -19,11 +22,12 @@ function App() {
     dispatch(getArea())
   }, [])
   useEffect(() => {
-
-  }, [])
+    dispatch(refreshToken())
+    dispatch(getPlaces())
+  }, [dispatch])
   return (
     <Router>
-      {/* <Alert /> */}
+      <AlertModal />
       <Navbar />
       <Route exact path={'/'} component={Home} />
       <Route exact path={'/:page'} component={PageRender} />

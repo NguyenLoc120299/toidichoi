@@ -73,11 +73,9 @@
 }
 .alert__modal {
   position: fixed;
-  bottom: 10px;
+  top: 10px;
   right: 0;
-  z-index: 20;
-  max-width: 500px;
-  width: 100%;
+  z-index: 99999;
   transition: all 0.3s ease-in-out;
 }
 @media (min-width: 992px) {

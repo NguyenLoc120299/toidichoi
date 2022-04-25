@@ -73,7 +73,7 @@ const PlaceCtrl = {
             })
             await newPlace.save()
             res.json({
-                msg: 'sucsess!',
+                msg: 'Thêm địa điểm thành công',
                 newPlace: {
                     ...newPlace._doc
                 }

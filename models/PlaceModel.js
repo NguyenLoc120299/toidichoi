@@ -19,7 +19,8 @@ const PlaceSchema = new mongoose.Schema({
     intro: String,
     owner: Number,
     time: {
-        type: Object
+        type: Object,
+        
     },
     price: {
         type: Object
@@ -43,7 +44,7 @@ const PlaceSchema = new mongoose.Schema({
         type: Array,
         required: true
     }
-
+    
 
 
 }, {

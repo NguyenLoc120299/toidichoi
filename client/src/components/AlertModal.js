@@ -6,18 +6,49 @@ import {
     CloseButton,
 } from '@chakra-ui/react'
 import React from 'react'
-
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { ALERT_ACTION } from '../redux/actions/alertAction'
 const AlertModal = () => {
+    const dispatch = useDispatch()
+    const { alert } = useSelector(state => state)
+    const onCLose = () => {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {}
+        })
+    }
+
     return (
-        <div className='alert__modal'>
-            <Alert
-                status='success'>
-                <AlertIcon />
-                <AlertTitle>Co loi xay ra</AlertTitle>
-                <AlertDescription>Your Chakra experience may be degraded.</AlertDescription>
-                <CloseButton position='absolute' right='8px' top='8px' />
-            </Alert>
-        </div>
+        <>
+            {
+                alert.err && (
+                    <div className='alert__modal'>
+                        <Alert
+                            status='error'>
+                            <AlertIcon />
+                            <AlertTitle>{alert.err}</AlertTitle>
+                            <AlertDescription></AlertDescription>
+                            <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
+                        </Alert>
+                    </div>
+                )
+            }
+            {
+                alert.success && (
+                    <div className='alert__modal'>
+                        <Alert
+                            status='success'>
+                            <AlertIcon />
+                            <AlertTitle>{alert.success}</AlertTitle>
+                            <AlertDescription></AlertDescription>
+                            <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
+                        </Alert>
+                    </div>
+                )
+            }
+        </>
+
     )
 }
 
