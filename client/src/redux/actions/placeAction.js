@@ -46,7 +46,7 @@ export const addPlace = (formInput, displayImage, auth) => async (dispatch) => {
                 payload: {
                     success: res.data.msg
                 }
-            })
+             })
         }
 
     } catch (error) {
