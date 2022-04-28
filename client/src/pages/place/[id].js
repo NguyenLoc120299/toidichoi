@@ -1,59 +1,72 @@
-import { Box, Container, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Flex, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import React from 'react'
-
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getPlaceSingle } from '../../redux/actions/placeAction'
+import { Skeleton, SkeletonText } from '@chakra-ui/react'
+import DetailTop from './components/DetailTop'
+import ImagesPlace from './components/ImagesPlace'
 const Single = () => {
+  const { id } = useParams()
+  const [place, setPlace] = useState([])
+  const { detail_place } = useSelector(state => state)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getPlaceSingle(id))
+  }, [dispatch, id])
   return (
     <Container maxW={'1240px'}>
+
       <Box boxShadow='md' p='6' rounded='md' bg='white'>
-        <Heading size={'xl'} as='h1'>
-          Jouri Dessert & Tea
-        </Heading>
-        <Text fontSize={'lg'}>
-          Delivering the best dessert & tea, fresh & unique decoration and good service in the heart of Hanoi.
-        </Text>
-        <Text fontSize={'lg'}>
-          Số 10 Khúc Hạo, Ba Đình — Hiển thị bản đồ — Xem đường đi — Xem menu</Text>
-        <SimpleGrid columns={[1, 3]} spacing={10} my={3} display={['none', 'grid']}>
-          <Box   height={'355px'}>
-            <Image rounded={'lg'} src='https://toidicafe.vn/static/images/place/manoir-cafe/57730e48-1fe6-4d2d-8305-4c24202689e5.jpg' w={'100%'} maxH='100%' objectFit={'cover'} />
-          </Box>
-          <Box  height={'355px'}> 
-            <Image rounded={'lg'} src='https://toidicafe.vn/static/images/place/floralia-tearoom-and-wine-bistro/2e2a633e-1296-4406-8712-b8c92c2630e7.jpg' w={'100%'} maxH='100%' objectFit={'cover'} />
-          </Box>
-          <Box  height={'355px'}
-           position='relative'
-           _before={{
-             content: '""',
-             position:'absolute',
-             width: "100%",
-             height: "100%",
-             bg: "gray.100",
-             opacity:"0.3"
-           }}
-           >
-             <Text 
-             position={'absolute'}
-             left='50%'
-             top={'50%'}
-             transform={"translate(-50%,-50%"}
-             fontWeight={'bold'}
-             color="gray.50"
-             >+1 ảnh</Text>
-            <Image rounded={'lg'} src='https://toidicafe.vn/static/images/place/manoir-cafe/57730e48-1fe6-4d2d-8305-4c24202689e5.jpg' w={'100%'} maxH='100%' objectFit={'cover'}/>
-          </Box>
-        </SimpleGrid>
+        <DetailTop name={detail_place.name} intro={detail_place.intro} address={detail_place.address}/>
+        <ImagesPlace images={detail_place.images}/>
       </Box>
-      <SimpleGrid columns={[1, 3]} spacing={10} my={3}>
-        <Box boxShadow='md' rounded={'md'} >a</Box>
-        <Box boxShadow='md' rounded={'md'} p='6'>a</Box>
-        <Box boxShadow='md' rounded={'md'} p='6'>a</Box>
+      <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
+
+        <Box boxShadow='md' rounded={'md'} p='6'>
+          <Heading as={'h3'} size='md'>Thông tin chi tiết</Heading>
+        </Box>
+        <Box boxShadow='md' rounded={'md'} p='6'>
+          <Heading as={'h3'} size='md'>Địa điểm cụ thể</Heading>
+        </Box>
       </SimpleGrid>
       <Box boxShadow='md' p='6' rounded='md' bg='white' my={3}>
         aaa
       </Box>
       <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
-        <Box boxShadow='md' rounded={'md'} p='6'>a</Box>
-        <Box boxShadow='md' rounded={'md'} p='6'>a</Box>
+        <Box boxShadow='md' rounded={'md'} p={['3', '6']}>
+          <Flex justifyContent={'space-between'} alignItems={'center'} py={3}>
+            <Heading as={'h3'} size={['lg']} >Đánh giá từ cộng đồng</Heading>
+            <Button colorScheme={'red'} borderRadius={'12px'}>Viết đánh giá</Button>
+          </Flex>
+          <Box
+            height={'180px'}
+            padding="10px 16px"
+            bg={'red.100'}
+            borderRadius="20px" position={'relative'}
+            _after={{
+              position: "absolute",
+              content: '""',
+              top: "-10px",
+              right: '36px',
+              bottom: 'auto',
+              left: 'auto',
+              width: 0,
+              height: 0,
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderBottom: '10px solid #ffdcd8'
+
+            }}
+          >
+
+          </Box>
+        </Box>
+        <Box boxShadow='md' rounded={'md'} p='6'>
+          <Heading as={'h3'} size='md'>Đánh giá</Heading>
+        </Box>
       </SimpleGrid>
     </Container>
   )

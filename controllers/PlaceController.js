@@ -29,6 +29,17 @@ const PlaceCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    getPlaceSingle: async (req,res)=>{
+        try {
+            const place = await Places.findById(req.params.id).populate('type utities')
+            res.json({
+                msg:'Success',
+                place
+            })
+        } catch (error) {
+            return res.status(500).json({msg:err.message})
+        }
+    },
     createPlaces: async (req, res) => {
         try {
             const {
