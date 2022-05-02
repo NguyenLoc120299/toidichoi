@@ -17,7 +17,7 @@ export default function NotFound() {
                     <Text fontSize="18px" mt={3} mb={2} color="red.500">
                         Không tìm thấy trang
                     </Text>
-                    <Text color={'gray.500'} mb={6}>
+                    <Text color={'gray.500'} fontSize={'3xl'} mb={6}>
                         Trang này  hiện không tồn tại
                     </Text>
 

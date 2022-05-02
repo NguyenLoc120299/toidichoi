@@ -5,12 +5,16 @@ import area from './areaReducer'
 import utities from './utitiesReducer'
 import image from './imageReducer'
 import auth from './authReducer'
+import place from './placeReducer'
+import detail_place from './detailPlaceReducer'
 export default combineReducers({
     categories,
     alert,
     area,
     utities,
     image,
-    auth
+    auth,
+    place,
+    detail_place
 
 })

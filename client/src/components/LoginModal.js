@@ -23,11 +23,11 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { useToast } from '@chakra-ui/react'
-import { useDispatch } from 'react-redux'
-import { signup } from '../redux/actions/authAction'
-const LoginModal = (props) => {
-    const toast = useToast()
+import { useDispatch, useSelector } from 'react-redux'
+import { login, signup } from '../redux/actions/authAction'
+import { ALERT_ACTION } from '../redux/actions/alertAction';
+const LoginModal = () => {
+    const { alert } = useSelector(state => state)
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false)
@@ -47,13 +47,22 @@ const LoginModal = (props) => {
             if (isSignup) {
                 dispatch(signup(formData))
             }
+            else{
+                dispatch(login({
+                    password:formData.password,
+                    email:formData.email
+                }))
+            }
         } catch (error) {
             console.log(error);
         }
 
     }
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose} isCentered>
+        <Modal isOpen={alert.modal} onClose={()=>dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {}
+        })} isCentered>
             <ModalOverlay />
             <ModalContent maxW={'800px'}    >
                 <ModalCloseButton />
@@ -75,7 +84,7 @@ const LoginModal = (props) => {
                             justify={'center'}>
                             <Stack spacing={5} mx={'auto'} maxW={'lg'} py={12}>
                                 <Stack align={'center'}>
-                                    <Heading fontSize={'2xl'}>Đăng nhập tài khoản</Heading>
+                                    <Heading fontSize={['md', '2xl']}>{isSignup ? 'Tạo tài khoản' : 'Đăng nhập tài khoản'}</Heading>
                                 </Stack>
                                 <Box
                                     rounded={'lg'}
@@ -147,6 +156,7 @@ const LoginModal = (props) => {
                                                 </InputGroup>
                                             </FormControl>
                                         }
+                                        
                                         <Stack spacing={10}>
                                             <Button
                                                 bg={'red.400'}
@@ -154,6 +164,7 @@ const LoginModal = (props) => {
                                                 _hover={{
                                                     bg: 'red.500',
                                                 }}
+                                                isLoading={alert.loading}
                                                 onClick={() => onsubmit()}
                                             >
                                                 {isSignup ? 'Tạo tài khoản' : 'Đăng nhập'}
