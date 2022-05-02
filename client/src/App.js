@@ -19,7 +19,7 @@ function App() {
     dispatch(getArea())
   }, [])
   useEffect(() => {
-
+    
   }, [])
   return (
     <Router>
