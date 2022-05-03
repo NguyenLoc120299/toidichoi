@@ -5,9 +5,13 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getPlaceSingle } from '../../redux/actions/placeAction'
-import { Skeleton, SkeletonText } from '@chakra-ui/react'
 import DetailTop from './components/DetailTop'
 import ImagesPlace from './components/ImagesPlace'
+import DetailInfo from './components/DetailInfo'
+import UntitiesPlaceSingle from './components/UntitiesPlaceSingle'
+import ImageSwipper from './components/ImageSwipper'
+import RatePlace from './components/RatePlace'
+import ReviewPlace from './components/ReviewPlace'
 const Single = () => {
   const { id } = useParams()
   const [place, setPlace] = useState([])
@@ -20,55 +24,25 @@ const Single = () => {
     <Container maxW={'1240px'}>
 
       <Box boxShadow='md' p='6' rounded='md' bg='white'>
-        <DetailTop name={detail_place.name} intro={detail_place.intro} address={detail_place.address}/>
-        <ImagesPlace images={detail_place.images}/>
+        <DetailTop name={detail_place.name} intro={detail_place.intro} address={detail_place.address} />
+        <ImagesPlace images={detail_place.images} />
+        <ImageSwipper images={detail_place.images} />
       </Box>
       <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
-
+        <DetailInfo info={detail_place} />
         <Box boxShadow='md' rounded={'md'} p='6'>
-          <Heading as={'h3'} size='md'>Thông tin chi tiết</Heading>
-        </Box>
-        <Box boxShadow='md' rounded={'md'} p='6'>
-          <Heading as={'h3'} size='md'>Địa điểm cụ thể</Heading>
+          <Heading as={'h3'} size='md' mb={5}>Địa điểm cụ thể</Heading>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.8264520999282!2d106.67570601474937!3d10.824589692288875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528fd151d7171%3A0xe10718bde853c841!2zcDMsIDQyIE5ndXnhu4VuIFbEg24gQ8O0bmcsIFBoxrDhu51uZyAxNSwgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1651471479787!5m2!1svi!2s" width={'100%'} height={"200px"}
+            allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </Box>
       </SimpleGrid>
-      <Box boxShadow='md' p='6' rounded='md' bg='white' my={3}>
-        aaa
-      </Box>
+      <UntitiesPlaceSingle utities={detail_place.utities} />
       <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
-        <Box boxShadow='md' rounded={'md'} p={['3', '6']}>
-          <Flex justifyContent={'space-between'} alignItems={'center'} py={3}>
-            <Heading as={'h3'} size={['lg']} >Đánh giá từ cộng đồng</Heading>
-            <Button colorScheme={'red'} borderRadius={'12px'}>Viết đánh giá</Button>
-          </Flex>
-          <Box
-            height={'180px'}
-            padding="10px 16px"
-            bg={'red.100'}
-            borderRadius="20px" position={'relative'}
-            _after={{
-              position: "absolute",
-              content: '""',
-              top: "-10px",
-              right: '36px',
-              bottom: 'auto',
-              left: 'auto',
-              width: 0,
-              height: 0,
-              borderLeft: '10px solid transparent',
-              borderRight: '10px solid transparent',
-              borderBottom: '10px solid #ffdcd8'
-
-            }}
-          >
-
-          </Box>
-        </Box>
-        <Box boxShadow='md' rounded={'md'} p='6'>
-          <Heading as={'h3'} size='md'>Đánh giá</Heading>
-        </Box>
+        <ReviewPlace />
+        <RatePlace />
       </SimpleGrid>
-    </Container>
+    </Container >
   )
 }
 

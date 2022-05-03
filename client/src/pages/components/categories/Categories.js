@@ -1,11 +1,8 @@
 import { Box, Center, Container } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import style from './categories.module.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { useSelector } from 'react-redux';
 const Categories = () => {
     const { categories } = useSelector(state => state)

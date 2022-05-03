@@ -20,7 +20,7 @@ const PlaceSchema = new mongoose.Schema({
     owner: Number,
     time: {
         type: Object,
-        
+
     },
     price: {
         type: Object
@@ -43,8 +43,12 @@ const PlaceSchema = new mongoose.Schema({
     images: {
         type: Array,
         required: true
-    }
-    
+    },
+    reviews: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'review'
+    }]
+
 
 
 }, {

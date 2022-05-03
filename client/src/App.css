@@ -78,6 +78,9 @@
   z-index: 99999;
   transition: all 0.3s ease-in-out;
 }
+.utities_single_place .swiper {
+  padding: 0 !important;
+}
 @media (min-width: 992px) {
   .Typewriter__wrapper {
     font-size: 40px;

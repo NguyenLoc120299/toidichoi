@@ -1,14 +1,16 @@
 const areaRouter = require('./AreaRouter')
-const categoryRouter= require('./CategoryRouter')
+const categoryRouter = require('./CategoryRouter')
 const placeRouter = require('./PlaceRouter')
-const utitiesRouter= require('./UtilitiesRouter')
-const authRouter= require('./AuthRouter')
-const routes=[
+const utitiesRouter = require('./UtilitiesRouter')
+const authRouter = require('./AuthRouter')
+const review = require('./ReviewRouter')
+const routes = [
     areaRouter,
     categoryRouter,
     placeRouter,
     utitiesRouter,
-    authRouter
+    authRouter,
+    review
 ]
 
-module.exports=routes
+module.exports = routes

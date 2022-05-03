@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import DataProvider from './redux/store'
 import { ChakraProvider } from '@chakra-ui/react'
+import "react-image-lightbox/style.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import 'rc-rate/assets/index.css';
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>
