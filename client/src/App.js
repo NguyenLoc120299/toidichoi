@@ -11,9 +11,6 @@ import { getArea } from './redux/actions/areaAction';
 import AlertModal from './components/AlertModal';
 import { refreshToken } from './redux/actions/authAction';
 import { getPlaces } from './redux/actions/placeAction';
-
-
-
 function App() {
 
   const dispatch = useDispatch()

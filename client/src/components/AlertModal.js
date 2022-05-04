@@ -18,35 +18,30 @@ const AlertModal = () => {
             payload: {}
         })
     }
-
     return (
         <>
-            {
-                alert.err && (
-                    <div className='alert__modal'>
-                        <Alert
-                            status='error'>
-                            <AlertIcon />
-                            <AlertTitle>{alert.err}</AlertTitle>
-                            <AlertDescription></AlertDescription>
-                            <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
-                        </Alert>
-                    </div>
-                )
-            }
-            {
-                alert.success && (
-                    <div className='alert__modal'>
-                        <Alert
-                            status='success'>
-                            <AlertIcon />
-                            <AlertTitle>{alert.success}</AlertTitle>
-                            <AlertDescription></AlertDescription>
-                            <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
-                        </Alert>
-                    </div>
-                )
-            }
+            {alert.err && (
+                <div className='alert__modal'>
+                    <Alert
+                        status='error'>
+                        <AlertIcon />
+                        <AlertTitle>{alert.err}</AlertTitle>
+                        <AlertDescription></AlertDescription>
+                        <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
+                    </Alert>
+                </div>
+            )}
+            {alert.success && (
+                <div className='alert__modal'>
+                    <Alert
+                        status='success'>
+                        <AlertIcon />
+                        <AlertTitle>{alert.success}</AlertTitle>
+                        <AlertDescription></AlertDescription>
+                        <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
+                    </Alert>
+                </div>
+            )}
         </>
 
     )

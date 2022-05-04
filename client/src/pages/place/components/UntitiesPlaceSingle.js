@@ -16,18 +16,15 @@ const UntitiesPlaceSingle = ({ utities }) => {
                     clickable: true,
                 }}
                 modules={[Autoplay]}
-                loop={true}
-            >
-                {
-                    utities && utities.map((item, index) => (
+                loop={true}>
+                {utities && utities.map((item, index) => (
                         <SwiperSlide key={index}>
                             <Flex direction={'column'}>
                                 <Text>{item.icon}</Text>
                                 <Text>{item.name}</Text>
                             </Flex>
                         </SwiperSlide>
-                    ))
-                }
+                    ))}
             </Swiper>
         </Box>
     )

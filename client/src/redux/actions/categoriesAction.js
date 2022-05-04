@@ -4,7 +4,6 @@ export const CATEGORY_TYPE = {
     GET_CATEGORIES: "GET_CATEGORIES",
     GET_UTITIES: "GET_UTITIES"
 }
-
 export const getCategories = () => async (dispatch) => {
     try {
         const res = await getDataAPI('category')

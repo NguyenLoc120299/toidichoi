@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Center, Container, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useHistory} from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
@@ -27,6 +27,7 @@ export const logo = (
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { auth } = useSelector(state => state)
+    const history= useHistory()
     const dispatch = useDispatch()
     return (
         <Container maxW={"100%"} className={style.nav}>
@@ -61,7 +62,7 @@ const Navbar = () => {
                     </Center>
 
                     <Center h={"100%"}>
-                        <Button colorScheme='red' mr='3' borderRadius={"12px"} >
+                        <Button colorScheme='red' mr='3' borderRadius={"12px"} onClick={()=>history.push('/add-review')}>
                             <BsPencil style={{ marginRight: "5px" }} /> Viết review
                         </Button>
                         {

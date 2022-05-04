@@ -2,7 +2,6 @@ import { Box, Heading, Text, Button, Center } from '@chakra-ui/react';
 
 export default function NotFound() {
     return (
-
         <Box textAlign="center" py={10} px={6} h="100vh">
             <Center h={'100%'}>
                 <Box>
@@ -20,7 +19,6 @@ export default function NotFound() {
                     <Text color={'gray.500'} fontSize={'3xl'} mb={6}>
                         Trang này  hiện không tồn tại
                     </Text>
-
                     <Button
                         colorScheme="red"
                         bgGradient="linear(to-r, red.400, red.500, red.600)"

@@ -107,3 +107,17 @@ export const getPlaceSingle=(id)=>async dispatch=>{
         })
     }
 }
+
+// export const searchPlaces=(name)=>async (dispatch)=> {
+//     try {
+        
+        
+//     } catch (error) {
+//         dispatch({
+//             type: ALERT_ACTION.ALERT,
+//             payload: {
+//                 err: error.response.data.msg
+//             }
+//         }) 
+//     }
+// }

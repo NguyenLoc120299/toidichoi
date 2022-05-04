@@ -24,31 +24,42 @@ const ImagesPlace = ({ images }) => {
               height: "100%",
               bg: "gray.200",
               opacity: "0.4"
-            } : ''}
-          >
+            } : ''}>
             {
               index === 0 &&
-              <Box position={'absolute'} left="10px" bottom={'10px'}>
-                <Button colorScheme='gray' opacity={0.7} onClick={() => toggleImageLightBox(0)} >
+              <Box
+                position={'absolute'}
+                left="10px"
+                bottom={'10px'}>
+                <Button
+                  colorScheme='gray'
+                  opacity={0.7}
+                  onClick={() => toggleImageLightBox(0)} >
                   Xem tất cả ({images.length})
                 </Button>
-              </Box>
-            }
-            {
-              index === 2 &&
+              </Box>}
+            {index === 2 &&
               <Box
                 position={'absolute'}
                 left='50%'
                 top={'50%'}
                 transform={"translate(-50%,-50%"}
               >
-                <Text fontWeight={'600'} color={'white'} cursor={"pointer"} fontSize={"25px"}>+1 ảnh</Text>
-              </Box>
-            }
-            <Image rounded={'lg'} src={item} w={'100%'} maxH='100%' objectFit={''} onClick={() => toggleImageLightBox(index)} />
+                <Text
+                  fontWeight={'600'}
+                  color={'white'}
+                  cursor={"pointer"}
+                  fontSize={"25px"}>+1 ảnh</Text>
+              </Box>}
+            <Image
+              rounded={'lg'}
+              src={item}
+              w={'100%'}
+              maxH='100%'
+              objectFit={''}
+              onClick={() => toggleImageLightBox(index)} />
           </Box>
-        ))
-      }
+        ))}
       <ImageLightbox
         isOpen={isOpen}
         photoIndex={photoIndex}

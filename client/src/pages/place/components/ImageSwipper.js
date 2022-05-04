@@ -19,16 +19,13 @@ const ImageSwipper = ({ images }) => {
                 loop={true}
                 modules={[Autoplay, Pagination, Navigation]}
             >
-                {
-                    images && images.map((item, index) => (
+                {images && images.map((item, index) => (
                         <SwiperSlide key={index}>
                             <Image src={item} alt={item} maxW="100%" minHeight={'100%'} />
                         </SwiperSlide>
-                    ))
-                }
+                    ))}
             </Swiper>
         </Box>
-
     )
 }
 

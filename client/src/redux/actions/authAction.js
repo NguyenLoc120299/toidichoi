@@ -30,7 +30,6 @@ export const signup = (formData) => async (dispatch) => {
         })
     }
 }
-
 export const login = (formData) => async (dispatch) => {
     try {
         dispatch(

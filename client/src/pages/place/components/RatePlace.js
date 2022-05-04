@@ -10,8 +10,6 @@ const RatePlace = () => {
     const handleOnchange = (v) => {
         setRate(v);
     }
-
-
     return (
         <Center>
             <Box boxShadow='sm' rounded={'md'} p='6'>
@@ -26,19 +24,16 @@ const RatePlace = () => {
                             </Text>
                         </Button> /5 (1 đánh giá)
                     </Center>
-                    {
-                        auth.token ?
+                    {auth.token ?
 
-                            <Rate
-                                style={{ fontSize: "60px" }}
-                                value={rate}
-                                allowHalf
-                                onChange={handleOnchange} />
-                            :
-                            <Text fontSize={'xl'} fontWeight={"bold"}>Vui lòng đăng nhập để có thể đánh giá về nơi này</Text>
-                    }
+                        <Rate
+                            style={{ fontSize: "60px" }}
+                            value={rate}
+                            allowHalf
+                            onChange={handleOnchange} />
+                        :
+                        <Text fontSize={'xl'} fontWeight={"bold"}>Vui lòng đăng nhập để có thể đánh giá về nơi này</Text>}
                 </Flex>
-
             </Box>
         </Center>
 

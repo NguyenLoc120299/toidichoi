@@ -4,11 +4,13 @@
   text-transform: capitalize;
   font-family: "Paytone One", sans-serif;
 }
+
 .title {
   font-size: 28px;
   font-weight: 700;
   text-align: center;
 }
+
 .swiper-button-next,
 .swiper-button-prev,
 .swiper-button-prev,
@@ -21,6 +23,7 @@
   background: #fff;
   border-radius: 50%;
 }
+
 .swiper-button-prev:after,
 .swiper-rtl .swiper-button-next:after,
 .swiper-button-next:after,
@@ -29,6 +32,7 @@
   font-size: 16px !important;
   font-weight: 700;
 }
+
 .swiper {
   width: 100%;
   height: 100%;
@@ -61,9 +65,11 @@
   height: 100%;
   object-fit: cover;
 }
+
 .swiper-pagination-bullet-active {
   background: rgb(205, 34, 34) !important;
 }
+
 .upload_file {
   display: flex;
   justify-content: center;
@@ -71,6 +77,7 @@
   width: 100%;
   height: 100%;
 }
+
 .alert__modal {
   position: fixed;
   top: 10px;
@@ -78,11 +85,48 @@
   z-index: 99999;
   transition: all 0.3s ease-in-out;
 }
+
 .utities_single_place .swiper {
   padding: 0 !important;
 }
+
+.rate__text {
+  display: none;
+}
+
+
+
 @media (min-width: 992px) {
   .Typewriter__wrapper {
     font-size: 40px;
+
+  }
+
+  .rate__text {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 6px;
+    margin-left: 20px;
+    margin-top: 4px;
+    color: #fff;
+    background: #e03;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .rate__text::after {
+    content: "";
+    border-color: transparent #e03 transparent transparent;
+    border-style: solid;
+    border-width: 16px 16px 16px 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -16px;
+    top: 0;
   }
 }

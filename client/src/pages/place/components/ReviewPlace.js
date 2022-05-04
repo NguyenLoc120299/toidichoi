@@ -25,9 +25,7 @@ const ReviewPlace = () => {
                     borderLeft: '10px solid transparent',
                     borderRight: '10px solid transparent',
                     borderBottom: '10px solid #ffdcd8'
-
-                }}
-            >
+                }}>
                 <Flex>
                     <Box >
                         <img src="https://ik.imagekit.io/reviewcafe/Online_Review-cuate_wG_WzURJF.svg" style={{

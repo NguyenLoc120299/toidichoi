@@ -99,6 +99,15 @@ const PlaceCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+    searchPlaces: async (req,res)=>{
+        try {  
+            const places = await Places.find({name:{$regex:req.query.name}})
+            .limit(5)
+            res.json({places})
+        } catch (error) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 }
 

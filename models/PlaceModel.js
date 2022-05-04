@@ -40,6 +40,14 @@ const PlaceSchema = new mongoose.Schema({
     instagram: String,
     email: String,
     website: String,
+    rate:{
+        type:Object,
+        required:true,
+        default:{
+           turnNumber: 0,
+           rateNumber:0
+        }
+    },
     images: {
         type: Array,
         required: true
