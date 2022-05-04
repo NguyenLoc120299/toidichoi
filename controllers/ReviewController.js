@@ -29,6 +29,19 @@ const reviewCtrl = {
                 msg: error.message
             })
         }
+    },
+    reviewSingle: async (req,res)=>{
+        try {
+            const review = await Reviews.findById(req.params.id).populate('comments likes user')
+            
+            res.json({
+                review
+            }) 
+        } catch (error) {
+            return res.status(500).json({
+                msg: error.message
+            })
+        }
     }
 }
 module.exports = reviewCtrl

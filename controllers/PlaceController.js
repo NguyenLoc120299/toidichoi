@@ -32,6 +32,13 @@ const PlaceCtrl = {
     getPlaceSingle: async (req,res)=>{
         try {
             const place = await Places.findById(req.params.id).populate('type utities')
+            .populate({
+                path:"reviews",
+                populate:{
+                    path:"user likes comments",
+                    select:"-password",
+                }
+            })
             res.json({
                 msg:'Success',
                 place
