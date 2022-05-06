@@ -19,7 +19,7 @@ const Single = () => {
   useEffect(() => {
     if (id)
       dispatch(getPlaceSingle(id))
-  }, [dispatch, id])
+  }, [id])
   const loading = detail_place.loading
   return (
     <Container maxW={'1240px'}>
