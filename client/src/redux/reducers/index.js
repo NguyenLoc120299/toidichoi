@@ -7,6 +7,7 @@ import image from './imageReducer'
 import auth from './authReducer'
 import place from './placeReducer'
 import detail_place from './detailPlaceReducer'
+import review from '../reducers/reviewReducer'
 export default combineReducers({
     categories,
     alert,
@@ -15,6 +16,6 @@ export default combineReducers({
     image,
     auth,
     place,
-    detail_place
-
+    detail_place,
+    review
 })

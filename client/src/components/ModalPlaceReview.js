@@ -50,7 +50,7 @@ const ModalPlaceReview = ({ isOpen, onClose, handleSelectPlace}) => {
             <ModalOverlay />
             <ModalContent >
                 <ModalHeader>Chọn địa điểm đánh giá</ModalHeader>
-                <ModalCloseButton />
+                <ModalCloseButton _focus={{border:"unset"}}/>
                 <ModalBody>
                     <Flex>
                         <FormControl position={'relative'} bg='gray.200' rounded={'lg'} mr={1}>
@@ -74,7 +74,7 @@ const ModalPlaceReview = ({ isOpen, onClose, handleSelectPlace}) => {
                     </Flex>
                     {
                         places.map((item) => (
-                           <ListPlaceSearch item={item} selectePlace={selectePlace}/>
+                           <ListPlaceSearch item={item} selectePlace={selectePlace} key={item._id}/>
                         ))
                     }
 

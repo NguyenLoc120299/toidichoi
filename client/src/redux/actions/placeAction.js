@@ -6,12 +6,13 @@ import { async } from "@firebase/util"
 export const PLACE_ACTIONS = {
     ADD_PLACE: "ADD_PLACE",
     GET_PLACES: "GET_PLACES",
-    PLACE_SINGLE:"PLACE_SINGLE"
+    PLACE_SINGLE:"PLACE_SINGLE",
+    LOADING:"LOADING"
 }
 
 export const addPlace = (formInput, displayImage, auth) => async (dispatch) => {
     try {
-        const display_image = await uploadImage(displayImage)
+      
         if (dispatch(checkLogin(auth))){
             dispatch({
                 type: ALERT_ACTION.ALERT,
@@ -19,6 +20,7 @@ export const addPlace = (formInput, displayImage, auth) => async (dispatch) => {
                     loading: true
                 }
             })
+            const display_image = await uploadImage(displayImage)
             const res = await postDataAPI('places', {
                 name: formInput.name,
                 area: formInput.area,
@@ -83,19 +85,19 @@ export const getPlaces = () => async (dispatch) => {
 export const getPlaceSingle=(id)=>async dispatch=>{
     try {
         dispatch({
-            type: ALERT_ACTION.ALERT,
-            payload: {
-                loading: true
-            }
+            type: PLACE_ACTIONS.LOADING,
+            payload: true
         })
         const res= await getDataAPI(`place/${id}`)
+        if(res && res.data){
+            dispatch({
+                type: PLACE_ACTIONS.PLACE_SINGLE,
+                payload: res.data
+            })
+        }
         dispatch({
-            type: PLACE_ACTIONS.PLACE_SINGLE,
-            payload: res.data.place
-        })
-        dispatch({
-            type: ALERT_ACTION.ALERT,
-            payload: { }
+            type: PLACE_ACTIONS.LOADING,
+            payload: false
         })
         
     } catch (error) {

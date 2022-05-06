@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     dispatch(getCategories())
     dispatch(getArea())
-  }, [])
+  }, [dispatch])
   useEffect(() => {
     dispatch(refreshToken())
     dispatch(getPlaces())

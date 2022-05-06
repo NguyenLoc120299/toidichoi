@@ -1,20 +1,22 @@
-import { PLACE_ACTIONS } from "../actions/placeAction";
+import { REVIEW_ACTIONS } from "../actions/reviewAction";
+
 
 const initialState = {
-    loading: false,
-    data: [],
+    list_review_place: [],
     result: 0,
 }
+
 const categoryReducer = (state = initialState, action) => {
     switch (action.type) {
-        case PLACE_ACTIONS.GET_PLACES:
+        case REVIEW_ACTIONS.LIST_REVIEW_PLACE:
             return {
                 ...state,
-                data: [...action.payload.places],
-                result: action.payload.result
+                list_review_place:action.payload
             }
         default:
             return state;
     }
 }
+
+
 export default categoryReducer

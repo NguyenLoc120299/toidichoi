@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from 'swiper'
-const UntitiesPlaceSingle = ({ utities }) => {
+const UntitiesPlaceSingle = ({ utities,loading }) => {
     return (
         <Box boxShadow='md' p='6' rounded='md' bg='white' my={3} className="utities_single_place">
             <Swiper

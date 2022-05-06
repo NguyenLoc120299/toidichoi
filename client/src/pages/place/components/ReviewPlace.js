@@ -1,12 +1,30 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
+import LIstReview from './LIstReview'
+import ModalAddReview from './ModalAddReview'
 
-const ReviewPlace = () => {
+const ReviewPlace = ({ item }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Box boxShadow='md' rounded={'md'} p={['3', '6']}>
+            <ModalAddReview
+                isOpen={isOpen}
+                onClose={onClose}
+                place={item}
+            />
             <Flex justifyContent={'space-between'} alignItems={'center'} py={3}>
                 <Heading as={'h3'} size={['lg']} >Đánh giá từ cộng đồng</Heading>
-                <Button colorScheme={'red'} borderRadius={'12px'}>Viết đánh giá</Button>
+                {
+                    !item.loading &&
+                    <Button
+                        colorScheme={'red'}
+                        borderRadius={'12px'}
+                        onClick={onOpen}
+                        _focus={{
+                            border: 'unset'
+                        }}
+                    >Viết đánh giá</Button>
+                }
             </Flex>
             <Box
                 minH={'180px'}
@@ -40,7 +58,7 @@ const ReviewPlace = () => {
                     </Box>
                 </Flex>
             </Box>
-            Chưa có đánh giá nào
+            <LIstReview item={item}/>
         </Box>
     )
 }

@@ -2,8 +2,11 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import Rate from 'rc-rate/lib/Rate'
 import React, { useEffect, useState } from 'react'
 
-const RateReview = ({rate,handleOnchange}) => {
+const RateReview = ({rate,setRate}) => {
     const [rateText,setRateText]=useState('')
+    const handleOnchange = (v) => {
+        setRate(v);
+    }
     useEffect(()=>{
         if(rate ===  1) setRateText('Quá tệ')
         else if(rate === 2 ) setRateText('Trung bình')
@@ -13,6 +16,7 @@ const RateReview = ({rate,handleOnchange}) => {
             setRateText("Tuyệt vời")
         }
     },[rate])
+   
   return (
      <>
           <Heading as={'h4'} fontSize="lg" textColor={'gray.500'}>Xếp hạng của bạn</Heading>
