@@ -12,24 +12,24 @@ const ImagesPlace = ({ images, loading }) => {
     <SimpleGrid columns={[1, 3]} spacing={10} my={3} display={['none', 'grid']}>
 
       {
-        loading ? 
-        <>
-          <Box
-            height={'355px'}
-          >
-            <Skeleton h={'100%'} rounded={"md"}/>
-          </Box>
-          <Box
-            height={'355px'}
-          >
-              <Skeleton h={'100%'} rounded={"md"}/>
-          </Box>
-          <Box
-            height={'355px'}
-          >
-              <Skeleton h={'100%'} rounded={"md"}/>
-          </Box>
-        </>
+        !images ?
+          <>
+            <Box
+              height={'355px'}
+            >
+              <Skeleton h={'100%'} rounded={"md"} />
+            </Box>
+            <Box
+              height={'355px'}
+            >
+              <Skeleton h={'100%'} rounded={"md"} />
+            </Box>
+            <Box
+              height={'355px'}
+            >
+              <Skeleton h={'100%'} rounded={"md"} />
+            </Box>
+          </>
           :
           images && images.slice(0, 3).map((item, index) => (
             <Box

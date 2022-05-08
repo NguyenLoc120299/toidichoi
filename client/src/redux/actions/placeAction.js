@@ -3,6 +3,7 @@ import { getDataAPI, postDataAPI } from '../../untils/fetchData'
 import { ALERT_ACTION } from '../actions/alertAction'
 import { checkLogin } from "./authAction"
 import { async } from "@firebase/util"
+import { getReviewByPlace } from "./reviewAction"
 export const PLACE_ACTIONS = {
     ADD_PLACE: "ADD_PLACE",
     GET_PLACES: "GET_PLACES",
@@ -84,10 +85,12 @@ export const getPlaces = () => async (dispatch) => {
 
 export const getPlaceSingle=(id)=>async dispatch=>{
     try {
-        dispatch({
-            type: PLACE_ACTIONS.LOADING,
-            payload: true
-        })
+        // dispatch({
+        //     type: ALERT_ACTION.ALERT,
+        //     payload: {
+        //         loading: true
+        //     }
+        // })
         const res= await getDataAPI(`place/${id}`)
         if(res && res.data){
             dispatch({
@@ -95,10 +98,14 @@ export const getPlaceSingle=(id)=>async dispatch=>{
                 payload: res.data
             })
         }
-        dispatch({
-            type: PLACE_ACTIONS.LOADING,
-            payload: false
-        })
+        dispatch(getReviewByPlace(id))
+        
+        // dispatch({
+        //     type: ALERT_ACTION.ALERT,
+        //     payload: {
+        //         loading: true
+        //     }
+        // })
         
     } catch (error) {
         dispatch({

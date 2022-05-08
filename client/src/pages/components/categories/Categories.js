@@ -6,6 +6,7 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import { useSelector } from 'react-redux';
 const Categories = () => {
     const { categories } = useSelector(state => state)
+
     return (
         <Container maxW={'1200px'} pt={10}>
             <Box py={5}>

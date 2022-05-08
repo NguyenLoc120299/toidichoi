@@ -12,7 +12,7 @@ import { addPlace } from '../redux/actions/placeAction'
 
 
 const Place = () => {
-    const { area, categories, utities, auth,alert } = useSelector(state => state)
+    const { area, categories, utities, auth, alert } = useSelector(state => state)
     const dispatch = useDispatch()
     const { displayImage, menuImage } = useSelector(state => state.image)
     const [err, setErr] = useState({})
@@ -55,7 +55,7 @@ const Place = () => {
     const onSubmit = () => {
         const check = isDisableSubmit(formInput)
         if (check.errNumber > 0) return setErr(check.msg)
-        dispatch(addPlace(formInput, displayImage,auth))
+        dispatch(addPlace(formInput, displayImage, auth))
     }
     return (
         <Container maxW={"996px"}>
@@ -263,7 +263,7 @@ const Place = () => {
                     <div>Chọn tối đa 20 ảnh</div>
                 </section> */}
                 <section>
-                    <Button colorScheme='red' size='lg' w={'100%'} mt={5}  isLoading={alert.loading} onClick={() => onSubmit()}>
+                    <Button colorScheme='red' size='lg' w={'100%'} mt={5} isLoading={alert.loading} onClick={() => onSubmit()}>
                         + Thêm địa điểm
                     </Button>
                 </section>

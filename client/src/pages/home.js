@@ -1,11 +1,22 @@
 import { Button, Center, Container, Flex } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Area from './components/area'
 import Banner from './components/banner/Banner'
 import Categories from './components/categories/Categories'
 import Trending from './components/trending/Trending'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getCategories } from '../redux/actions/categoriesAction'
+import { getArea } from '../redux/actions/areaAction'
+import { getPlaces } from '../redux/actions/placeAction'
 const Home = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getCategories())
+        dispatch(getArea())
+        dispatch(getPlaces())
+    }, [dispatch])
+
     return (
         <Container maxW={"100%"} px="1.5">
             <Banner />

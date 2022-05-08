@@ -1,31 +1,26 @@
-import { Heading, Text, Skeleton,SkeletonText } from '@chakra-ui/react'
+import { Heading, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
 
 const DetailTop = (props) => {
     return (
         <>
-            <Heading size={'xl'} as='h1' py={1}>
-                {
-                    props.loading ?
-                        <SkeletonText w={'50%'} noOfLines={1}></SkeletonText> :
-                        <p>{props.name}</p>
-                }
-
-            </Heading>
-            <Text fontSize={'lg'} py={1}>
-                {
-                    props.loading ?  
+            {
+                props.name && props.intro && props.address ?
                     <>
-                            <SkeletonText noOfLines={5} spacing='1' mb={3}></SkeletonText>
-                    </> :
-                    <>
+                        <Heading size={'xl'} as='h1' py={1}>
+                            {props.name}
+                        </Heading>
+                        <Text fontSize={'lg'} py={1}>
                             {props.intro}
-                    </>   
-                }     
-            </Text>
-            <Text fontSize={'lg'} py={1}>
-                {props.address}
-            </Text>
+                        </Text>
+                        <Text fontSize={'lg'} py={1}>
+                            {props.address}
+                        </Text>
+                    </>
+                    :
+                    <SkeletonText w={'100%'} noOfLines={3} borderRadius="md"></SkeletonText>
+            }
+
         </>
     )
 }

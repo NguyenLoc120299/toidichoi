@@ -5,33 +5,33 @@ import { MdOutlineAttachMoney } from 'react-icons/md'
 import { AiFillPhone } from 'react-icons/ai'
 import { GrMail } from 'react-icons/gr'
 // import { BsFacebook, BsInstagram, } from 'react-icons/bs'
-const DetailInfo = ({ info, loading }) => {
+const DetailInfo = ({ infor, loading }) => {
     return (
         <Box boxShadow='md' rounded={'md'} p='6'>
             {
-                loading ? <SkeletonText noOfLines={4} spacing='4'/>
+                !infor ? <SkeletonText noOfLines={4} spacing='4' />
                     : <Box>
                         <Heading as={'h3'} size='md' mb={5}>Thông tin chi tiết</Heading>
                         <Flex alignItems='center' mb={3}>
                             <MdOutlineAttachMoney style={{ marginRight: '3px' }} />
-                            <Text>{info.price ? info?.price?.min : 0}đ - {info.price ? info?.price?.max : 0}đ</Text>
+                            <Text>{infor.price ? infor?.price?.min : 0}đ - {infor.price ? infor?.price?.max : 0}đ</Text>
                         </Flex>
                         <Flex alignItems='center' mb={3}>
                             <BiTime style={{ marginRight: '3px' }} />
                             <Box>
-                                <Text colorScheme={'green'}>Đang mở cửa - {info.time ? info.time.min : 0} - {info.time ? info.time.max : 0} </Text>
+                                <Text colorScheme={'green'}>Đang mở cửa - {infor.time ? infor.time.min : 0} - {infor.time ? infor.time.max : 0} </Text>
                             </Box>
                         </Flex>
                         <Flex alignItems='center' mb={3}>
                             <AiFillPhone style={{ marginRight: '3px' }} />
                             <Box>
-                                <Text>{info.phone === '' ? 'Chưa có thông tin' : info.phone}</Text>
+                                <Text>{infor.phone === '' ? 'Chưa có thông tin' : infor.phone}</Text>
                             </Box>
                         </Flex>
                         <Flex alignItems='center' mb={3}>
                             <GrMail style={{ marginRight: '3px' }} />
                             <Box>
-                                <Text>{info.email === '' ? 'Chưa có thông tin' : info.email}</Text>
+                                <Text>{infor.email === '' ? 'Chưa có thông tin' : infor.email}</Text>
                             </Box>
                         </Flex>
                     </Box>
