@@ -2,6 +2,7 @@ import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/reac
 import React from 'react'
 import LIstReview from './LIstReview'
 import ModalAddReview from './ModalAddReview'
+import RatePlace from './RatePlace'
 
 const ReviewPlace = ({ item }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -18,8 +19,9 @@ const ReviewPlace = ({ item }) => {
                     !item.loading &&
                     <Button
                         colorScheme={'red'}
-                        borderRadius={'12px'}
+                        rounded={'lg'}
                         onClick={onOpen}
+                        p={7}
                         _focus={{
                             border: 'unset'
                         }}
@@ -44,7 +46,7 @@ const ReviewPlace = ({ item }) => {
                     borderRight: '10px solid transparent',
                     borderBottom: '10px solid #ffdcd8'
                 }}>
-                <Flex>
+                <Flex direction={['column', 'row']}>
                     <Box >
                         <img src="https://ik.imagekit.io/reviewcafe/Online_Review-cuate_wG_WzURJF.svg" style={{
                             width: "100%",
@@ -52,13 +54,14 @@ const ReviewPlace = ({ item }) => {
                         }} />
                     </Box>
                     <Box>
-                        <Heading as={'h4'} size="sm" mb={5}>Bạn đã từng đến đây</Heading>
+                        <Heading as={'h4'} size="lg" mb={5}>Bạn đã từng đến đây</Heading>
                         <Text>Chia sẽ kinh nghiệm và trảu nghiệm cả bản thân cho mọi người cùng biết</Text>
                         <Text>Hãy chia sẽ thật những cảm xúc thật của bản thân chính mình </Text>
+                        <RatePlace item={item.rate} />
                     </Box>
                 </Flex>
             </Box>
-            <LIstReview item={item}/>
+            <LIstReview item={item} />
         </Box>
     )
 }

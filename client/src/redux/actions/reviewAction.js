@@ -27,6 +27,7 @@ export const createReview = (place, formData, images, rate, auth) => async (disp
                 rateNumber: rate,
                 placeId: place._id
             }, auth.token)
+
             dispatch({
                 type: ALERT_ACTION.ALERT,
                 payload: {

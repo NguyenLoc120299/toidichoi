@@ -56,10 +56,11 @@ const Single = () => {
       <UntitiesPlaceSingle
         utities={detail_place.utities}
       />
-      <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
+      <ReviewPlace item={detail_place} />
+      {/* <SimpleGrid columns={[1, 2]} spacing={10} my={3}>
         <ReviewPlace item={detail_place} />
         <RatePlace item={detail_place.rate} />
-      </SimpleGrid>
+      </SimpleGrid> */}
     </Container >
   )
 }

@@ -1,6 +1,5 @@
 import { Box, Button, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import LikeButton from '../../../components/LikeButton'
 const ReviewAction = ({ item }) => {
