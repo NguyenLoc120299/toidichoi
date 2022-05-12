@@ -2,7 +2,8 @@ import { Box, Button, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import LikeButton from '../../../components/LikeButton'
-const ReviewAction = ({ item }) => {
+import ReviewReply from '../../../components/ReviewReply'
+const ReviewAction = (item) => {
     const [isLike, setIsLike] = useState(false)
     const { auth } = useSelector(state => state)
     useEffect(() => {

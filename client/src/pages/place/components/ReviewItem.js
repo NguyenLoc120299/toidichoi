@@ -1,15 +1,16 @@
 import { Avatar, Box, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useState } from 'react'
+import ReviewReply from '../../../components/ReviewReply'
 import { formatTime } from '../../components/helper/moment'
 import ReviewAction from './ReviewAction'
 
-const ReviewItem = ({ review }) => {
-    console.log(review, 1111111111111111111111);
+const ReviewItem = ({ avatar, username, createdAt, content, likes, comments, isComment = false }) => {
     return (
         <Box my={5}>
             <Flex w={'100%'} >
                 <Box mr={5} display={['none', 'block']}>
-                    <Avatar size='lg' name={review.user?.username} src={review.user?.avatar} />{' '}
+                    <Avatar size={isComment ? 'md' : 'lg'} name={username} src={avatar} />
                 </Box>
                 <Flex
                     direction={'column'}
@@ -33,15 +34,26 @@ const ReviewItem = ({ review }) => {
                             transform: "translatey(-50%) rotate(-90deg)"
                         }]}>
                         <Box mb={5} >
-                            <Avatar size='md' name={review.user?.username} src={review.user?.avatar} display={['block', 'none']} />{' '}
-                            <Heading as={'h3'} size={'sm'} mb={1}>{review.user.username}</Heading>
-                            <Text color={'gray.500'} fontSize={"13px"}>Đã đánh giá {formatTime(review.createdAt)}</Text>
+                            <Avatar size='md' name={username} src={avatar} display={['block', 'none']} />{' '}
+                            <Flex justifyContent={'space-between'}>
+                                <Heading as={'h3'} size={'sm'} mb={1}>{username}</Heading>
+                            </Flex>
+                            {
+                                isComment ?
+                                    <Text color={'gray.500'} fontSize={"13px"}> {formatTime(createdAt)}</Text>
+                                    :
+                                    <Text color={'gray.500'} fontSize={"13px"}> Đã đánh giá {formatTime(createdAt)}</Text>
+                            }
                         </Box>
                         <Box>
-                            <Text size={'md'}>{review.content}</Text>
+                            <Text size={'md'}>{content}</Text>
                         </Box>
                     </Box>
-                    <ReviewAction item={review} />
+                    <ReviewAction
+                        likes={likes}
+                        comments={comments}
+                    />
+                    <ReviewReply item={comments} />
                 </Flex>
             </Flex>
 

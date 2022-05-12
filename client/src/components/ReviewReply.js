@@ -1,8 +1,10 @@
 import React from 'react'
 import { Box, Button } from '@chakra-ui/react'
 import { FaReply } from 'react-icons/fa'
-const ReviewReply = (item) => {
-    console.log(1111111111111111, item);
+import ReviewItem from '../pages/place/components/ReviewItem'
+import { useState } from 'react'
+const ReviewReply = ({ item }) => {
+    const [isShowComment, setIsShowComment] = useState(false)
     const renderReply = () => {
         if (item.length > 0) {
             return (
@@ -19,20 +21,36 @@ const ReviewReply = (item) => {
                     _hover={{
                         background: "unset"
                     }}
+                    onClick={() => setIsShowComment(true)}
                 >
                     <FaReply style={{
                         transform: 'rotate(180deg)',
                         marginRight: "10px"
                     }} />
-                    Xem 1 trả lời
+                    Xem {item.length} trả lời
                 </Button>
             )
         }
     }
+
     return (
         <Box>
             {
                 renderReply()
+            }
+            {
+                isShowComment && item.map(item => (
+                    <ReviewItem
+                        avatar={item?.user?.avatar}
+                        comments={[]}
+                        likes={item.likes}
+                        content={item.content}
+                        username={item?.user?.username}
+                        createdAt={item.createdAt}
+                        key={item._id}
+                        isComment={true}
+                    />
+                ))
             }
         </Box>
     )

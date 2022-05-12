@@ -14,7 +14,15 @@ const LIstReview = () => {
         <Box p={5}>
             {
                 showReview.map(item => (
-                    <ReviewItem key={item._id} review={item} />
+                    <ReviewItem
+                        key={item._id}
+                        avatar={item.user.avatar}
+                        comments={item.comments}
+                        likes={item.likes}
+                        content={item.content}
+                        createdAt={item.createdAt}
+                        username={item.user.username}
+                    />
                 ))
             }
             {
