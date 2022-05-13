@@ -21,13 +21,13 @@ const ReviewReply = ({ item }) => {
                     _hover={{
                         background: "unset"
                     }}
-                    onClick={() => setIsShowComment(true)}
+                    onClick={() => setIsShowComment(!isShowComment)}
                 >
                     <FaReply style={{
                         transform: 'rotate(180deg)',
                         marginRight: "10px"
                     }} />
-                    Xem {item.length} trả lời
+                    {isShowComment ? "Thu gọn" : `Xem ${item.length} trả lời`}
                 </Button>
             )
         }

@@ -5,6 +5,7 @@ const utitiesRouter = require('./UtilitiesRouter')
 const authRouter = require('./AuthRouter')
 const review = require('./ReviewRouter')
 const comment= require('./CommentRouter')
+const user = require('./UserRouter')
 const routes = [
     areaRouter,
     categoryRouter,
@@ -12,7 +13,8 @@ const routes = [
     utitiesRouter,
     authRouter,
     review,
-    comment
+    comment,
+    user
     
 ]
 

@@ -33,8 +33,9 @@ const ReviewAction = (item) => {
                     _hover={{
                         background: "unset"
                     }}
+                    onClick={() => item.setShowComment(!item.showFormComment)}
                 >
-                    Trả lời
+                    {item.showFormComment ? "Hủy" : "Trả lời"}
                 </Button>
             </Flex>
         </Box>

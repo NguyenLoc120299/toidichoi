@@ -3,9 +3,11 @@ import React from 'react'
 import { useState } from 'react'
 import ReviewReply from '../../../components/ReviewReply'
 import { formatTime } from '../../components/helper/moment'
+import FormComment from './FormComment'
 import ReviewAction from './ReviewAction'
 
 const ReviewItem = ({ avatar, username, createdAt, content, likes, comments, isComment = false }) => {
+    const [showFormComment, setShowComment] = useState(false)
     return (
         <Box my={5}>
             <Flex w={'100%'} >
@@ -52,7 +54,10 @@ const ReviewItem = ({ avatar, username, createdAt, content, likes, comments, isC
                     <ReviewAction
                         likes={likes}
                         comments={comments}
+                        setShowComment={setShowComment}
+                        showFormComment={showFormComment}
                     />
+                    {showFormComment && <FormComment />}
                     <ReviewReply item={comments} />
                 </Flex>
             </Flex>
