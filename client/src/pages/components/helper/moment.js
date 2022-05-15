@@ -3,5 +3,5 @@ import 'moment/locale/vi'
 moment.locale('vi')
 
 export const formatTime = (data) => {
-    return moment(data, "YYYYMMDD").fromNow();
+    return moment(new Date(data), "YYYYMMDD").fromNow();
 }

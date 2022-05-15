@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box, Button } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex } from '@chakra-ui/react'
 import { FaReply } from 'react-icons/fa'
-import ReviewItem from '../pages/place/components/ReviewItem'
+import BoxComment from '../pages/place/components/BoxComment'
 import { useState } from 'react'
 const ReviewReply = ({ item }) => {
     const [isShowComment, setIsShowComment] = useState(false)
@@ -39,19 +39,28 @@ const ReviewReply = ({ item }) => {
                 renderReply()
             }
             {
-                isShowComment && item.map(item => (
-                    <ReviewItem
-                        avatar={item?.user?.avatar}
-                        comments={[]}
-                        likes={item.likes}
-                        content={item.content}
-                        username={item?.user?.username}
-                        createdAt={item.createdAt}
-                        key={item._id}
-                        isComment={true}
-                    />
+                isShowComment &&
+                item.map(i => (
+                    <Flex key={i._id} mb={3}>
+                        <Box mr={5} display={['none', 'block']}>
+                            <Avatar size={'md'} name={i.user.username} src={i.user.avatar} />
+                        </Box>
+                        <Flex
+                            direction={'column'}
+                        >
+                            <BoxComment
+                                username={i.user.username}
+                                content={i.content}
+                                isComment={true}
+                                createdAt={i.createdAt}
+                                avatar={i.user.avatar}
+                            />
+                        </Flex>
+                    </Flex>
+
                 ))
             }
+
         </Box>
     )
 }

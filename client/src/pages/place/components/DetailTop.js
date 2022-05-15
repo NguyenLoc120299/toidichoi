@@ -18,7 +18,7 @@ const DetailTop = (props) => {
                         </Text>
                     </>
                     :
-                    <SkeletonText w={'100%'} noOfLines={3} borderRadius="md"></SkeletonText>
+                    <SkeletonText w={'100%'} noOfLines={3} borderRadius="lg" height={'10'} py={1}></SkeletonText>
             }
 
         </>

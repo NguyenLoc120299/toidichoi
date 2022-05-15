@@ -1,5 +1,4 @@
-import { async } from "@firebase/util"
-import { auth } from "../../firebase"
+import axios from "axios"
 import { getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { uploadImage } from "../../untils/uploadImage"
 import { ALERT_ACTION } from "./alertAction"
@@ -8,7 +7,8 @@ import { checkLogin } from "./authAction"
 
 export const REVIEW_ACTIONS = {
     LIST_REVIEW_PLACE: "LIST_REVIEW_PLACE",
-    UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE"
+    UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE",
+    UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -93,6 +93,27 @@ export const unLikeReview = (auth, review) => async (dispatch) => {
             payload: newReview
         })
 
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+
+export const createComment = (auth, content, reviewId, reviewUserId) => async (dispatch) => {
+    try {
+        const res = await postDataAPI('comment', {
+            content, reviewId, reviewUserId
+        }, auth.token)
+        if (res && res.data) {
+            dispatch({
+                type: REVIEW_ACTIONS.UPDATE_COMMENT_REVIEW,
+                payload: { ...res.data.newComment, user: auth.user }
+            })
+        }
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,

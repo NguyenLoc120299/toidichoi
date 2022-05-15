@@ -17,8 +17,8 @@ const RatePlace = ({ item }) => {
         }
     }, [item])
     return (
-        <Center>
-            <Box boxShadow='sm' rounded={'md'} p='6'>
+        <Center justifyContent={'start'}>
+            <Box boxShadow='sm' rounded={'md'} mt={5}>
                 <Flex direction={'column'}>
                     <Center mb={5}>
                         <Heading size={'md'} mr={5}>{rateText}</Heading>

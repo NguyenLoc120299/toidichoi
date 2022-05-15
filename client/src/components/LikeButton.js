@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { likeReview, unLikeReview } from '../redux/actions/reviewAction'
 
-const LikeButton = ({ number, isLike, item }) => {
+const LikeButton = ({ isLike, item }) => {
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
     const likeAction = (auth, item) => {

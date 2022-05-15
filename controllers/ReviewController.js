@@ -11,7 +11,7 @@ const reviewCtrl = {
                 user: req.user._id, title, content, placeId, images
             })
             const newTurnNumber = Number.parseFloat(place.rate.turnNumber) + 1
-            const newRateNumber = (place.rate.rateNumber * place.rate.turnNumber + rateNumber)/newTurnNumber
+            const newRateNumber = (place.rate.rateNumber * place.rate.turnNumber + rateNumber) / newTurnNumber
             const newRate = {
                 rateNumber: newRateNumber,
                 turnNumber: newTurnNumber
@@ -48,6 +48,7 @@ const reviewCtrl = {
                     populate: 'user',
 
                 })
+            review.sort()
             res.json({
                 review,
                 total: review.length

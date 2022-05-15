@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import LikeButton from '../../../components/LikeButton'
 import ReviewReply from '../../../components/ReviewReply'
-const ReviewAction = (item) => {
+const ReviewAction = ({ item, showFormComment, setShowComment }) => {
     const [isLike, setIsLike] = useState(false)
     const { auth } = useSelector(state => state)
     useEffect(() => {
@@ -13,7 +13,7 @@ const ReviewAction = (item) => {
         } else {
             setIsLike(false)
         }
-    }, [item.likes, auth.user._id])
+    }, [item?.likes, auth?.user._id])
     return (
         <Box px={3}>
             <Flex >
@@ -33,9 +33,9 @@ const ReviewAction = (item) => {
                     _hover={{
                         background: "unset"
                     }}
-                    onClick={() => item.setShowComment(!item.showFormComment)}
+                    onClick={() => setShowComment(!showFormComment)}
                 >
-                    {item.showFormComment ? "Hủy" : "Trả lời"}
+                    {showFormComment ? "Hủy" : "Trả lời"}
                 </Button>
             </Flex>
         </Box>

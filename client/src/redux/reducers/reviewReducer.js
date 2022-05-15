@@ -20,6 +20,13 @@ const categoryReducer = (state = initialState, action) => {
                 ...state,
                 list_review_place: EditData(state.list_review_place, action.payload._id, action.payload)
             }
+        case REVIEW_ACTIONS.UPDATE_COMMENT_REVIEW:
+            const review = state.list_review_place.find(item => item._id === action.payload.reviewId)
+            const newReview = { ...review, comments: [...review.comments, action.payload] }
+            return {
+                ...state,
+                list_review_place: EditData(state.list_review_place, action.payload.reviewId, newReview)
+            }
         default:
             return state;
     }

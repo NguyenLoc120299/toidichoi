@@ -75,7 +75,7 @@ const ImagesPlace = ({ images, loading }) => {
                 src={item}
                 w={'100%'}
                 maxH='100%'
-                objectFit={''}
+                objectFit={'cover'}
                 onClick={() => toggleImageLightBox(index)} />
             </Box>
           ))}

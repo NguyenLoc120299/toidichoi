@@ -1,64 +1,47 @@
-import { Avatar, Box, Flex, Heading, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Heading, Image, Img, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useState } from 'react'
 import ReviewReply from '../../../components/ReviewReply'
 import { formatTime } from '../../components/helper/moment'
+import BoxComment from './BoxComment'
 import FormComment from './FormComment'
+import ImageLightbox from './ImageLightbox'
 import ReviewAction from './ReviewAction'
 
-const ReviewItem = ({ avatar, username, createdAt, content, likes, comments, isComment = false }) => {
+const ReviewItem = (props) => {
     const [showFormComment, setShowComment] = useState(false)
     return (
         <Box my={5}>
             <Flex w={'100%'} >
                 <Box mr={5} display={['none', 'block']}>
-                    <Avatar size={isComment ? 'md' : 'lg'} name={username} src={avatar} />
+                    <Avatar size={props.isComment ? 'md' : 'lg'} name={props.username} src={props.avatar} />
                 </Box>
                 <Flex
                     direction={'column'}
+                    w={['100%', 'calc((100% - 64px) - 20px)']}
                 >
-                    <Box p={3}
-                        position={'relative'}
-                        bg="gray.100"
-                        rounded={'xl'}
-                        _before={['', {
-                            position: "absolute",
-                            top: "25px",
-                            right: "auto",
-                            bottom: "auto",
-                            left: "-12px",
-                            content: "''",
-                            width: 0,
-                            height: 0,
-                            borderLeft: "8px solid transparent",
-                            borderRight: "8px solid transparent",
-                            borderBottom: " 8px solid #f5f5f7",
-                            transform: "translatey(-50%) rotate(-90deg)"
-                        }]}>
-                        <Box mb={5} >
-                            <Avatar size='md' name={username} src={avatar} display={['block', 'none']} />{' '}
-                            <Flex justifyContent={'space-between'}>
-                                <Heading as={'h3'} size={'sm'} mb={1}>{username}</Heading>
-                            </Flex>
-                            {
-                                isComment ?
-                                    <Text color={'gray.500'} fontSize={"13px"}> {formatTime(createdAt)}</Text>
-                                    :
-                                    <Text color={'gray.500'} fontSize={"13px"}> Đã đánh giá {formatTime(createdAt)}</Text>
-                            }
-                        </Box>
-                        <Box>
-                            <Text size={'md'}>{content}</Text>
-                        </Box>
-                    </Box>
+                    <BoxComment
+                        username={props.username}
+                        avatar={props.avatar}
+                        content={props.content}
+                        createdAt={props.createdAt}
+                        images={props.images}
+                    />
+
                     <ReviewAction
-                        likes={likes}
-                        comments={comments}
+                        likes={props.likes}
+                        comments={props.comments}
                         setShowComment={setShowComment}
                         showFormComment={showFormComment}
+                        item={props.review}
                     />
-                    {showFormComment && <FormComment />}
-                    <ReviewReply item={comments} />
+                    {showFormComment &&
+                        <FormComment
+                            reviewId={props.reviewId}
+                            reviewUserId={props.reviewUserId}
+                        />}
+                    <ReviewReply
+                        item={props.comments} />
                 </Flex>
             </Flex>
 
