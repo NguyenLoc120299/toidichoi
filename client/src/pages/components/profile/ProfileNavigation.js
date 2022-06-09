@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Link, Wrap, WrapItem } from '@chakra-ui/react'
 import React from 'react'
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaEllipsisH } from 'react-icons/fa'
 const ProfileNavigation = () => {
     return (
         <Box
             background={'#fff'}
             boxShadow="0 2px 2px 0 rgb(189 171 171 / 20 %)"
-            overflowX="auto"
+
         >
             <Box
                 display={'flex'}
@@ -31,7 +31,7 @@ const ProfileNavigation = () => {
                             padding="10px 14px"
                             color="#000"
                         >
-                            Đánh giá
+                            Đã lưu
                         </Link>
                     </WrapItem>
                     <WrapItem>
@@ -41,7 +41,7 @@ const ProfileNavigation = () => {
                             padding="10px 14px"
                             color="#000"
                         >
-                            Đánh giá
+                            Người theo dõi
                         </Link>
                     </WrapItem>
                 </Wrap>
@@ -66,9 +66,10 @@ const ProfileNavigation = () => {
                             marginTop="6px"
                             borderRadius="6px"
                             fontWeight="500"
-                            colorScheme={'facebook'}
-                            leftIcon={<FaFacebook />}
-                        />
+
+                        >
+                            <FaFacebook />
+                        </Button>
 
                     </WrapItem>
                     <WrapItem>
@@ -78,9 +79,21 @@ const ProfileNavigation = () => {
                             marginTop="6px"
                             borderRadius="6px"
                             fontWeight="500"
-                            background={''}
-                            leftIcon={<FaInstagram />}
-                        />
+                        >
+                            <FaInstagram />
+                        </Button>
+
+                    </WrapItem>
+                    <WrapItem>
+                        <Button
+                            padding="6px 18px"
+                            marginLeft=" 6px"
+                            marginTop="6px"
+                            borderRadius="6px"
+                            fontWeight="500"
+                        >
+                            <FaEllipsisH />
+                        </Button>
 
                     </WrapItem>
                 </Wrap>

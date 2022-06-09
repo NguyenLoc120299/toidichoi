@@ -94,6 +94,20 @@
   display: none;
 }
 
+.new_review {
+  width: 100%;
+  outline: none;
+  resize: none;
+  min-height: 36px;
+  line-height: 36px;
+  letter-spacing: .12px;
+  margin-left: 6px;
+  padding: 0 12px;
+  border-radius: 18px;
+  background-color: #f5f5f7;
+  border: 1px solid transparent;
+  vertical-align: bottom
+}
 
 
 @media (min-width: 992px) {
