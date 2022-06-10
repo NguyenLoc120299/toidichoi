@@ -1,6 +1,7 @@
 const Reviews = require('../models/ReviewModel')
 const Places = require('../models/PlaceModel')
 const formatDate = require('../lib/moment')
+const { default: mongoose } = require('mongoose')
 const reviewCtrl = {
     createReview: async (req, res) => {
         try {
@@ -30,6 +31,62 @@ const reviewCtrl = {
                 newReview,
 
             })
+        } catch (error) {
+            return res.status(500).json({
+                msg: error.message
+            })
+        }
+    },
+    getListReviewsByUser: async (req, res) => {
+        const { id } = req.user
+
+        try {
+            const result = await Reviews.aggregate(
+                [
+
+                    {
+                        $match: {
+                            user: mongoose.Types.ObjectId(id)
+                        }
+                    },
+                    // User
+                    {
+                        $lookup: {
+                            from: "users",
+                            let: { user_id: "$user" },
+                            pipeline: [
+                                { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
+                                { $project: { username: 1, avatar: 1 } }
+                            ],
+                            as: "user"
+                        }
+                    },
+                    // array -> object
+                    { $unwind: "$user" },
+
+                    //place
+                    {
+                        $lookup: {
+                            from: "places",
+                            let: { place_id: "$placeId" },
+                            pipeline: [
+                                { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
+                                { $project: { name: 1, rate: 1 } }
+                            ],
+                            as: "placeId"
+                        }
+                    },
+                    //array -> Object
+                    { $unwind: "$placeId" },
+                    //sorting
+
+                    { $sort: { "createdAt": -1 } },
+
+
+                ]
+            )
+
+            res.json(result)
         } catch (error) {
             return res.status(500).json({
                 msg: error.message

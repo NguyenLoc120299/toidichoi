@@ -3,7 +3,8 @@ import { postDataAPI } from '../../untils/fetchData'
 import { ALERT_ACTION } from './alertAction';
 export const AUTH_ACTIONS = {
     AUTH: "AUTH",
-    SIGN_UP: 'SIGN_UP'
+    SIGN_UP: 'SIGN_UP',
+    REVIEW: 'REVIEW'
 }
 
 export const signup = (formData) => async (dispatch) => {
@@ -104,15 +105,15 @@ export const logout = () => async (dispatch) => {
     }
 }
 
-export const checkLogin =(auth) => (dispatch) => {
+export const checkLogin = (auth) => (dispatch) => {
     if (auth.token) {
         return true
     }
-    else{
+    else {
         dispatch({
-            type:ALERT_ACTION.ALERT,
-            payload:{
-                modal:true
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                modal: true
             }
         })
         return false

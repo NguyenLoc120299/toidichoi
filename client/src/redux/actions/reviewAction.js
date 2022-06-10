@@ -1,8 +1,9 @@
+import { async } from "@firebase/util"
 import axios from "axios"
 import { getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { uploadImage } from "../../untils/uploadImage"
 import { ALERT_ACTION } from "./alertAction"
-import { checkLogin } from "./authAction"
+import { AUTH_ACTIONS, checkLogin } from "./authAction"
 
 
 export const REVIEW_ACTIONS = {
@@ -114,6 +115,25 @@ export const createComment = (auth, content, reviewId, reviewUserId) => async (d
                 payload: { ...res.data.newComment, user: auth.user }
             })
         }
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+
+export const getReviewByAuth = (auth) => async (dispatch) => {
+    try {
+        console.log(auth);
+        const res = await getDataAPI('/list-reviews', auth.token)
+        if (res.data)
+            dispatch({
+                type: AUTH_ACTIONS.REVIEW,
+                payload: res.data
+            })
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
