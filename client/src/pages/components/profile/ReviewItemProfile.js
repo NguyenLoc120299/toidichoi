@@ -11,7 +11,7 @@ const ReviewItem = ({ reviewItem }) => {
             <Box paddingBottom={'4px'}>
                 <ReviewHeader item={reviewItem} />
                 <ReviewBody item={reviewItem} />
-                <ReviewAction />
+                <ReviewAction item={reviewItem} />
                 <FormNewComment />
                 <ListReviewReply />
             </Box>

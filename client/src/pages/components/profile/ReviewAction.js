@@ -3,7 +3,7 @@ import React from 'react'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { BiComment, BiShare } from 'react-icons/bi'
 
-const ReviewAction = () => {
+const ReviewAction = ({ item }) => {
     return (
         <Box
             display={'flex'}
@@ -20,9 +20,21 @@ const ReviewAction = () => {
                 padding="4px 0"
                 outline="none"
                 backgroundColor="transparent"
+                _active={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
+                _focus={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
             >
-                <AiOutlineHeart />
-                <span>Thích</span>
+                <AiOutlineHeart style={{
+                    marginRight: '5px'
+                }} />
+                <span> {item.likes.length} Thích</span>
             </Button>
             <Button
                 cursor="pointer"
@@ -32,8 +44,10 @@ const ReviewAction = () => {
                 outline="none"
                 backgroundColor="transparent"
             >
-                <BiComment />
-                <span>Bình luận</span>
+                <BiComment style={{
+                    marginRight: '5px'
+                }} />
+                <span>{item.comments.length} Bình luận</span>
             </Button>
             <Button
                 cursor="pointer"
@@ -44,7 +58,7 @@ const ReviewAction = () => {
                 backgroundColor="transparent"
             >
                 <BiShare />
-                <span>Bình luận</span>
+                <span>Chia sẻ</span>
             </Button>
         </Box>
     )
