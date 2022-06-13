@@ -20,9 +20,12 @@ const ProfileContainer = () => {
             <GridItem colSpan={2}>
                 {
                     auth.reviews ?
-                        <BoxProfile>
-                            <ReviewItem />
-                        </BoxProfile>
+                        auth.reviews.map(item => (
+                            <BoxProfile key={item._id}>
+                                <ReviewItem reviewItem={item} />
+                            </BoxProfile>
+                        ))
+
                         : <p>Loading...</p>
                 }
 

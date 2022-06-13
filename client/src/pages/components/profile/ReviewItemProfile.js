@@ -5,12 +5,12 @@ import FormNewComment from './FormNewComment'
 import ReviewBody from './ReviewBody'
 import ReviewHeader from './ReviewHeader'
 import ListReviewReply from './ListReviewReply'
-const ReviewItem = () => {
+const ReviewItem = ({ reviewItem }) => {
     return (
         <Box>
             <Box paddingBottom={'4px'}>
-                <ReviewHeader />
-                <ReviewBody />
+                <ReviewHeader item={reviewItem} />
+                <ReviewBody item={reviewItem} />
                 <ReviewAction />
                 <FormNewComment />
                 <ListReviewReply />

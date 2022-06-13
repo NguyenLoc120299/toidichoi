@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Center, Container, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Link ,useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
@@ -27,7 +27,7 @@ export const logo = (
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const { auth } = useSelector(state => state)
-    const history= useHistory()
+    const history = useHistory()
     const dispatch = useDispatch()
     return (
         <Container maxW={"100%"} className={style.nav}>
@@ -62,15 +62,15 @@ const Navbar = () => {
                     </Center>
 
                     <Center h={"100%"}>
-                        <Button colorScheme='red' mr='3' borderRadius={"12px"} onClick={()=>history.push('/add-review')}>
+                        <Button colorScheme='red' mr='3' borderRadius={"12px"} onClick={() => history.push('/add-review')}>
                             <BsPencil style={{ marginRight: "5px" }} /> Viết review
                         </Button>
                         {
                             !auth.token &&
-                            <Button colorScheme='red' mr='3' borderRadius={"12px"} variant='outline' onClick={()=>dispatch({
-                                type:ALERT_ACTION.ALERT,
-                                payload:{
-                                    modal:true
+                            <Button colorScheme='red' mr='3' borderRadius={"12px"} variant='outline' onClick={() => dispatch({
+                                type: ALERT_ACTION.ALERT,
+                                payload: {
+                                    modal: true
                                 }
                             })}>
                                 Đăng nhập
@@ -106,18 +106,20 @@ const Navbar = () => {
                                         />
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem >
-                                            <Flex justifyContent={'space-between'} alignItems={"center"} >
-                                                <Avatar
-                                                    size={'sm'}
-                                                    objectFit={"cover"}
-                                                    mr={3}
-                                                    src={auth.user.avatar ? auth.user.avatar :
-                                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                                                    }
-                                                />
-                                                <Text fontSize='md' fontWeight={'bold'}>{auth.user.username}</Text>
-                                            </Flex>
+                                        <MenuItem  >
+                                            <Link to="/profile" >
+                                                <Flex justifyContent={'space-between'} alignItems={"center"} >
+                                                    <Avatar
+                                                        size={'sm'}
+                                                        objectFit={"cover"}
+                                                        mr={3}
+                                                        src={auth.user.avatar ? auth.user.avatar :
+                                                            'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                                                        }
+                                                    />
+                                                    <Text fontSize='md' fontWeight={'bold'}>{auth.user.username}</Text>
+                                                </Flex>
+                                            </Link>
                                         </MenuItem>
                                         <MenuDivider />
                                         <MenuItem>

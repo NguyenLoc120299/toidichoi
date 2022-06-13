@@ -1,7 +1,12 @@
 import { Box, Center, Image, Link, Text } from '@chakra-ui/react'
 import React from 'react'
-
-const ReviewHeader = () => {
+import { Link as RouterLink } from 'react-router-dom';
+import { FaCaretRight } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { formatTime } from '../../components/helper/moment'
+import Rate from 'rc-rate';
+const ReviewHeader = ({ item }) => {
+    const auth = useSelector(state => state.auth)
     return (
         <Box
             display={'flex'}
@@ -27,7 +32,7 @@ const ReviewHeader = () => {
                     width="100%"
                     position="relative"
                 >
-                    <Image src="https://lh3.googleusercontent.com/a/AATXAJw07Jo348XQSk5ol5Vh-rE_ygsM4BJMzAqdjYGj=s96-c"
+                    <Image src={item.user.avatar}
                         backgroundPosition="50%"
                         backgroundSize="cover"
                         height="100%"
@@ -42,31 +47,52 @@ const ReviewHeader = () => {
 
                 margin=" 0 30px 0 8px"
             >
-                <Box>
-                    <Link href='#'>123</Link>
-
-                    <Link href="/place/mobius-space-cafe-boardgame"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        fontSize="18px"
-                        fontWeight="600"
-                        letterSpacing=".4px"
-                        marginRight="5px"
-                        color="#000"
-                    >Mobius Space - Cafe &amp; Boardgame</Link>
+                <Box display={'flex'} alignItems="center">
+                    <RouterLink to={item.user._id === auth.user._id ? '/profile' : `/prodile/${item.user._id}`}>
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            fontSize="18px"
+                            fontWeight="600"
+                            letterSpacing=".4px"
+                            marginRight="5px"
+                            color="#000"
+                        >{item.user.username}</Box>
+                    </RouterLink>
+                    <FaCaretRight style={{
+                        color: "#ccc"
+                    }} />
+                    <RouterLink href={`/place/${item.placeId._id}`}>
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            fontSize="18px"
+                            fontWeight="600"
+                            letterSpacing=".4px"
+                            marginRight="5px"
+                            color="#000"
+                        >{item.placeId.name}
+                        </Box>
+                    </RouterLink>
                 </Box>
                 <Center justifyContent={'flex-start'}>
-                    <span>****</span>
+                    <Rate
+                        style={{ fontSize: "15px" }}
+                        value={item.placeId.rate.rateNumber}
+                        allowHalf
+                        disabled
+                        character={<i className="anticon anticon-star" />} />
                     <Box m={"0 6px"}></Box>
                     <Text as="p"
                         color="#898c95"
                     >
-                        time
+                        {formatTime(item.createdAt)}
                     </Text>
                 </Center>
             </Box>
-        </Box>
+        </Box >
     )
 }
 

@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-
-const ReviewBody = () => {
+import ReactPhotoGrid from 'react-photo-grid'
+const ReviewBody = ({ item }) => {
     return (
         <Box
             p={"4px 2px"}
@@ -17,8 +17,18 @@ const ReviewBody = () => {
                     overflowWrap="break-word"
                     textAlign={'left'}
                 >
-                    11111111111111111
+                    {item.content}
                 </Box>
+                {
+                    item.images.length > 0 &&
+                    <Box mt={5} w={"700px"}>
+                        <ReactPhotoGrid
+                            data={item.images}
+                            gridSize="500x500"
+                        />
+                    </Box>
+                }
+
 
             </Box>
         </Box>
