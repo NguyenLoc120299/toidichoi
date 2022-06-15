@@ -1,6 +1,6 @@
-import { Box, Center, Image, Link, Text } from '@chakra-ui/react'
+import { Box, Center, Image, Text } from '@chakra-ui/react'
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaCaretRight } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { formatTime } from '../../components/helper/moment'
@@ -48,7 +48,7 @@ const ReviewHeader = ({ item }) => {
                 margin=" 0 30px 0 8px"
             >
                 <Box display={'flex'} alignItems="center">
-                    <RouterLink to={item.user._id === auth.user._id ? '/profile' : `/prodile/${item.user._id}`}>
+                    <Link to={item.user._id === auth.user._id ? '/profile' : `/profile/${item.user._id}`}>
                         <Box
                             display="flex"
                             alignItems="center"
@@ -59,11 +59,11 @@ const ReviewHeader = ({ item }) => {
                             marginRight="5px"
                             color="#000"
                         >{item.user.username}</Box>
-                    </RouterLink>
+                    </Link>
                     <FaCaretRight style={{
                         color: "#ccc"
                     }} />
-                    <RouterLink href={`/place/${item.placeId._id}`}>
+                    <Link to={`/place/${item.placeId._id}`}>
                         <Box
                             display="flex"
                             alignItems="center"
@@ -75,7 +75,7 @@ const ReviewHeader = ({ item }) => {
                             color="#000"
                         >{item.placeId.name}
                         </Box>
-                    </RouterLink>
+                    </Link>
                 </Box>
                 <Center justifyContent={'flex-start'}>
                     <Rate

@@ -20,6 +20,9 @@ const ReviewAction = ({ item }) => {
                 padding="4px 0"
                 outline="none"
                 backgroundColor="transparent"
+                _hover={{
+                    background: 'unset'
+                }}
                 _active={{
                     border: "unset",
                     background: "transparent",
@@ -43,6 +46,19 @@ const ReviewAction = ({ item }) => {
                 padding="4px 0"
                 outline="none"
                 backgroundColor="transparent"
+                _hover={{
+                    background: 'unset'
+                }}
+                _active={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
+                _focus={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
             >
                 <BiComment style={{
                     marginRight: '5px'
@@ -56,6 +72,19 @@ const ReviewAction = ({ item }) => {
                 padding="4px 0"
                 outline="none"
                 backgroundColor="transparent"
+                _hover={{
+                    background: 'unset'
+                }}
+                _active={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
+                _focus={{
+                    border: "unset",
+                    background: "transparent",
+                    boxShadow: 'unset'
+                }}
             >
                 <BiShare />
                 <span>Chia sẻ</span>

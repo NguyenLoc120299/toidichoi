@@ -17,7 +17,7 @@ const ProfileContainer = () => {
                     <h1>aaaaaaa</h1>
                 </BoxProfile>
             </GridItem>
-            <GridItem colSpan={2}>
+            <GridItem colSpan={[3, 2]}>
                 {
                     auth.reviews ?
                         auth.reviews.map(item => (

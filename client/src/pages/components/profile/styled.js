@@ -23,16 +23,14 @@ export const BoxAvatar = ({ children }) => {
     return (
         <Box
             backgroundImage="url(https://lh3.googleusercontent.com/a/AATXAJw07Jo348XQSk5ol5Vh-rE_ygsM4BJMzAqdjYGj=s96-c)"
-            width="36px"
-            height="36px"
+            width="35px"
+            height="35px"
             backgroundColor="#eee"
             backgroundPosition="50%"
             backgroundSize="cover"
             backgroundRepeat="no-repeat"
             flex="0 0 auto"
             cursor="pointer"
-            width="46px"
-            height="46px"
             borderRadius="50%"
             border="none"
             overflow="hidden"
