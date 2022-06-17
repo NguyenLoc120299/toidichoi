@@ -9,7 +9,8 @@ import { AUTH_ACTIONS, checkLogin } from "./authAction"
 export const REVIEW_ACTIONS = {
     LIST_REVIEW_PLACE: "LIST_REVIEW_PLACE",
     UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE",
-    UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW"
+    UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW",
+    LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -127,11 +128,29 @@ export const createComment = (auth, content, reviewId, reviewUserId) => async (d
 
 export const getReviewByAuth = (auth) => async (dispatch) => {
     try {
-        console.log(auth);
+
         const res = await getDataAPI('/list-reviews', auth.token)
         if (res.data)
             dispatch({
                 type: AUTH_ACTIONS.REVIEW,
+                payload: res.data
+            })
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+
+export const getListAllReviews = () => async (dispatch) => {
+    try {
+        const res = await getDataAPI('listAll-reviews')
+        if (res && res.data)
+            dispatch({
+                type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,
                 payload: res.data
             })
     } catch (error) {

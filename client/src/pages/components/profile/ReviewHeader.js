@@ -87,6 +87,7 @@ const ReviewHeader = ({ item }) => {
                     <Box m={"0 6px"}></Box>
                     <Text as="p"
                         color="#898c95"
+                        textTransform={'capitalize'}
                     >
                         {formatTime(item.createdAt)}
                     </Text>

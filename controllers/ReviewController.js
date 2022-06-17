@@ -78,6 +78,115 @@ const reviewCtrl = {
                     },
                     //array -> Object
                     { $unwind: "$placeId" },
+
+
+                    // comments
+                    {
+                        $lookup: {
+                            from: "comments",
+                            let: { cmts_id: "$comments" },
+                            pipeline: [
+                                { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
+                                {
+                                    $lookup: {
+                                        from: "users",
+                                        let: { user_id: "$user" },
+                                        pipeline: [
+                                            {
+                                                $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
+                                            }
+                                        ],
+                                        as: "user"
+                                    },
+                                },
+                                {
+                                    $unwind: "$user"
+                                }
+                            ],
+                            as: "comments"
+                        }
+                    },
+
+
+                    //sorting
+
+                    { $sort: { "createdAt": -1 } },
+
+
+                ]
+            )
+
+            res.json(result)
+        } catch (error) {
+            return res.status(500).json({
+                msg: error.message
+            })
+        }
+    },
+    getListReviews: async (req, res) => {
+
+        try {
+            const result = await Reviews.aggregate(
+                [
+
+                    {
+                        $lookup: {
+                            from: "users",
+                            let: { user_id: "$user" },
+                            pipeline: [
+                                { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
+                                { $project: { username: 1, avatar: 1 } }
+                            ],
+                            as: "user"
+                        }
+                    },
+                    // array -> object
+                    { $unwind: "$user" },
+
+                    //place
+                    {
+                        $lookup: {
+                            from: "places",
+                            let: { place_id: "$placeId" },
+                            pipeline: [
+                                { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
+                                { $project: { name: 1, rate: 1 } }
+                            ],
+                            as: "placeId"
+                        }
+                    },
+                    //array -> Object
+                    { $unwind: "$placeId" },
+
+
+                    // comments
+                    {
+                        $lookup: {
+                            from: "comments",
+                            let: { cmts_id: "$comments" },
+                            pipeline: [
+                                { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
+                                {
+                                    $lookup: {
+                                        from: "users",
+                                        let: { user_id: "$user" },
+                                        pipeline: [
+                                            {
+                                                $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
+                                            }
+                                        ],
+                                        as: "user"
+                                    },
+                                },
+                                {
+                                    $unwind: "$user"
+                                }
+                            ],
+                            as: "comments"
+                        }
+                    },
+
+
                     //sorting
 
                     { $sort: { "createdAt": -1 } },

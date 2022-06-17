@@ -19,10 +19,10 @@ export const BoxProfile = ({ children }) => {
         </Box>
     )
 }
-export const BoxAvatar = ({ children }) => {
+export const BoxAvatar = ({ children, avatar }) => {
     return (
         <Box
-            backgroundImage="url(https://lh3.googleusercontent.com/a/AATXAJw07Jo348XQSk5ol5Vh-rE_ygsM4BJMzAqdjYGj=s96-c)"
+            backgroundImage={`url(${avatar})`}
             width="35px"
             height="35px"
             backgroundColor="#eee"

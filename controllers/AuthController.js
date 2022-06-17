@@ -44,7 +44,7 @@ const authCtrl = {
         }
 
     },
-    login: async (req,res)=>{
+    login: async (req, res) => {
         try {
             const { email, password } = req.body
             const user = await Users.findOne({ email }).populate('followers following')
@@ -67,9 +67,9 @@ const authCtrl = {
                 }
             })
         } catch (error) {
-            return res.status(500).json({msg:error.message})
+            return res.status(500).json({ msg: error.message })
         }
-    
+
     },
     generateAccessToken: async (req, res) => {
         try {
@@ -96,7 +96,7 @@ const authCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-    },
+    }
 
 }
 const createAccessToken = (payload) => {

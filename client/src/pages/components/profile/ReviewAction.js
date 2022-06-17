@@ -1,9 +1,30 @@
 import { Box, Button } from '@chakra-ui/react'
-import React from 'react'
-import { AiOutlineHeart } from 'react-icons/ai'
+import React, { useEffect, useRef, useState } from 'react'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { BiComment, BiShare } from 'react-icons/bi'
+import { useDispatch, useSelector } from 'react-redux'
+import { likeReview, unLikeReview } from '../../../redux/actions/reviewAction'
 
 const ReviewAction = ({ item }) => {
+    const [isLike, setIsLike] = useState(false)
+    const auth = useSelector(state => state.auth)
+
+    const dispatch = useDispatch()
+    const likeAction = (auth, item) => {
+        if (isLike) dispatch(unLikeReview(auth, item))
+        else
+            dispatch(likeReview(auth, item))
+        setIsLike(!isLike)
+    }
+    useEffect(() => {
+        if (item.likes.find(like => like === auth.user._id)) {
+
+            setIsLike(true)
+        } else {
+            setIsLike(false)
+        }
+    }, [item?.likes, auth?.user._id, dispatch])
+
     return (
         <Box
             display={'flex'}
@@ -33,10 +54,12 @@ const ReviewAction = ({ item }) => {
                     background: "transparent",
                     boxShadow: 'unset'
                 }}
+                onClick={() => likeAction(auth, item)}
             >
-                <AiOutlineHeart style={{
-                    marginRight: '5px'
-                }} />
+                {
+                    isLike ? <AiFillHeart style={{ marginRight: '5px', color: 'red' }} />
+                        : <AiOutlineHeart style={{ marginRight: '5px' }} />
+                }
                 <span> {item.likes.length} Thích</span>
             </Button>
             <Button
@@ -59,6 +82,7 @@ const ReviewAction = ({ item }) => {
                     background: "transparent",
                     boxShadow: 'unset'
                 }}
+
             >
                 <BiComment style={{
                     marginRight: '5px'
@@ -85,6 +109,7 @@ const ReviewAction = ({ item }) => {
                     background: "transparent",
                     boxShadow: 'unset'
                 }}
+
             >
                 <BiShare />
                 <span>Chia sẻ</span>

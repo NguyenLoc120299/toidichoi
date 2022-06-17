@@ -5,6 +5,7 @@ import { REVIEW_ACTIONS } from "../actions/reviewAction";
 const initialState = {
     list_review_place: [],
     result: 0,
+    explore: []
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -26,6 +27,11 @@ const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 list_review_place: EditData(state.list_review_place, action.payload.reviewId, newReview)
+            }
+        case REVIEW_ACTIONS.LISTS_ALL_REVIEWS:
+            return {
+                ...state,
+                explore: action.payload
             }
         default:
             return state;

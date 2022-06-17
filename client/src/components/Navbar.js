@@ -39,7 +39,7 @@ const Navbar = () => {
                 <Box display={["none", "flex"]}>
                     <Center h={"100%"}>
                         <Flex justifyContent={"space-between"} alignItems="center">
-                            <Link to="/explorer" style={{ marginRight: "1.5rem" }} className={style.links}>
+                            <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
                                 <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
                             </Link>
                             <Link to="/promotion" className={style.links}>
