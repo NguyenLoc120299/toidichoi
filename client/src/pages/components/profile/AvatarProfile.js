@@ -1,8 +1,15 @@
 import { Box, Center, Skeleton, SkeletonCircle, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { BsCameraFill } from 'react-icons/bs'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfile } from '../../../redux/actions/authAction'
 const AvatarProfile = ({ user }) => {
-
+    const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
+    const handleOnchangeAvatar = (e) => {
+        const files = [...e.target.files]
+        dispatch(updateProfile(auth.user.username, files, auth))
+    }
     return (
         <Box
             w={'100%'}
@@ -65,7 +72,15 @@ const AvatarProfile = ({ user }) => {
                                 alignItems={'center'}
                             >
                                 <Center>
-                                    <BsCameraFill />
+                                    <label htmlFor='upload_avatar'>
+                                        <BsCameraFill style={{ cursor: 'pointer' }} />
+                                        <input type="file"
+                                            name='file'
+                                            multiple
+                                            style={{ display: "none" }}
+                                            onChange={handleOnchangeAvatar}
+                                            id='upload_avatar'></input>
+                                    </label>
                                 </Center>
                             </Box>
 

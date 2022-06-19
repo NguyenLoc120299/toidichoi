@@ -1,4 +1,6 @@
 import { AUTH_ACTIONS } from "../actions/authAction";
+import { EditData } from "../actions/imageAction";
+import { REVIEW_ACTIONS } from "../actions/reviewAction";
 
 const initialState = {}
 
@@ -10,6 +12,19 @@ const alertReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reviews: action.payload
+            }
+        case AUTH_ACTIONS.UPDATE:
+            console.log(state);
+            return {
+                ...state,
+                user: action.payload.newUser
+            }
+        case REVIEW_ACTIONS.UPDATE_REVIEW_PROFILE:
+            const review = state.reviews.find(item => item._id === action.payload.reviewId)
+            const newReview = { ...review, comments: [...review.comments, action.payload] }
+            return {
+                ...state,
+                reviews: EditData(state.reviews, action.payload.reviewId, newReview)
             }
         default:
             return state;

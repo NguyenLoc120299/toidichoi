@@ -10,7 +10,8 @@ export const REVIEW_ACTIONS = {
     LIST_REVIEW_PLACE: "LIST_REVIEW_PLACE",
     UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE",
     UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW",
-    LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS"
+    LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS",
+    UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -105,17 +106,29 @@ export const unLikeReview = (auth, review) => async (dispatch) => {
     }
 }
 
-export const createComment = (auth, content, reviewId, reviewUserId) => async (dispatch) => {
+export const createComment = (auth, content, reviewId, reviewUserId, location) => async (dispatch) => {
     try {
         const res = await postDataAPI('comment', {
             content, reviewId, reviewUserId
         }, auth.token)
-        if (res && res.data) {
-            dispatch({
-                type: REVIEW_ACTIONS.UPDATE_COMMENT_REVIEW,
-                payload: { ...res.data.newComment, user: auth.user }
-            })
+        if (location === '/profile') {
+            if (res && res.data) {
+
+                dispatch({
+                    type: REVIEW_ACTIONS.UPDATE_REVIEW_PROFILE,
+                    payload: res.data.newComment
+                })
+            }
         }
+        else if (location === '/explore') {
+            console.log(1);
+        } else
+            if (res && res.data) {
+                dispatch({
+                    type: REVIEW_ACTIONS.UPDATE_COMMENT_REVIEW,
+                    payload: { ...res.data.newComment, user: auth.user }
+                })
+            }
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -153,6 +166,18 @@ export const getListAllReviews = () => async (dispatch) => {
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,
                 payload: res.data
             })
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+export const updateReviewProfile = (item, content) => dispatch => {
+    try {
+        console.log(item);
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,

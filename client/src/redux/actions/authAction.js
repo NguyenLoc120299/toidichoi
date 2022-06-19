@@ -1,10 +1,14 @@
 
-import { postDataAPI } from '../../untils/fetchData'
+import { async } from '@firebase/util';
+import { auth } from '../../firebase';
+import { patchDataAPI, postDataAPI } from '../../untils/fetchData'
+import { uploadImage } from '../../untils/uploadImage';
 import { ALERT_ACTION } from './alertAction';
 export const AUTH_ACTIONS = {
     AUTH: "AUTH",
     SIGN_UP: 'SIGN_UP',
-    REVIEW: 'REVIEW'
+    REVIEW: 'REVIEW',
+    UPDATE: "UPDATE"
 }
 
 export const signup = (formData) => async (dispatch) => {
@@ -117,6 +121,25 @@ export const checkLogin = (auth) => (dispatch) => {
             }
         })
         return false
+    }
+}
+
+export const updateProfile = (username, files, auth) => async (dispatch) => {
+    try {
+        const avatar = (await uploadImage(files))[0]
+        const res = await patchDataAPI('profile', { username, avatar }, auth.token)
+        dispatch({
+            type: AUTH_ACTIONS.UPDATE,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                error: error.response.data.msg
+            }
+        })
     }
 }
 

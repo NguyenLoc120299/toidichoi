@@ -1,18 +1,279 @@
-import React from 'react'
+import { background, Box, Grid, GridItem, Image, SimpleGrid, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import ImageLightbox from '../../place/components/ImageLightbox'
+
 
 const GridImages = ({ images }) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [photoIndex, setPhotoIndex] = useState(0)
+    const toggleImageLightBox = (index) => {
+        setIsOpen(true)
+        setPhotoIndex(index)
+    }
     if (images.length === 1)
         return (
-            <div>
-                a
-            </div>
+            <Box>
+                <Box h={'100%'} onClick={() => toggleImageLightBox(0)}>
+                    <Image src={images[0]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                    <ImageLightbox
+                        isOpen={isOpen}
+                        photoIndex={photoIndex}
+                        setIsOpen={setIsOpen}
+                        setPhotoIndex={setPhotoIndex}
+                        images={images}
+                    />
+                </Box>
+            </Box>
         )
-    if (images.length === 2) return <div>GridImages2</div>
-    if (images.length === 3) return <div>GridImages3</div>
-    if (images.length === 4) return <div>GridImages4</div>
+    if (images.length === 2) return (
+        <Box>
+            <SimpleGrid columns={2} spacing={4} height={"600px"}>
+                <Box h={'100%'} onClick={() => toggleImageLightBox(0)}>
+                    <Image src={images[0]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </Box>
+                <Box h={"100%"} onClick={() => toggleImageLightBox(1)}>
+                    <Image src={images[1]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </Box>
+            </SimpleGrid>
+            <ImageLightbox
+                isOpen={isOpen}
+                photoIndex={photoIndex}
+                setIsOpen={setIsOpen}
+                setPhotoIndex={setPhotoIndex}
+                images={images}
+            />
+        </Box>
+    )
+    if (images.length === 3) return (<Box>
+        <Grid
+            h='600px'
+            templateRows='repeat(2, 1fr)'
+            templateColumns='repeat(5, 1fr)'
+            gap={4}
+        >
+            <GridItem rowSpan={2} colSpan={3} h={"100%"}>
+                <Box h={"100%"} onClick={() => toggleImageLightBox(0)} >
+                    <Image src={images[0]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </Box>
+            </GridItem>
+            <GridItem colSpan={2} h={'300px'} >
+                <Box h={"100%"} onClick={() => toggleImageLightBox(1)} >
+                    <Image src={images[1]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </Box>
+            </GridItem>
+            <GridItem colSpan={2} h={'300px'} >
+                <Box h={"100%"} onClick={() => toggleImageLightBox(2)} >
+                    <Image src={images[2]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </Box>
+            </GridItem>
+        </Grid>
+        <ImageLightbox
+            isOpen={isOpen}
+            photoIndex={photoIndex}
+            setIsOpen={setIsOpen}
+            setPhotoIndex={setPhotoIndex}
+            images={images}
+        />
+    </Box>
+    )
+    if (images.length === 4) return (
+        <Box>
+            <Grid
+                h='600px'
+                overflow={'hidden'}
+                templateRows='repeat(3, 1fr)'
+                templateColumns='repeat(5, 1fr)'
+                gap={4}
+            >
+                <GridItem rowSpan={3}
+                    colSpan={4}
+                    onClick={() => toggleImageLightBox(0)}
+                >
+                    <Image src={images[0]}
+                        alt="img0"
+                        w={'100%'}
+                        h={"100%"}
+                        objectFit={"cover"}
+
+                    />
+                </GridItem>
+                <GridItem colSpan={1} >
+                    <Box
+                        height={'200px'}
+                        onClick={() => toggleImageLightBox(1)}
+                    >
+                        <Image src={images[1]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+
+                </GridItem>
+                <GridItem colSpan={1} >
+                    <Box
+                        height={'200px'}
+                        onClick={() => toggleImageLightBox(2)}
+                    >
+                        <Image src={images[2]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+
+                </GridItem>
+                <GridItem colSpan={1} >
+                    <Box
+                        height={'200px'}
+                        onClick={() => toggleImageLightBox(3)}
+                    >
+                        <Image src={images[3]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+
+                </GridItem>
+            </Grid>
+            <ImageLightbox
+                isOpen={isOpen}
+                photoIndex={photoIndex}
+                setIsOpen={setIsOpen}
+                setPhotoIndex={setPhotoIndex}
+                images={images}
+            />
+        </Box>
+    )
     else
         return (
-            <div>GridImages</div>
+            <Box height={'600px'}>
+                <SimpleGrid columns={2} spacing={4} height={"400px"}>
+                    <Box
+                        onClick={() => toggleImageLightBox(0)}
+                    >
+                        <Image src={images[0]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+                    <Box
+                        onClick={() => toggleImageLightBox(1)}
+                    >
+                        <Image src={images[1]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+                </SimpleGrid>
+                <SimpleGrid columns={3} spacing={4} mt={4} height={'200px'}>
+                    <Box maxH={'200px'}
+                        onClick={() => toggleImageLightBox(2)}
+                    >
+                        <Image src={images[2]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+                    <Box maxH={'200px'}
+                        onClick={() => toggleImageLightBox(3)}
+                    >
+                        <Image src={images[3]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                    </Box>
+                    <Box
+                        maxH={'200px'}
+                        position="relative"
+                        _before={{
+                            content: "''",
+                            position: 'absolute',
+                            background: 'rgba(0, 0, 0, .4)',
+                            width: '100%',
+                            height: '100%',
+                            left: 0,
+                            top: 0,
+                            opacity: 0.5
+
+                        }}
+                        onClick={() => toggleImageLightBox(4)}
+                    >
+                        <Image src={images[4]}
+                            alt="img0"
+                            w={'100%'}
+                            h={"100%"}
+                            objectFit={"cover"}
+                        />
+                        <Text
+                            position={'absolute'}
+                            left='50%'
+                            top="50%"
+                            transform={'translate(-50%,-50%)'}
+                            fontSize='36px'
+                            fontWeight='500'
+                            color='#fff'
+                        >
+                            +{images.length}
+                        </Text>
+                    </Box>
+                </SimpleGrid>
+                <ImageLightbox
+                    isOpen={isOpen}
+                    photoIndex={photoIndex}
+                    setIsOpen={setIsOpen}
+                    setPhotoIndex={setPhotoIndex}
+                    images={images}
+                />
+            </Box>
         )
 }
 

@@ -3,12 +3,9 @@ import React, { useState } from 'react'
 import ReactPhotoGrid from 'react-photo-grid'
 import ImageLightbox from '../../place/components/ImageLightbox'
 import ImageSwipper from '../../place/components/ImageSwipper'
+import GridImages from './GridImages'
 const ReviewBody = ({ item }) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [photoIndex, setPhotoIndex] = useState(0)
-    const toggleImageLightBox = () => {
-        setIsOpen(true)
-    }
+
     return (
         <Box
             p={"4px 2px"}
@@ -29,7 +26,7 @@ const ReviewBody = ({ item }) => {
                 {
                     item.images.length > 0 &&
                     <Box mt={5} display={['none', 'block']}>
-                        <ReactPhotoGrid
+                        {/* <ReactPhotoGrid
                             onImageClick={() => toggleImageLightBox()}
                             data={item.images}
                             gridSize="500x500"
@@ -40,7 +37,8 @@ const ReviewBody = ({ item }) => {
                             setIsOpen={setIsOpen}
                             setPhotoIndex={setPhotoIndex}
                             images={item.images}
-                        />
+                        /> */}
+                        <GridImages images={item.images} />
                     </Box>
                 }
                 {item.images.length > 0 &&
