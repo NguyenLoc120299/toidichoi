@@ -1,6 +1,7 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import ProfileStatus from './ProfileStatus'
 import ReviewItem from './ReviewItemProfile'
 import { BoxProfile } from './styled'
 
@@ -12,10 +13,8 @@ const ProfileContainer = () => {
             templateColumns={'repeat(3,1fr)'}
             gap={6}
         >
-            <GridItem colSpan={1}>
-                <BoxProfile>
-                    <h1>aaaaaaa</h1>
-                </BoxProfile>
+            <GridItem colSpan={[3, 1]} display={['none', 'grid']}>
+                <ProfileStatus />
             </GridItem>
             <GridItem colSpan={[3, 2]}>
                 {
@@ -30,7 +29,7 @@ const ProfileContainer = () => {
                 }
 
             </GridItem>
-        </Grid>
+        </Grid >
     )
 }
 

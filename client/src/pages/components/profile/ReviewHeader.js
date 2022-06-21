@@ -47,7 +47,7 @@ const ReviewHeader = ({ item }) => {
 
                 margin=" 0 30px 0 8px"
             >
-                <Box display={'flex'} alignItems="center">
+                <Box display={'flex'} alignItems="center" flexDirection={['column', 'row']}>
                     <Link to={item.user._id === auth.user._id ? '/profile' : `/profile/${item.user._id}`}>
                         <Box
                             display="flex"
@@ -58,11 +58,12 @@ const ReviewHeader = ({ item }) => {
                             letterSpacing=".4px"
                             marginRight="5px"
                             color="#000"
+
                         >{item.user.username}</Box>
                     </Link>
                     <FaCaretRight style={{
                         color: "#ccc"
-                    }} />
+                    }} className="desktop" />
                     <Link to={`/place/${item.placeId._id}`}>
                         <Box
                             display="flex"

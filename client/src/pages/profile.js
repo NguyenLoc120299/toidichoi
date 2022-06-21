@@ -20,8 +20,7 @@ const Profile = () => {
     }, [auth.token])
     return (
         <Container maxW={'1280px'}>
-            <AvatarProfile
-                user={auth?.user} />
+            <AvatarProfile />
             <ProfileNavigation />
             <ProfileContainer />
         </Container>
