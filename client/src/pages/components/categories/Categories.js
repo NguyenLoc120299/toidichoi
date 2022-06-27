@@ -1,4 +1,4 @@
-import { Box, Center, Container } from '@chakra-ui/react'
+import { Box, Center, Container, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import style from './categories.module.css'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -39,18 +39,27 @@ const Categories = () => {
                     }}
                 >
                     {
-                        categories?.data.map(item => (
-                            <SwiperSlide key={item._id}>
-                                <div className={style.card_slide}>
-                                    <img src={item.image} alt={item.image} />
-                                    <div className={style.category}>
-                                        <Center>
-                                            <span>{item.name}</span>
-                                        </Center>
+                        categories.data.length > 0 ?
+                            categories?.data.map(item => (
+                                <SwiperSlide key={item._id}>
+                                    <div className={style.card_slide}>
+                                        <img src={item.image} alt={item.image} />
+                                        <div className={style.category}>
+                                            <Center>
+                                                <span>{item.name}</span>
+                                            </Center>
+                                        </div>
                                     </div>
-                                </div>
-                            </SwiperSlide>
-                        ))
+                                </SwiperSlide>
+                            ))
+                            :
+                            [1, 2, 3].map(item => (
+                                <SwiperSlide key={item._id}>
+                                    <div className={style.card_slide}>
+                                        <Skeleton />
+                                    </div>
+                                </SwiperSlide>
+                            ))
                     }
                 </Swiper>
             </Box>

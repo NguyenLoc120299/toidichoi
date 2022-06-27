@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Container, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Container, Flex, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import style from './navbar.module.css'
@@ -49,7 +49,7 @@ const Navbar = () => {
                     </Center>
                 </Box>
                 <Box display={["none", "flex"]}>
-                    <Center>
+                    {/* <Center>
                         <Button
                             aria-label="Toggle Color Mode"
                             onClick={toggleColorMode}
@@ -59,7 +59,7 @@ const Navbar = () => {
                         >
                             {colorMode === 'light' ? <BsMoonStarsFill /> : <BsSun />}
                         </Button>
-                    </Center>
+                    </Center> */}
 
                     <Center h={"100%"}>
                         <Button colorScheme='red' mr='3' borderRadius={"12px"} onClick={() => history.push('/add-review')}>
@@ -82,10 +82,10 @@ const Navbar = () => {
                         <>
                             <Center>
                                 <Button borderRadius={'50%'} mr="3">
-                                    <img src='/assets/img/bookmark2.svg' alt='' className={style.icon} />
+                                    <Image src='/assets/img/bookmark2.svg' alt='' className={style.icon} />
                                 </Button>
                                 <Button borderRadius={'50%'} mr="3">
-                                    <img src='/assets/img/bell2.svg' alt='' className={style.icon} />
+                                    <Image src='/assets/img/bell2.svg' alt='' className={style.icon} />
                                 </Button>
                             </Center>
 
@@ -106,8 +106,9 @@ const Navbar = () => {
                                         />
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem  >
-                                            <Link to="/profile" >
+                                        <Link to="/profile" >
+                                            <MenuItem  >
+
                                                 <Flex justifyContent={'space-between'} alignItems={"center"} >
                                                     <Avatar
                                                         size={'sm'}
@@ -119,8 +120,9 @@ const Navbar = () => {
                                                     />
                                                     <Text fontSize='md' fontWeight={'bold'}>{auth.user.username}</Text>
                                                 </Flex>
-                                            </Link>
-                                        </MenuItem>
+
+                                            </MenuItem>
+                                        </Link>
                                         <MenuDivider />
                                         <MenuItem>
                                             <Center>

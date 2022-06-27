@@ -24,6 +24,47 @@ const userCtrl = {
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
+    },
+    getUserTrending: async (req, res) => {
+        try {
+            const result = await Users.aggregate([
+                {
+                    $unwind: "$blogs"
+                },
+                {
+                    $group: { _id: "$_id", ct: { $sum: 1 } }
+                },
+                {
+                    $lookup: {
+                        from: "users",
+                        let: { user_id: "$_id" },
+                        pipeline: [
+                            { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
+
+                        ],
+                        as: "users"
+                    }
+                },
+                {
+                    $unwind: "$users"
+                },
+                {
+                    $sort: { ct: -1 }
+                },
+                {
+                    $project: {
+                        password: 0,
+                        _id: 0,
+                        ct: 0,
+
+                    }
+                }
+
+            ])
+            return res.json(result)
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
     }
 }
 

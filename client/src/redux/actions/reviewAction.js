@@ -143,6 +143,7 @@ export const getReviewByAuth = (auth) => async (dispatch) => {
     try {
 
         const res = await getDataAPI('/list-reviews', auth.token)
+        console.log(res);
         if (res.data)
             dispatch({
                 type: AUTH_ACTIONS.REVIEW,

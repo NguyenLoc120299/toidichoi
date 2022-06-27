@@ -11,7 +11,13 @@ const alertReducer = (state = initialState, action) => {
         case AUTH_ACTIONS.REVIEW:
             return {
                 ...state,
-                reviews: action.payload
+                reviews: action.payload.dataReview,
+                status: {
+                    totalReview: action.payload.dataReview.length,
+                    countLikes: action.payload.countLikes,
+                    countComments: action.payload.countComments,
+                    dateJoin: state.user.createdAt
+                }
             }
         case AUTH_ACTIONS.UPDATE:
             console.log(state);

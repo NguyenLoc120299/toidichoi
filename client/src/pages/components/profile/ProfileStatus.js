@@ -1,9 +1,13 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
-import { FaCalendarAlt, FaComment, FaEdit, FaRss } from 'react-icons/fa'
+import { FaCalendarAlt, FaComment, FaEdit, FaHeart, FaRss } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+import { formatDay } from '../helper/moment'
 import { BoxProfile } from './styled'
 
 const ProfileStatus = () => {
+    const status = useSelector(state => state.auth.status)
+
     return (
         <BoxProfile>
             <Text
@@ -33,7 +37,7 @@ const ProfileStatus = () => {
                         display='flex'
                         alignItems={'center'}
                     >
-                        0
+                        {status ? status.totalReview : 0}
                     </Box>
                 </Flex>
                 <Flex justifyContent={'space-between'} mb={3}>
@@ -56,7 +60,31 @@ const ProfileStatus = () => {
                         display='flex'
                         alignItems={'center'}
                     >
-                        0
+                        {status ? status.countComments : 0}
+
+                    </Box>
+                </Flex>
+                <Flex justifyContent={'space-between'} mb={3}>
+                    <Flex alignItems={'center'}>
+                        <FaHeart style={{ color: "#9d9d9d", fontSize: '20px' }} />
+                        <Text
+                            fontSize="20px"
+                            textAlign="left"
+                            paddingRight="4px"
+                            color="#9d9d9d"
+                            marginLeft={'10px'}
+                        >
+                            Được thích
+                        </Text>
+                    </Flex>
+                    <Box
+                        padding="0 10px"
+                        borderRadius="6px"
+                        background="#efefef"
+                        display='flex'
+                        alignItems={'center'}
+                    >
+                        {status ? status.countLikes : 0}
                     </Box>
                 </Flex>
                 <Flex justifyContent={'space-between'} mb={3}>
@@ -102,7 +130,7 @@ const ProfileStatus = () => {
                         display='flex'
                         alignItems={'center'}
                     >
-                        0
+                        {status ? formatDay(status.dateJoin) : 0}
                     </Box>
                 </Flex>
             </Flex>

@@ -15,23 +15,23 @@ const PlaceCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    getPlaceSingle: async (req,res)=>{
+    getPlaceSingle: async (req, res) => {
         try {
             const place = await Places.findById(req.params.id).populate('type utities')
-            .populate({
-                path:"reviews",
-                populate:{
-                    path:"user likes comments",
-                    select:"-password",
-                 
-                }
-            })
+                .populate({
+                    path: "reviews",
+                    populate: {
+                        path: "user likes comments",
+                        select: "-password",
+
+                    }
+                })
             res.json({
-                msg:'Success',
+                msg: 'Success',
                 ...place._doc
             })
         } catch (error) {
-            return res.status(500).json({msg:error.message})
+            return res.status(500).json({ msg: error.message })
         }
     },
     createPlaces: async (req, res) => {
@@ -87,11 +87,51 @@ const PlaceCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    searchPlaces: async (req,res)=>{
-        try {  
+    searchPlaces: async (req, res) => {
+        try {
             const places = await Places.find({ name: { $regex: req.query.name } })
                 .limit(10)
-            res.json({places})
+            res.json({ places })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    getPlaceOutstanding: async (req, res) => {
+        try {
+            const result = await Places.aggregate(
+                [
+
+                    {
+                        $unwind: "$reviews"
+                    },
+                    {
+                        $group: { _id: "$_id", ct: { $sum: 1 } }
+                    },
+                    {
+                        $lookup: {
+                            from: "places",
+                            let: { place_id: "$_id" },
+                            pipeline: [
+                                { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
+
+                            ],
+                            as: "totalData"
+                        }
+                    },
+                    {
+                        $sort: { ct: -1 }
+                    },
+                    {
+                        $project: {
+                            totalData: { $arrayElemAt: ["$totalData", 0] },
+                            _id: 0
+                        }
+                    }
+
+                ]
+            )
+
+            res.json(result);
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }

@@ -8,4 +8,6 @@ router.get('/profile/:id/reviews', auth, userCtrl.getReview)
 
 router.patch('/profile', auth, userCtrl.updateProfile)
 
+router.get('/user-trending', userCtrl.getUserTrending)
+
 module.exports = router

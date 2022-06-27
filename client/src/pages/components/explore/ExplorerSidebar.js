@@ -1,6 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { FaStar, FaUserCheck } from 'react-icons/fa'
+import PlaceTrending from './PlaceTrending'
+import UserTrending from './UserTrending'
 export const BoxCustom = ({ children }) => {
     return (
         <Box
@@ -46,26 +48,8 @@ const ExplorerSidebar = () => {
                 </Flex>
 
             </BoxCustom>
-            <BoxCustom
-            >
-                <Text as={'h3'}
-                    fontSize="20px"
-                    textAlign="center"
-                    paddingBottom="14px"
-                    borderBottom="1px solid #eee"
-                >Địa điểm nổi bật</Text>
-
-            </BoxCustom>
-            <BoxCustom
-            >
-                <Text as={'h3'}
-                    fontSize="20px"
-                    textAlign="center"
-                    paddingBottom="14px"
-                    borderBottom="1px solid #eee"
-                >Người dùng tích cực</Text>
-
-            </BoxCustom>
+            <PlaceTrending />
+            <UserTrending />
         </Box >
     )
 }

@@ -2,6 +2,7 @@ const Reviews = require('../models/ReviewModel')
 const Places = require('../models/PlaceModel')
 const formatDate = require('../lib/moment')
 const { default: mongoose } = require('mongoose')
+const Users = require('../models/UserModel')
 const reviewCtrl = {
     createReview: async (req, res) => {
         try {
@@ -23,7 +24,9 @@ const reviewCtrl = {
                 $push: { reviews: newReview._id },
                 rate: newRate
             }, { new: true })
-
+            await Users.findOneAndUpdate({ _id: req.user._id }, {
+                $push: { blogs: newReview._id }
+            }, { new: true })
             await newReview.save()
 
             res.json({
@@ -43,80 +46,124 @@ const reviewCtrl = {
         try {
             const result = await Reviews.aggregate(
                 [
-
                     {
                         $match: {
                             user: mongoose.Types.ObjectId(id)
                         }
                     },
-                    // User
                     {
-                        $lookup: {
-                            from: "users",
-                            let: { user_id: "$user" },
-                            pipeline: [
-                                { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
-                                { $project: { username: 1, avatar: 1 } }
-                            ],
-                            as: "user"
-                        }
-                    },
-                    // array -> object
-                    { $unwind: "$user" },
+                        $facet: {
+                            totalData: [
 
-                    //place
-                    {
-                        $lookup: {
-                            from: "places",
-                            let: { place_id: "$placeId" },
-                            pipeline: [
-                                { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
-                                { $project: { name: 1, rate: 1 } }
-                            ],
-                            as: "placeId"
-                        }
-                    },
-                    //array -> Object
-                    { $unwind: "$placeId" },
-
-
-                    // comments
-                    {
-                        $lookup: {
-                            from: "comments",
-                            let: { cmts_id: "$comments" },
-                            pipeline: [
-                                { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
+                                // User
                                 {
                                     $lookup: {
                                         from: "users",
                                         let: { user_id: "$user" },
                                         pipeline: [
-                                            {
-                                                $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
-                                            }
+                                            { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
+                                            { $project: { username: 1, avatar: 1 } }
                                         ],
                                         as: "user"
-                                    },
+                                    }
                                 },
+                                // array -> object
+                                { $unwind: "$user" },
+
+                                //place
                                 {
-                                    $unwind: "$user"
-                                }
+                                    $lookup: {
+                                        from: "places",
+                                        let: { place_id: "$placeId" },
+                                        pipeline: [
+                                            { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
+                                            { $project: { name: 1, rate: 1 } }
+                                        ],
+                                        as: "placeId"
+                                    }
+                                },
+                                //array -> Object
+                                { $unwind: "$placeId" },
+
+
+                                // comments
+                                {
+                                    $lookup: {
+                                        from: "comments",
+                                        let: { cmts_id: "$comments" },
+                                        pipeline: [
+                                            { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
+                                            {
+                                                $lookup: {
+                                                    from: "users",
+                                                    let: { user_id: "$user" },
+                                                    pipeline: [
+                                                        {
+                                                            $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
+                                                        }
+                                                    ],
+                                                    as: "user"
+                                                },
+                                            },
+                                            {
+                                                $unwind: "$user"
+                                            }
+                                        ],
+                                        as: "comments"
+                                    }
+                                },
+
+
+                                //sorting
+
+                                { $sort: { "createdAt": -1 } },
+
                             ],
-                            as: "comments"
-                        }
+                            totalLikes: [
+
+                                {
+                                    $group: { _id: "$likes" }
+                                },
+                            ],
+
+
+                            totalComments: [
+                                {
+                                    $group: { _id: "$comments" }
+                                },
+
+                            ],
+
+
+                        },
+
                     },
 
-
-                    //sorting
-
-                    { $sort: { "createdAt": -1 } },
+                    // {
+                    //     $project: {
+                    //         countLikes: { $arrayElemAt: ["$totalLikes.count", 0] },
+                    //         countComments: { $arrayElemAt: ["$totalComments.count", 0] },
+                    //         totalData: 1
+                    //     }
+                    // }
 
 
                 ]
             )
-
-            res.json(result)
+            let countLikes = 0
+            let countComments = 0
+            let dataReview = result[0].totalData
+            for (var item of result[0].totalLikes) {
+                countLikes += item._id.length
+            }
+            for (var item of result[0].totalComments) {
+                countComments += item._id.length
+            }
+            res.json({
+                dataReview,
+                countLikes,
+                countComments
+            })
         } catch (error) {
             return res.status(500).json({
                 msg: error.message
@@ -127,6 +174,7 @@ const reviewCtrl = {
 
         try {
             const result = await Reviews.aggregate(
+
                 [
 
                     {
@@ -320,5 +368,6 @@ const reviewCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
 }
 module.exports = reviewCtrl

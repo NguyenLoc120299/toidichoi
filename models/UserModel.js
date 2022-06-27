@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String, default: 'user'
     },
+    blogs: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'reviews'
+    }],
     story: {
         type: String,
         default: '',
