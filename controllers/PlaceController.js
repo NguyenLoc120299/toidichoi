@@ -1,5 +1,6 @@
 const Places = require('../models/PlaceModel.js')
 const APIfeatures = require('../lib/features')
+const moment = require('moment')
 const PlaceCtrl = {
 
     getPlaces: async (req, res) => {
@@ -135,7 +136,62 @@ const PlaceCtrl = {
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
+    },
+    filterPlaces: async (req, res) => {
+        try {
+            let filter = [{}]
+            const currentHour = moment().format('HH:mm')
+            const { utitiesData, typeData, priceData, isTimeOpen, areaData } = req.body
+            if (utitiesData.length > 0) {
+                filter[0].utities = { $in: utitiesData }
+            }
+            if (areaData.length > 0) {
+                filter[0].area = { $in: areaData }
+            }
+            if (typeData.length > 0) {
+                filter[0].type = { $in: typeData }
+            }
+            if (priceData.length > 0) {
+                filter.push({ "price.min": { $gte: priceData[0] } })
+                filter.push({ "price.max": { $lte: priceData[1] } })
+            }
+
+            const places = await Places.find({ $and: filter })
+            const data = []
+            if (isTimeOpen) {
+                for (let i = 0; i < places.length; i++) {
+                    if (moment(currentHour, 'HH:mm').isBefore(moment(places[i].time.max, 'HH:mm')) &&
+
+                        moment(currentHour, 'HH:mm').isAfter(moment(places[i].time.min, 'HH:mm'))) {
+                        data.push(places[i])
+
+
+                    }
+
+                }
+            }
+            else {
+                data.push(...places)
+
+            }
+
+
+            res.json({ data })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
     }
+    // searchAllPlace: async (req, res) => {
+    //     try {
+    //         const places = await Places.find({
+    //             area: { $all: ["62530f1b0bb18e51db340049", "62530f1b0bb18e51db340049/"] }
+    //         })
+    //         res.json(places);
+    //     } catch (error) {
+    //         return res.status(500).json({ msg: error.message })
+    //     }
+    // }
+
 }
 
 module.exports = PlaceCtrl

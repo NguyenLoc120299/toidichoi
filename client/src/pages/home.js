@@ -11,11 +11,7 @@ import { getArea } from '../redux/actions/areaAction'
 import { getPlaces } from '../redux/actions/placeAction'
 const Home = () => {
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getCategories())
-        dispatch(getArea())
-        dispatch(getPlaces())
-    }, [dispatch])
+
 
     return (
         <Container maxW={"100%"} px="1.5">

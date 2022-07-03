@@ -100,20 +100,27 @@
   resize: none;
   min-height: 36px;
   line-height: 36px;
-  letter-spacing: .12px;
+  letter-spacing: 0.12px;
   margin-left: 6px;
   padding: 0 12px;
   border-radius: 18px;
   background-color: #f5f5f7;
   border: 1px solid transparent;
-  vertical-align: bottom
+  vertical-align: bottom;
 }
-
+.ant-slider-track {
+  background-color: #ef4949 !important;
+}
+.ant-slider:hover .ant-slider-track {
+  background-color: #ef4949 !important;
+}
+.ant-slider-handle {
+  border: solid 2px #ef4949 !important;
+}
 
 @media (min-width: 992px) {
   .Typewriter__wrapper {
     font-size: 40px;
-
   }
 
   .rate__text {

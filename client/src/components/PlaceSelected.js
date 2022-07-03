@@ -2,7 +2,7 @@ import { Box, Center, Flex, Image, Text } from '@chakra-ui/react'
 import Rate from 'rc-rate/lib/Rate'
 import React from 'react'
 
-const PlaceSelected = ({item}) => {
+const PlaceSelected = ({ item }) => {
   return (
     <Center w={'100%'} h={'100%'}>
       <Box w={'100%'} h={"100%"}>
@@ -14,14 +14,14 @@ const PlaceSelected = ({item}) => {
             <Flex direction={'column'}>
               <Text fontWeight={'700'}>{item.name}</Text>
               <Text>{item.address}</Text>
-              <span><Rate value={item.rate.rateNumber} allowHalf disabled character={<i className="anticon anticon-star" />} /> - {item.rate.turnNumber} đánh giá</span>
+              <span><Rate value={item.rate.rateNumber} allowHalf disabled character={<i className="far fa-star"></i>} /> - {item.rate.turnNumber} đánh giá</span>
             </Flex>
           </Center>
-          
+
         </Flex>
       </Box>
     </Center>
-   
+
   )
 }
 

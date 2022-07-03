@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'rc-rate/assets/index.css';
+import 'antd/dist/antd.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>

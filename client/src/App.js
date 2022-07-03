@@ -8,11 +8,19 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import AlertModal from './components/AlertModal';
 import { refreshToken } from './redux/actions/authAction';
+import { getCategories } from './redux/actions/categoriesAction';
+import { getArea } from './redux/actions/areaAction';
+import { getPlaces } from './redux/actions/placeAction';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(refreshToken())
   }, [])
+  useEffect(() => {
+    dispatch(getCategories())
+    dispatch(getArea())
+    dispatch(getPlaces())
+  }, [dispatch])
   return (
     <Router>
       <AlertModal />

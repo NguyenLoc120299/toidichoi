@@ -28,6 +28,10 @@ code {
 .desktop {
   display: block;
 }
+.ant-collapse-header-text {
+  font-size: 18px;
+  font-weight: 500;
+}
 @media (max-width: 768px) {
   .rc-rate-star {
     margin-right: 0 !important;

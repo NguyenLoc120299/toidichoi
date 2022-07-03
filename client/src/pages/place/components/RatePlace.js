@@ -37,7 +37,7 @@ const RatePlace = ({ item }) => {
                             value={item && item.rateNumber}
                             allowHalf
                             disabled
-                            character={<i className="anticon anticon-star" />} />
+                            character={<i className="fas fa-star"></i>} />
                         :
                         <Text fontSize={'xl'} fontWeight={"bold"}>Vui lòng đăng nhập để có thể đánh giá về nơi này</Text>}
                 </Flex>
