@@ -19,7 +19,9 @@ const DetailInfo = ({ infor, loading }) => {
                         <Flex alignItems='center' mb={3}>
                             <BiTime style={{ marginRight: '3px' }} />
                             <Box>
-                                <Text colorScheme={'green'}>Đang mở cửa - {infor.time ? infor.time.min : 0} - {infor.time ? infor.time.max : 0} </Text>
+                                <Text colorScheme={'green'}><span>
+                                    {infor.isOpenning ? "Đang mở cửa" : "Chưa mở cửa"}
+                                </span> - {infor.time ? infor.time.min : 0} - {infor.time ? infor.time.max : 0} </Text>
                             </Box>
                         </Flex>
                         <Flex alignItems='center' mb={3}>

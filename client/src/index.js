@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import 'rc-rate/assets/index.css';
 import 'antd/dist/antd.css';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>

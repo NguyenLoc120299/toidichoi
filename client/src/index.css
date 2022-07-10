@@ -32,6 +32,148 @@ code {
   font-size: 18px;
   font-weight: 500;
 }
+.map-container {
+  height: calc(100% - 60px);
+}
+a.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+.mapboxgl-ctrl-bottom-right {
+  display: none !important;
+}
+.modal_map {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+}
+.modal_map_wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.map_container {
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 6px;
+  position: relative;
+  background-color: #eee;
+}
+.map_header {
+  height: 60px;
+  padding: 4px 20px 6px;
+  background-color: #fff;
+  border-bottom: 1px solid #111;
+  text-align: center;
+}
+.map_header_info h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: -2px;
+}
+.map_header_close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: auto;
+  left: auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #333;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 10%);
+}
+.marker {
+  background-image: url("https://toidicafe.vn/marker.svg");
+  background-size: cover;
+  width: 33px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.map_content {
+  display: flex;
+  width: 100%;
+  height: -webkit-calc(100% - 60px);
+  height: calc(100% - 60px);
+  overflow: hidden;
+}
+.mapboxgl-popup {
+  top: -30px !important;
+}
+.mapboxgl-popup-close-button {
+  position: absolute;
+  right: 5px !important;
+  top: 5px !important;
+  /* border: 0; */
+  border-radius: 0 3px 0 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+.popup_map {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.popup_avt {
+  background-color: #eee;
+  background-image: -webkit-linear-gradient(left, #eee, #f5f5f5, #eee);
+  background-image: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  -webkit-animation: Map_loading-image-animation__37v2E 1.2s ease-in-out infinite;
+  animation: Map_loading-image-animation__37v2E 1.2s ease-in-out infinite;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  border-radius: -webkit-calc(10px - 4px);
+  border-radius: calc(10px - 4px);
+  width: 60px;
+  height: 60px;
+}
+.popup_avt img {
+  width: 100%;
+  height: 100%;
+  background-position: 50%;
+  background-size: cover;
+  -webkit-object-fit: cover;
+  object-fit: cover;
+  border-radius: -webkit-calc(10px - 4px);
+  border-radius: calc(10px - 4px);
+}
+.popup_info {
+  margin-left: 10px;
+}
+.popup_info h3 {
+  font-weight: 700;
+}
 @media (max-width: 768px) {
   .rc-rate-star {
     margin-right: 0 !important;
