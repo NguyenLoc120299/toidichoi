@@ -117,12 +117,53 @@
 .ant-slider-handle {
   border: solid 2px #ef4949 !important;
 }
-
+.nav_mobile {
+  position: fixed;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  z-index: 1000;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+.nav-content {
+  justify-content: space-around;
+  max-width: 400px;
+  height: 70px;
+  display: flex;
+  padding-bottom: 10px;
+  align-items: center;
+  margin: 0 auto;
+}
+.Navbar_item {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  color: #000 !important;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+}
+.Navbar_item i {
+  font-size: 24px;
+  width: 28px;
+}
+.Navbar_item span {
+  font-size: 10px;
+  margin-top: 4px;
+}
 @media (min-width: 992px) {
   .Typewriter__wrapper {
     font-size: 40px;
   }
-
+  .nav_mobile {
+    display: none;
+  }
   .rate__text {
     position: relative;
     display: inline-block;

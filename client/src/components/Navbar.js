@@ -15,10 +15,10 @@ import { logout } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 export const logo = (
     <>
-        <img src='/assets/img/logo.png' style={{ maxWidth: '100 %' }} alt='' />
+        <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
         <Center>
             <Link to="/home">
-                <span className={style.logo}>Tôi đi chơi</span>
+                <span className={style.logo}>Tôi đi reviews</span>
             </Link>
         </Center>
     </>

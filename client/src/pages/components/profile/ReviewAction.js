@@ -17,13 +17,15 @@ const ReviewAction = ({ item }) => {
         setIsLike(!isLike)
     }
     useEffect(() => {
-        if (item.likes.find(like => like === auth.user._id)) {
+        if (auth.user) {
+            if (item.likes.find(like => like === auth.user._id)) {
 
-            setIsLike(true)
-        } else {
-            setIsLike(false)
+                setIsLike(true)
+            } else {
+                setIsLike(false)
+            }
         }
-    }, [item?.likes, auth?.user._id, dispatch])
+    }, [item?.likes, auth, dispatch])
 
     return (
         <Box

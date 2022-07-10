@@ -175,7 +175,7 @@ const Search = () => {
                     templateColumns='repeat(8, 1fr)'
                     gap={4}
                 >
-                    <GridItem colSpan={2} >
+                    <GridItem colSpan={2} display={['none', 'grid']} >
                         <BoxLayput>
                             <Box
                                 borderBottom="1px solid #e0e0e0"
@@ -278,7 +278,7 @@ const Search = () => {
                             </Box>
                         </BoxLayput>
                     </GridItem>
-                    <GridItem colSpan={6}>
+                    <GridItem colSpan={[8, 6]}>
                         <Box
                             display={'flex'}
                             justifyContent={"space-between"}
@@ -348,7 +348,7 @@ const Search = () => {
                             places.length > 0 && places.map((item) => (
                                 <BoxLayput>
                                     <Flex
-
+                                        direction={['column', 'row']}
                                     >
                                         <Link to={`/place/${item._id}`}>
                                             <Box
@@ -358,7 +358,7 @@ const Search = () => {
                                                 backgroundRepeat="no-repeat"
                                                 overflow="hidden"
                                                 borderRadius="calc(10px - 4px)"
-                                                width="270px"
+                                                width={["100%", "270px"]}
                                                 height="100%"
                                             >
                                                 <Box

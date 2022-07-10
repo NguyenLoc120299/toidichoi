@@ -48,7 +48,7 @@ const ReviewHeader = ({ item }) => {
                 margin=" 0 30px 0 8px"
             >
                 <Box display={'flex'} alignItems="center" flexDirection={['column', 'row']}>
-                    <Link to={item.user._id === auth.user._id ? '/profile' : `/profile/${item.user._id}`}>
+                    <Link to={auth.user && item.user._id === auth.user._id ? '/profile' : `/profile/${item.user._id}`}>
                         <Box
                             display="flex"
                             alignItems="center"

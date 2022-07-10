@@ -11,6 +11,7 @@ import { refreshToken } from './redux/actions/authAction';
 import { getCategories } from './redux/actions/categoriesAction';
 import { getArea } from './redux/actions/areaAction';
 import { getPlaces } from './redux/actions/placeAction';
+import MenuMobile from './components/MenuMobile';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
   return (
     <Router>
       <AlertModal />
+      <MenuMobile />
       <Navbar />
       <Route exact path={'/'} component={Home} />
       <Route exact path={'/:page'} component={PageRender} />

@@ -7,13 +7,15 @@ const ReviewAction = ({ item, showFormComment, setShowComment }) => {
     const [isLike, setIsLike] = useState(false)
     const { auth } = useSelector(state => state)
     useEffect(() => {
-        if (item.likes.find(like => like === auth.user._id)) {
+        if (auth.user) {
+            if (item.likes.find(like => like === auth.user._id)) {
 
-            setIsLike(true)
-        } else {
-            setIsLike(false)
+                setIsLike(true)
+            } else {
+                setIsLike(false)
+            }
         }
-    }, [item?.likes, auth?.user._id])
+    }, [item?.likes, auth])
     return (
         <Box px={3}>
             <Flex >
