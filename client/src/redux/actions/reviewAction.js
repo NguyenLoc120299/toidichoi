@@ -71,12 +71,20 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
 
 export const likeReview = (auth, review) => async (dispatch) => {
     try {
-        await patchDataAPI(`review/${review._id}/like`, null, auth.token)
-        const newReview = { ...review, likes: [...review.likes, auth.user._id] }
-        dispatch({
-            type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
-            payload: newReview
-        })
+        if (dispatch(checkLogin(auth))) {
+            dispatch({
+                type: ALERT_ACTION.ALERT,
+                payload: {
+                    loading: true
+                }
+            })
+            await patchDataAPI(`review/${review._id}/like`, null, auth.token)
+            const newReview = { ...review, likes: [...review.likes, auth.user._id] }
+            dispatch({
+                type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
+                payload: newReview
+            })
+        }
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,

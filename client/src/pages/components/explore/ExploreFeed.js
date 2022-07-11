@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllReviews } from '../../../redux/actions/reviewAction'
@@ -11,7 +11,8 @@ import ReviewHeader from '../profile/ReviewHeader'
 
 const ExploreFee = ({ item }) => {
 
-
+    const auth = useSelector(state => state.auth)
+    const [setLsComment, setShowLsComment] = useState(false)
     return (
         <Box
             padding="12px 16px"
@@ -23,8 +24,33 @@ const ExploreFee = ({ item }) => {
             <ReviewHeader item={item} />
             <ReviewBody item={item} />
             <ReviewAction item={item} />
-            <FormNewComment item={item} />
-            <ListReviewReply item={item} />
+            {
+                auth.user && <FormNewComment item={item} />
+            }
+            {
+                item.comments.length > 0 && !setLsComment && <Box
+                    fontWeight="500"
+                    color="#000"
+                    my={3}
+                    textAlign="center"
+                    cursor={"pointer"}
+                    onClick={() => setShowLsComment(!setLsComment)}
+                >Xem tất cả {item.comments.length} bình luận</Box>
+            }
+            {
+                setLsComment && <ListReviewReply item={item} />
+            }
+            {
+                setLsComment && <Box
+                    fontWeight="500"
+                    color="#000"
+                    my={3}
+                    textAlign="center"
+                    cursor={"pointer"}
+                    onClick={() => setShowLsComment(!setLsComment)}
+                >Ẩn tất cả bình luận</Box>
+            }
+
         </Box>
 
     )

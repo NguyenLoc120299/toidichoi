@@ -4,13 +4,16 @@ import {
     AlertTitle,
     AlertDescription,
     CloseButton,
+    useToast
 } from '@chakra-ui/react'
 import React from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 const AlertModal = () => {
     const dispatch = useDispatch()
+    const toast = useToast()
     const { alert } = useSelector(state => state)
     const onCLose = () => {
         dispatch({
@@ -18,9 +21,29 @@ const AlertModal = () => {
             payload: {}
         })
     }
+    useEffect(() => {
+        if (alert.err)
+            toast({
+                title: alert.err,
+                // description: "We've created your account for you.",
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "top-right"
+            })
+        if (alert.success)
+            toast({
+                title: alert.success,
+                // description: "We've created your account for you.",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: "top-right"
+            })
+    }, [alert, alert])
     return (
         <>
-            {alert.err && (
+            {/* {alert.err && (
                 <div className='alert__modal'>
                     <Alert
                         status='error'>
@@ -41,7 +64,7 @@ const AlertModal = () => {
                         <CloseButton position='absolute' right='0' top='-5px' fontSize={'7px'} onClick={onCLose} />
                     </Alert>
                 </div>
-            )}
+            )} */}
         </>
 
     )

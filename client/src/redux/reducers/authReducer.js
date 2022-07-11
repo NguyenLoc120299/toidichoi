@@ -20,7 +20,7 @@ const alertReducer = (state = initialState, action) => {
                 }
             }
         case AUTH_ACTIONS.UPDATE:
-            console.log(state);
+
             return {
                 ...state,
                 user: action.payload.newUser

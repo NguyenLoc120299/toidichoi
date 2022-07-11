@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Avatar } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createComment, updateReviewProfile } from '../../../redux/actions/reviewAction'
@@ -28,7 +28,7 @@ const FormNewComment = ({ item }) => {
             display="flex"
             padding="10px 6px 2px"
         >
-            <BoxAvatar avatar={item.user.avatar} />
+            <Avatar src={item.user.avatar} name={item.user.name} size="sm" />
             <Box
                 w={'100%'}
             >

@@ -17,9 +17,10 @@ const userCtrl = {
     updateProfile: async (req, res) => {
         try {
             const { username, avatar } = req.body
-            const newUser = await Users.findOneAndUpdate({ _id: req.user._id }, {
+            const user = await Users.findOneAndUpdate({ _id: req.user._id }, {
                 avatar, username
             })
+            const newUser = { ...user, avatar, username }
             res.json({ newUser })
         } catch (error) {
             return res.status(500).json({ msg: error.message })

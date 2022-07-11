@@ -1,11 +1,13 @@
 import { Box, Button, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import LikeButton from '../../../components/LikeButton'
 import ReviewReply from '../../../components/ReviewReply'
+import { checkLogin } from '../../../redux/actions/authAction'
 const ReviewAction = ({ item, showFormComment, setShowComment }) => {
     const [isLike, setIsLike] = useState(false)
     const { auth } = useSelector(state => state)
+    const dispatch = useDispatch()
     useEffect(() => {
         if (auth.user) {
             if (item.likes.find(like => like === auth.user._id)) {
@@ -16,6 +18,11 @@ const ReviewAction = ({ item, showFormComment, setShowComment }) => {
             }
         }
     }, [item?.likes, auth])
+    const hanldeShowFormComment = (auth) => {
+        if (dispatch(checkLogin(auth))) {
+            setShowComment(!showFormComment)
+        }
+    }
     return (
         <Box px={3}>
             <Flex >
@@ -35,7 +42,7 @@ const ReviewAction = ({ item, showFormComment, setShowComment }) => {
                     _hover={{
                         background: "unset"
                     }}
-                    onClick={() => setShowComment(!showFormComment)}
+                    onClick={() => hanldeShowFormComment(auth)}
                 >
                     {showFormComment ? "Hủy" : "Trả lời"}
                 </Button>
