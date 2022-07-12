@@ -35,8 +35,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "npm run build1 && tar.exe -a -c -f ..\\toidichoi.zip build && scp -i D:\\projects\\key\\product\\thanhloc_key.pem ..\\toidichoi.zip thanhloc@20.106.103.225:~/ && ..\\deploy.bat",
     "dev": "npm start",
-    "build": "react-scripts build",
+    "build1": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
