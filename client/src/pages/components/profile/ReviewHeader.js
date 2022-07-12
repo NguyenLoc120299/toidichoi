@@ -1,4 +1,4 @@
-import { Box, Center, Image, Text } from '@chakra-ui/react'
+import { Box, Center, Avatar, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaCaretRight } from 'react-icons/fa';
@@ -32,14 +32,14 @@ const ReviewHeader = ({ item }) => {
                     width="100%"
                     position="relative"
                 >
-                    <Image src={item.user.avatar}
+                    {/* <Image src={item.user.avatar}
                         backgroundPosition="50%"
                         backgroundSize="cover"
                         height="100%"
                         width="100%"
                         objectFit="cover"
-                    />
-
+                    /> */}
+                    <Avatar name={item.user.name} src={item.user.avatar} />
                 </Box>
             </Box>
 

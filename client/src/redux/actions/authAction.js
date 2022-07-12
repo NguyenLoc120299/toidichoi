@@ -128,6 +128,7 @@ export const updateProfile = (username, files, auth) => async (dispatch) => {
     try {
         const avatar = (await uploadImage(files))[0]
         const res = await patchDataAPI('profile', { username, avatar }, auth.token)
+        console.log(res.data);
         dispatch({
             type: AUTH_ACTIONS.UPDATE,
             payload: res.data

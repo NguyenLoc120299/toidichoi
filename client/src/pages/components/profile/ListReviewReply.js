@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Avatar } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { formatTime } from '../helper/moment'
@@ -14,7 +14,7 @@ const ListReviewReply = ({ item }) => {
                             textAlign={'center'}
                             mr="6px"
                         >
-                            <BoxAvatar avatar={cmt.user.avatar} />
+                            <Avatar src={item.user.avatar} name={item.user.name} size="sm" />
                         </Box>
                         <Box
                             padding="8px 15px"
