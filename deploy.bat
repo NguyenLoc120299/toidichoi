@@ -1,0 +1,1 @@
+ssh -i D:\\projects\\key\\product\\thanhloc_key.pem thanhloc@20.106.103.225 "cd /var/www/html/toidichoi && sudo mv ~/toidichoi.zip /var/www/html/toidichoi && sudo unzip -o toidichoi.zip && sudo rm -rf /var/www/html/toidichoi/toidichoi.zip && pm2 restart 0"

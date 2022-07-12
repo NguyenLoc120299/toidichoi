@@ -17,6 +17,7 @@
     "framer-motion": "^6.2.9",
     "mapbox-gl": "^1.11.1",
     "moment": "^2.29.3",
+    "numeral": "^2.0.6",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-icons": "^4.3.1",
@@ -29,12 +30,14 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "swiper": "^8.1.0",
+    "typewriter-effect": "^2.19.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "npm run build1 && tar.exe -a -c -f ..\\toidichoi.zip build && scp -i D:\\projects\\key\\product\\thanhloc_key.pem ..\\toidichoi.zip thanhloc@20.106.103.225:~/ && ..\\deploy.bat",
     "dev": "npm start",
-    "build": "react-scripts build",
+    "build1": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
