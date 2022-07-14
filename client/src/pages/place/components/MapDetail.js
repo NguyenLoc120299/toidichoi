@@ -21,9 +21,12 @@ const MapDetail = ({ info }) => {
         getMapInfo()
     }, [info])
     return (
-        <Box boxShadow='md' rounded={'md'} p='6'
+        <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" rounded={'md'} p='6'
             backgroundImage={"url(https://static.tacdn.com/img2/maps/img_map.png)"}
             position='relative'
+            backgroundPosition={'center'}
+            backgroundRepeat="no-repeat"
+            backgroundSize={'cover'}
         >
 
             <Heading as={'h3'} size='md' mb={5}>Địa điểm cụ thể</Heading>

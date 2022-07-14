@@ -26,6 +26,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { login, signup } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction';
+import { isMobile } from 'react-device-detect';
 const LoginModal = () => {
     const { alert } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -47,10 +48,10 @@ const LoginModal = () => {
             if (isSignup) {
                 dispatch(signup(formData))
             }
-            else{
+            else {
                 dispatch(login({
-                    password:formData.password,
-                    email:formData.email
+                    password: formData.password,
+                    email: formData.email
                 }))
             }
         } catch (error) {
@@ -59,12 +60,12 @@ const LoginModal = () => {
 
     }
     return (
-        <Modal isOpen={alert.modal} onClose={()=>dispatch({
+        <Modal size={isMobile ? 'full' : 'lg'} isOpen={alert.modal} onClose={() => dispatch({
             type: ALERT_ACTION.ALERT,
             payload: {}
-        })} isCentered>
+        })} isCentered >
             <ModalOverlay />
-            <ModalContent maxW={'800px'}    >
+            <ModalContent maxW={'800px'}  >
                 <ModalCloseButton />
                 <SimpleGrid columns={[1, 2]} spacingX='40px' spacingY='20px'>
                     <Box bg='red.50' display={['none', 'block']}>
@@ -89,7 +90,7 @@ const LoginModal = () => {
                                 <Box
                                     rounded={'lg'}
                                     bg={useColorModeValue('white', 'gray.700')}
-                                    boxShadow={'lg'}
+                                    boxShadow={['none', 'lg']}
                                     p={8}>
                                     <Stack spacing={4}>
                                         {
@@ -156,7 +157,7 @@ const LoginModal = () => {
                                                 </InputGroup>
                                             </FormControl>
                                         }
-                                        
+
                                         <Stack spacing={10}>
                                             <Button
                                                 bg={'red.400'}

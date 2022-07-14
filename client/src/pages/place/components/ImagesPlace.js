@@ -36,14 +36,14 @@ const ImagesPlace = ({ images, loading }) => {
               height={'355px'}
               position={"relative"}
               key={index}
+              cursor="pointer"
               _before={index === 2 ? {
                 content: '""',
                 position: 'absolute',
                 width: "100%",
                 height: "100%",
-                bg: "gray.200",
                 opacity: "0.4"
-              } : ''}>
+              } : ''} onClick={() => toggleImageLightBox(index)}>
               {
                 index === 0 &&
                 <Box
@@ -51,24 +51,35 @@ const ImagesPlace = ({ images, loading }) => {
                   left="10px"
                   bottom={'10px'}>
                   <Button
-                    colorScheme='gray'
+                    color={"#fff"}
                     opacity={0.7}
-                    onClick={() => toggleImageLightBox(0)} >
+                    onClick={() => toggleImageLightBox(0)}
+                    display={"flex"}
+                    alignItems={'center'}
+                    background={'rgba(0,0,0,.6666666666666666)'}
+                    _focus={{
+                      background: 'rgba(0,0,0,.6666666666666666)'
+                    }}
+                    _hover={{ background: 'rgba(0,0,0,.6666666666666666)' }}
+                  >
+                    <i className="fas fa-image" style={{ marginRight: '10px' }}></i>
                     Xem tất cả ({images.length})
                   </Button>
                 </Box>}
+
               {index === 2 &&
                 <Box
                   position={'absolute'}
                   left='50%'
                   top={'50%'}
                   transform={"translate(-50%,-50%"}
+                  onClick={() => toggleImageLightBox(2)}
                 >
                   <Text
                     fontWeight={'600'}
                     color={'white'}
                     cursor={"pointer"}
-                    fontSize={"25px"}>+1 ảnh</Text>
+                    fontSize={"25px"}>+{images.length - 2} ảnh</Text>
                 </Box>}
               <Image
                 rounded={'lg'}
@@ -77,6 +88,7 @@ const ImagesPlace = ({ images, loading }) => {
                 maxH='100%'
                 objectFit={'cover'}
                 onClick={() => toggleImageLightBox(index)} />
+
             </Box>
           ))}
       <ImageLightbox

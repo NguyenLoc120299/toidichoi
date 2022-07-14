@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FaUserEdit, FaRegEnvelope, FaPowerOff } from 'react-icons/fa'
 import { logout } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
+import DrawerNavbar from './DrawerNavbar'
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
@@ -25,6 +26,8 @@ export const logo = (
 
 )
 const Navbar = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const { colorMode, toggleColorMode } = useColorMode();
     const { auth } = useSelector(state => state)
     const history = useHistory()
@@ -150,31 +153,38 @@ const Navbar = () => {
                 </Box>
                 <Box display={["flex", "none"]}>
                     <Center>
-                        <Menu>
+                        <Menu
+                        >
                             <MenuButton
                                 as={IconButton}
                                 aria-label='Options'
-                                icon={<AiOutlineMenu />}
+                                border={'none'}
                                 variant='outline'
-                            />
-                            <MenuList>
-                                <MenuItem >
-                                </MenuItem>
-                                <MenuItem>
-                                    Trang chủ
-                                </MenuItem>
-                                <MenuItem>
-                                    Khám phá
-                                </MenuItem>
-                                <MenuItem >
-                                    Khuyến mãi
-                                </MenuItem>
-                            </MenuList>
+                                onClick={onOpen}
+                                _focus={{
+                                    border: "unset",
+                                    background: "transparent",
+                                    boxShadow: 'unset'
+                                }}
+                                _active={{
+                                    background: "transparent"
+                                }}
+                                _hover={{
+                                    background: "unset"
+                                }}
+
+                            >
+                                <svg viewBox="0 0 120 100" width="20" height="18"><rect width="120" height="18" rx="14"></rect><rect y="40" x="30" width="90" height="20" rx="14"></rect><rect y="80" width="120" height="20" rx="14"></rect></svg>
+                            </MenuButton>
                         </Menu>
 
                     </Center>
                 </Box>
             </Flex>
+            <DrawerNavbar
+                isOpen={isOpen}
+                onClose={onClose}
+            />
         </Container>
     )
 }

@@ -28,8 +28,8 @@ const Single = () => {
   }, [])
 
   return (
-    <Container maxW={'1240px'}>
-      <Box boxShadow='md' p='6' rounded='md' bg='white'>
+    <Container maxW={'1240px'} pt={"15px"} p={[0, '15px']}>
+      <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" p='6' rounded='md' bg='white'>
         <DetailTop
           name={detail_place.name}
           intro={detail_place.intro}

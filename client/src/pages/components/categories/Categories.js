@@ -17,7 +17,7 @@ const Categories = () => {
                     spaceBetween={30}
                     slidesPerView={3}
                     autoplay={{
-                        delay: 2500,
+                        delay: 2000,
                         disableOnInteraction: false,
                     }}
                     pagination={{

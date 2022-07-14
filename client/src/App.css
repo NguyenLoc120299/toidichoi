@@ -160,7 +160,99 @@
 a:hover {
   color: unset !important;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  display: none !important;
+}
+.tiktok_icon {
+  color: #111;
+  -webkit-filter: drop-shadow(2px 0 0 #fd3e3e) drop-shadow(-2px -2px 0 #4de8f4);
+  filter: drop-shadow(2px 0 0 #fd3e3e) drop-shadow(-2px -2px 0 #4de8f4);
+  font-size: 16px;
+  font-weight: 500;
+}
+.facebook_icon {
+  color: #1778f2;
+  font-size: 16px;
+  font-weight: 500;
+}
+.instagram_icon {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 16px;
+}
+._btnReset {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  bottom: auto;
+  left: auto;
+  display: block;
+  width: 34px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: #aaa;
+}
+._btnReset i {
+  color: #aaa;
+  font-size: 18px;
+  line-height: 30px;
+}
+.searchCancel {
+  color: #a0a0a0;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.desktop_btnReset {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  line-height: 60px;
+  color: #5a5a5a;
+}
+.Search_actions {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: fixed;
+  top: auto;
+  right: 0;
+  bottom: 85px;
+  left: 0;
+  z-index: 1;
+  visibility: unset;
+}
+.Search_actionButton {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  color: #111;
+  background: #fff;
+  position: relative;
+  padding: 2px 12px;
+  margin: 0 4px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px 2px rgb(0 0 0 / 15%);
+}
 @media (min-width: 992px) {
+  .Search_actions {
+    visibility: hidden;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block !important;
+  }
   .Typewriter__wrapper {
     font-size: 40px;
   }

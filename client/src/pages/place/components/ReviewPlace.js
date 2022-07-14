@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, GridItem, Heading, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 import LIstReview from './ListReview'
 import ModalAddReview from './ModalAddReview'
@@ -7,7 +7,7 @@ import RatePlace from './RatePlace'
 const ReviewPlace = ({ item }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <Box boxShadow='md' rounded={'md'} p={['3', '6']}>
+        <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" rounded={'md'} p={['3', '6']} mb={[0, 10]}>
             <ModalAddReview
                 isOpen={isOpen}
                 onClose={onClose}
@@ -61,7 +61,15 @@ const ReviewPlace = ({ item }) => {
                     </Box>
                 </Flex>
             </Box>
-            <LIstReview item={item} />
+            <Grid templateColumns='repeat(5, 1fr)' gap={6}>
+                <GridItem colSpan={[5, 3]}>
+                    <LIstReview item={item} />
+                </GridItem>
+                <GridItem colSpan={[5, 3]}>
+
+                </GridItem>
+            </Grid>
+
         </Box>
     )
 }

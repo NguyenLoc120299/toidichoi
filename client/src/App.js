@@ -12,6 +12,7 @@ import { getCategories } from './redux/actions/categoriesAction';
 import { getArea } from './redux/actions/areaAction';
 import { getPlaces } from './redux/actions/placeAction';
 import MenuMobile from './components/MenuMobile';
+import { Box } from '@chakra-ui/react';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -26,11 +27,13 @@ function App() {
     <Router>
       <AlertModal />
       <MenuMobile />
-      <Navbar />
-      <Route exact path={'/'} component={Home} />
-      <Route exact path={'/:page'} component={PageRender} />
-      <Route exact path={'/:page/:id'} component={PageRender} />
-      <Footer />
+      <Box pb={['100px', 0]}>
+        <Navbar />
+        <Route exact path={'/'} component={Home} />
+        <Route exact path={'/:page'} component={PageRender} />
+        <Route exact path={'/:page/:id'} component={PageRender} />
+        <Footer />
+      </Box>
     </Router>
   );
 }

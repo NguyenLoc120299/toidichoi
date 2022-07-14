@@ -11,9 +11,10 @@ const ProfileNavigation = () => {
             <Box
                 display={'flex'}
                 justifyContent={"space-between"}
-                borderTop="1px solid #ddd"
+                borderTop={["none", "1px solid #ddd"]}
+                flexDirection={["column-reverse", "row"]}
             >
-                <Wrap>
+                <Wrap  >
                     <WrapItem>
                         <Link href='#'
                             display="block"
@@ -42,6 +43,16 @@ const ProfileNavigation = () => {
                             color="#000"
                         >
                             Người theo dõi
+                        </Link>
+                    </WrapItem>
+                    <WrapItem>
+                        <Link href='#'
+                            display="block"
+                            fontWeight="500"
+                            padding="10px 14px"
+                            color="#000"
+                        >
+                            Đang theo dõi
                         </Link>
                     </WrapItem>
                 </Wrap>
