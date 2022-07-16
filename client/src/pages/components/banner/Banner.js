@@ -1,15 +1,35 @@
-import { Button, Center, Flex, FormControl, Input, Box, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
-import React from 'react'
+import { Button, Center, Flex, FormControl, Input, Box, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, Image } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import styles from './baner.module.css'
 import Typewriter from 'typewriter-effect';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLocationArrow } from 'react-icons/fa'
+import { ALERT_ACTION } from '../../../redux/actions/alertAction';
+import { getDataAPI } from '../../../untils/fetchData';
+import { useDispatch } from 'react-redux';
 const Banner = () => {
     const [isShowSearchBox, setIsShowSearchBox] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+    const [dataPlaceOffer, setdataPlaceOffer] = useState([])
+    const dispatch = useDispatch()
+    const getPlaceTrending = async () => {
+        try {
+            const res = await getDataAPI('place-outstanding')
+            if (res && res.data) setdataPlaceOffer(res.data.slice(0, 2))
+        } catch (error) {
+            dispatch({
+                type: ALERT_ACTION.ALERT,
+                payload: {
+                    err: error.response.data.msg
+                }
+            })
+        }
+    }
+    useEffect(() => {
+        getPlaceTrending()
+    }, [])
     const renderSearch = () => {
         return (
             <Box width={['100%', '700px']} bg="#fff" p={"14px"}>
@@ -21,16 +41,21 @@ const Banner = () => {
                     Đề xuất
                 </div>
                 <div className={styles.listPlace}>
-                    <Link to="#" className={styles.searchItemPlace}>
-                        <div className={styles.image}>
+                    {
+                        dataPlaceOffer.length > 0 && dataPlaceOffer.map((item, index) => (
+                            <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace}>
+                                <div className={styles.image}>
+                                    <Image src={item.totalData.images[0]} alt={item.totalData.name} />
+                                </div>
+                                <div className={styles.info}>
+                                    <div className={styles.name}>{item.totalData.name}</div>
+                                    <div className={styles.address}>{item.totalData.address}</div>
+                                </div>
 
-                        </div>
-                        <div className={styles.info}>
-                            <div className={styles.name}>Artemis Pastry & Coffee Shop</div>
-                            <div className={styles.address}>20 Ngô Quyền, Tràng Tiền, Hoàn Kiếm, Hà Nội.</div>
-                        </div>
+                            </Link>
+                        ))
+                    }
 
-                    </Link>
                 </div>
                 <div className={styles.searchTitile}>
                     Đã xem gần đây
@@ -68,22 +93,25 @@ const Banner = () => {
                     <p className={styles.text1}>Khám phá những địa điểm ăn uống tại Sài Gòn</p>
                     <Center pt={3} >
                         <Flex display={['none', 'flex']}>
-                            <FormControl mr={'3'}>
+                            <FormControl mr={'3'}  >
                                 <Input type='text' focusBorderColor='none' color={"#aaa"} bg="#fff"
-
+                                    height={"65px"}
                                     borderBottomLeftRadius={isShowSearchBox && "unset"}
                                     borderBottomRightRadius={isShowSearchBox && "unset"}
                                     placeholder='Tên quán ,khu vực,kiểu quán,..' w={{ sm: '100%', lg: '700px' }} size='lg'
                                     onClick={() => setIsShowSearchBox(true)}
-                                />
-                                <button class="desktop_btnReset"><i class="fas fa-times"></i></button>
+                                    position="relative"
+                                >
+
+                                </Input>
+                                <button class="desktop_btnReset" ><i class="fas fa-times"></i></button>
                                 {
                                     isShowSearchBox && renderSearch()
 
                                 }
 
                             </FormControl>
-                            <Button colorScheme='red' borderRadius={'8px'} size='lg' >
+                            <Button colorScheme='red' borderRadius={'8px'} size='lg' h={"65px"} w={"200px"} >
                                 Tìm kiếm
                             </Button>
                         </Flex>
@@ -104,7 +132,7 @@ const Banner = () => {
                     </Center>
 
                 </Flex>
-            </Center>
+            </Center >
             <Drawer onClose={onClose} isOpen={isOpen} size={'full'} placement={"right"} >
                 <DrawerOverlay />
                 <DrawerContent overflow="scroll">
@@ -166,7 +194,7 @@ const Banner = () => {
                     {renderSearch()}
                 </DrawerContent>
             </Drawer>
-        </div>
+        </div >
     )
 }
 

@@ -7,13 +7,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import numeral from 'numeral'
 import { ALERT_ACTION } from '../redux/actions/alertAction';
 import { postDataAPI } from '../untils/fetchData';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Rate from 'rc-rate/lib/Rate'
 import moment from 'moment';
 import { isMobile } from 'react-device-detect';
 const { Panel } = Collapse;
+function useQuery() {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 
 const Search = () => {
+    const query = useQuery()
     const area = useSelector(state => state.area)
     const categories = useSelector(state => state.categories)
     const utities = useSelector(state => state.utities)
@@ -48,6 +55,24 @@ const Search = () => {
             return false
         }
     }
+    useEffect(() => {
+        if (query.get('type')) {
+
+            const item = categories.data.filter(item => item.name === query.get('type'))
+            if (item.length > 0)
+                setFilterData({
+                    ...filterData, typeData: [...filterData.typeData, item[0]]
+                })
+        }
+        if (query.get('area')) {
+
+            const item = area.data.filter(item => item.name === query.get('area'))
+            if (item.length > 0)
+                setFilterData({
+                    ...filterData, areaData: [...filterData.areaData, item[0]]
+                })
+        }
+    }, [query.get('type'), query.get('area')])
     const onFilterData = async () => {
         try {
             const places = await postDataAPI('search', {
@@ -68,6 +93,7 @@ const Search = () => {
             })
         }
     }
+
     const handleOnChaneTimeOpen = (e) => {
         setFilterData({
             ...filterData,
@@ -181,7 +207,7 @@ const Search = () => {
                     <Collapse
                         onChange={onChange}
                         bordered
-                        expandIconPosition="right"
+                        expandIconPosition="end"
                         // accordion
                         ghost
                         defaultActiveKey={['1', '2', '3', '4', '5', '6']}
@@ -282,7 +308,7 @@ const Search = () => {
                     gap={4}
                 >
                     <GridItem colSpan={2} display={['none', 'grid']} >
-                        <BoxLayput>
+                        <BoxLayput mb={5}>
                             {renderBoxSearch()}
                         </BoxLayput>
                     </GridItem>
@@ -354,7 +380,7 @@ const Search = () => {
                         </Box>
                         {
                             places.length > 0 && places.map((item) => (
-                                <BoxLayput>
+                                <BoxLayput key={item._id}>
                                     <Flex
                                         direction={['row', 'row']}
                                     >
@@ -367,7 +393,7 @@ const Search = () => {
                                                 overflow="hidden"
                                                 borderRadius="calc(10px - 4px)"
                                                 width={["120px", "270px"]}
-                                                height={["110px", '100%']}
+                                                height={["110px", '250px']}
                                             >
                                                 <Box
                                                     height="100%"
@@ -375,7 +401,7 @@ const Search = () => {
                                                     position="relative"
                                                     overflow="hidden"
                                                 >
-                                                    <Image src={item.images[0]} alt="" />
+                                                    <Image src={item.images[0]} alt="" w={"100%"} h={"100%"} objectFit="cover" />
                                                 </Box>
 
                                             </Box>
@@ -404,13 +430,13 @@ const Search = () => {
                                                 {item.address}
                                             </Box>
                                             <Box pt={2} fontSize={'16px'}>
-                                                <i class="fas fa-clock" style={{ marginRight: '5px' }}></i>
+                                                <i className="fas fa-clock" style={{ marginRight: '5px' }}></i>
                                                 {isOpenning(item.time.min, item.time.max) ?
                                                     <span style={{ fontWeight: '600', color: "#00b707" }}>Đang mở cửa</span>
                                                     : <span style={{ fontWeight: '600', color: "red" }}>Chưa mở cửa</span>}    {item.time.min} - {item.time.max}
                                             </Box>
                                             <Box pt={2} fontSize={'16px'}>
-                                                <i class="fas fa-comment" style={{ marginRight: '5px' }}></i>
+                                                <i className="fas fa-comment" style={{ marginRight: '5px' }}></i>
                                                 {item.reviews.length} lượt thảo luận
                                             </Box>
                                         </Box>
