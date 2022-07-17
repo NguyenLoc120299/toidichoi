@@ -33,6 +33,7 @@ const Banner = () => {
         }
     }
     const handleOnChange = async (value) => {
+        setLoading(true)
         dispatch({
             type: ALERT_ACTION.ALERT,
             payload: {
@@ -45,6 +46,7 @@ const Banner = () => {
             type: ALERT_ACTION.ALERT,
             payload: {}
         })
+        setLoading(false)
     }
     const closeSearchHandler = (e) => {
         if (isShowSearchBox) {
@@ -65,7 +67,7 @@ const Banner = () => {
         setValueSearch(value)
         handleOnChange(value)
     }
-
+    console.log(valueSearch);
     const renderPlacesAll = () => {
         return (
             <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
@@ -257,16 +259,20 @@ const Banner = () => {
                                         marginRight="16px"
                                         background="transparent"
                                         position="relative"
+                                        value={valueSearch}
+                                        onChange={handleSearch}
                                     />
                                 </Box>
-                                <button class="_btnReset">
-                                    <i class="fas fa-times-circle"></i></button>
+                                {valueSearch.length > 0 &&
+                                    <button class="_btnReset" onClick={valueBtnReset}>
+                                        <i class="fas fa-times-circle"></i></button>
+                                }
                             </Box>
                             <h3 class="searchCancel" onClick={onClose}>Huỷ</h3>
                         </Flex>
                     </DrawerHeader>
 
-                    {renderSearch()}
+                    {valueSearch.length > 0 ? renderPlacesAll() : renderSearch()}
                 </DrawerContent>
             </Drawer>
         </div >

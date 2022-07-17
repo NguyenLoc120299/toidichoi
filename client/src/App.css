@@ -155,12 +155,15 @@
   text-decoration: none;
 }
 .Navbar_item i {
-  font-size: 24px;
-  width: 28px;
+  font-size: 17px;
+  text-align: center;
 }
 .Navbar_item span {
   font-size: 10px;
   margin-top: 4px;
+}
+.Navbar_item.active {
+  color: #e03 !important;
 }
 a:hover {
   color: unset !important;
@@ -258,6 +261,9 @@ a:hover {
   font-size: 30px;
   margin-right: 10px;
   font-weight: 500;
+}
+.Typewriter__wrapper {
+  font-size: 20px;
 }
 @media (min-width: 992px) {
   .Search_actions {
