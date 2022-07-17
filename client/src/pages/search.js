@@ -27,7 +27,7 @@ const Search = () => {
     const dispatch = useDispatch()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [filterData, setFilterData] = useState({
-        priceData: [],
+        priceData: [0, 1000000],
         typeData: [],
         utitiesData: [],
         areaData: [],

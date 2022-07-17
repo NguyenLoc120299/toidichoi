@@ -14,7 +14,7 @@ const Footer = () => {
                             {logo}
                         </Flex>
                     </Center>
-                    <Center >
+                    <Center mt={10}>
                         <div className={style.contact}>
                             <FaRegHandshake style={{ fontSize: "30px", marginRight: "10px" }} />  Hợp tác với chúng tôi
                         </div>
