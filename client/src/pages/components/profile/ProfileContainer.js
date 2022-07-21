@@ -13,7 +13,7 @@ const ProfileContainer = () => {
             templateColumns={'repeat(3,1fr)'}
             gap={6}
         >
-            <GridItem colSpan={[3, 1]} display={['none', 'grid']}>
+            <GridItem colSpan={[3, 1]} display={['grid', 'grid']}>
                 <ProfileStatus />
             </GridItem>
             <GridItem colSpan={[3, 2]}>

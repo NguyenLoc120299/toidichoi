@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react"
 export const BoxProfile = ({ children }) => {
     return (
         <Box
-            padding={'20px 0 0 20px'}
+            padding={['0', '20px 0 0 20px']}
         >
             <Box
                 position="relative"

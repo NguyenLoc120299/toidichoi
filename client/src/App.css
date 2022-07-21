@@ -265,6 +265,18 @@ a:hover {
 .Typewriter__wrapper {
   font-size: 20px;
 }
+.list___wrapper .chakra-wrap__list.css-wah4g8 {
+  display: -webkit-box;
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
+.list___wrapper .chakra-wrap__list.css-wah4g8::-webkit-scrollbar {
+  display: none;
+}
+.list___wrapper .active {
+  color: #e03;
+  border-bottom: 4px solid #e03;
+}
 @media (min-width: 992px) {
   .Search_actions {
     visibility: hidden;
