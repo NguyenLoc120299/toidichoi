@@ -42,7 +42,7 @@ const DrawerNavbar = ({ onClose, isOpen }) => {
                                 justifyContent="flex-start"
                                 padding="20px"
                                 margin="-24px"
-                                background="linear-gradient(270deg,#ef5d7c,#e03)"
+                                background="linear-gradient(214.02deg, #D71479 6.04%, #DF2A65 26.68%, #E7444D 49.32%, #EF5939 68.78%, #F87421 92.95%)"
                                 borderBottomRightRadius="60px"
                             >
                                 <Box

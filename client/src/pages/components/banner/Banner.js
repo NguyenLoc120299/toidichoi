@@ -188,7 +188,7 @@ const Banner = () => {
                             </FormControl>
                             <Button colorScheme='red' borderRadius={'8px'} size='lg' h={"65px"} w={"200px"}
                                 _focus={{ border: 'unset' }}
-                                ref={searchRef}>
+                                ref={searchRef} className="custom_btn">
                                 <i className="fas fa-search" style={{ marginRight: '5px' }}></i>  Tìm kiếm
                             </Button>
                         </Flex>

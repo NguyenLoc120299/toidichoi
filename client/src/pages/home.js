@@ -30,7 +30,7 @@ const Home = () => {
                         <div>
                             <p className={'title'}>Chúng tôi có đang bỏ lỡ địa điểm nào bạn biết không ?</p>
                             <Center py={5}>
-                                <Button colorScheme='red' size='lg'>
+                                <Button colorScheme='red' size='lg' className='custom_btn'>
                                     <Link to='/add-place'>
                                         Thêm địa điểm
                                     </Link>

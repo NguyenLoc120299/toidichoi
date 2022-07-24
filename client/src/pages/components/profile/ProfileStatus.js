@@ -15,6 +15,7 @@ const ProfileStatus = () => {
                 fontWeight=" 600"
                 color="#e03"
                 marginBottom=" 8px"
+                className='custom_text'
             >[ Bảng chiến tích ]</Text>
             <Flex direction={'column'}>
                 <Flex justifyContent={'space-between'} mb={3}>

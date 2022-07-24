@@ -21,11 +21,12 @@ const RatePlace = ({ item }) => {
             <Box boxShadow='sm' rounded={'md'} mt={5}>
                 <Flex direction={'column'}>
                     <Center mb={5}>
-                        <Heading size={'md'} mr={5}>{rateText}</Heading>
-                        <Button colorScheme={'red'} mr={1}>
+                        <Heading size={'md'} mr={5} color="white">{rateText}</Heading>
+                        <Button background={"#f5f5ff"} mr={1}>
                             <Text
                                 fontSize={'2xl'}
-                                fontWeight={"bold"}>
+                                fontWeight={"bold"} className='custom_text'>
+
                                 {item && (item.rateNumber).toFixed(1)}
                             </Text>
                         </Button> /5 ( {item && item.turnNumber} đánh giá)

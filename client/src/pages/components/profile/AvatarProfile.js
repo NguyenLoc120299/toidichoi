@@ -24,7 +24,7 @@ const AvatarProfile = () => {
                 padding={'20px 40px'}
                 borderBottomLeftRadius='16px'
                 borderBottomRightRadius='16px'
-                background='linear-gradient(180deg,#ffb8b8,#fafafa)'
+                className='custom_btn'
             >
                 <Center
                     flexDirection={'column'}

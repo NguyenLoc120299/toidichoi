@@ -263,7 +263,7 @@ const Place = () => {
                     <div>Chọn tối đa 20 ảnh</div>
                 </section> */}
                 <section>
-                    <Button colorScheme='red' size='lg' w={'100%'} mt={5} isLoading={alert.loading} onClick={() => onSubmit()}>
+                    <Button className="custom_btn" size='lg' w={'100%'} mt={5} isLoading={alert.loading} onClick={() => onSubmit()}>
                         + Thêm địa điểm
                     </Button>
                 </section>

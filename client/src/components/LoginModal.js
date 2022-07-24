@@ -85,7 +85,7 @@ const LoginModal = () => {
                             justify={'center'}>
                             <Stack spacing={5} mx={'auto'} maxW={'lg'} py={12}>
                                 <Stack align={'center'}>
-                                    <Heading fontSize={['md', '2xl']}>{isSignup ? 'Tạo tài khoản' : 'Đăng nhập tài khoản'}</Heading>
+                                    <Heading fontSize={['md', '2xl']} className="custom_text">{isSignup ? 'Tạo tài khoản' : 'Đăng nhập tài khoản'}</Heading>
                                 </Stack>
                                 <Box
                                     rounded={'lg'}
@@ -173,7 +173,8 @@ const LoginModal = () => {
                                         </Stack>
                                         {!isSignup && <Link color={'red.500'} textAlign="center" fontWeight={'bold'}>Quên mật khẩu?</Link>}
                                         <Text>{isSignup ? 'Bạn đã có tài khoản' : 'Bạn chưa có tài khoản'}
-                                            <Link color={'red.500'} fontWeight={"bold"} onClick={() => setIsSignup(!isSignup)}>
+                                            <Link
+                                                className='custom_text' fontWeight={"bold"} onClick={() => setIsSignup(!isSignup)}>
                                                 {isSignup ? ' Đăng nhập' : ' Tạo tài khoản'}
                                             </Link></Text>
                                     </Stack>

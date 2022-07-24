@@ -274,8 +274,11 @@ a:hover {
   display: none;
 }
 .list___wrapper .active {
-  color: #e03;
-  border-bottom: 4px solid #e03;
+  background: linear-gradient(214.02deg, #d71479 6.04%, #df2a65 26.68%, #e7444d 49.32%, #ef5939 68.78%, #f87421 92.95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border-bottom: 4px solid #e7444d;
 }
 @media (min-width: 992px) {
   .Search_actions {
@@ -302,14 +305,14 @@ a:hover {
     margin-left: 20px;
     margin-top: 4px;
     color: #fff;
-    background: #e03;
+    background: #e7444d;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
   }
 
   .rate__text::after {
     content: "";
-    border-color: transparent #e03 transparent transparent;
+    border-color: transparent #e7444d transparent transparent;
     border-style: solid;
     border-width: 16px 16px 16px 0;
     width: 0;

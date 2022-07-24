@@ -17,7 +17,6 @@ const Explore = () => {
             w={'100%'}
             h="100%"
             minH={'calc(100vh - 360px)'}
-            bgGradient="linear(to bottom ,red.100, pink.50)"
         >
             <Container maxW={'1280px'} py="10px">
                 <Grid templateColumns={"repeat(3, 1fr)"} gap="20px">

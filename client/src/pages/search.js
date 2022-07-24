@@ -471,7 +471,7 @@ const Search = () => {
                 <DrawerOverlay />
                 <DrawerContent >
                     <DrawerCloseButton color={'#fff'} />
-                    <DrawerHeader background={"#e03"}>
+                    <DrawerHeader background={"linear-gradient(214.02deg, #D71479 6.04%, #DF2A65 26.68%, #E7444D 49.32%, #EF5939 68.78%, #F87421 92.95%)"}>
                         <Text color={"#fff"} fontWeight={"500"}>Bộ lọc</Text>
                     </DrawerHeader>
 
@@ -481,7 +481,7 @@ const Search = () => {
 
                     <DrawerFooter>
                         <Flex>
-                            <Button colorScheme={'red'} mr={3} _focus={{ border: 'unser' }} onClick={onFilterData}>
+                            <Button className='custom_btn' mr={3} _focus={{ border: 'unser' }} onClick={onFilterData}>
                                 Áp dụng
                             </Button>
                             <Button colorScheme='red' variant={'outline'} _focus={{ border: 'unser' }}>

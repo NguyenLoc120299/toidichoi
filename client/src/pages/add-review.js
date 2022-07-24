@@ -43,7 +43,7 @@ const AddReview = () => {
                             reviewImage={reviewImage}
                             setFormData={setFormData}
                         />
-                        <Button colorScheme={'red'} rounded="lg" onClick={() => onSubmit()}>Gửi đánh giá của bạn</Button>
+                        <Button colorScheme={'red'} className={"custom_btn"} rounded="lg" onClick={() => onSubmit()}>Gửi đánh giá của bạn</Button>
                     </Box>
                     <Box>
                         <Heading as={'h4'} fontSize="lg" textColor={'gray.500'} mb={3}>Địa điểm</Heading>

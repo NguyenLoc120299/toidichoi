@@ -25,13 +25,14 @@ const ReviewPlace = ({ item }) => {
                         _focus={{
                             border: 'unset'
                         }}
+                        className="custom_btn"
                     >Viết đánh giá</Button>
                 }
             </Flex>
             <Box
                 minH={'180px'}
                 padding="10px 16px"
-                bg={'red.100'}
+                className='custom_btn'
                 borderRadius="20px" position={'relative'}
                 _after={{
                     position: "absolute",
@@ -44,7 +45,7 @@ const ReviewPlace = ({ item }) => {
                     height: 0,
                     borderLeft: '10px solid transparent',
                     borderRight: '10px solid transparent',
-                    borderBottom: '10px solid #ffdcd8'
+                    borderBottom: '10px solid #d71479'
                 }}>
                 <Flex direction={['column', 'row']}>
                     <Box >
@@ -54,7 +55,7 @@ const ReviewPlace = ({ item }) => {
                         }} />
                     </Box>
                     <Box>
-                        <Heading as={'h4'} size="lg" mb={5}>Bạn đã từng đến đây</Heading>
+                        <Heading as={'h4'} color="white" size="lg" mb={5}>Bạn đã từng đến đây</Heading>
                         <Text>Chia sẽ kinh nghiệm và trảu nghiệm cả bản thân cho mọi người cùng biết</Text>
                         <Text>Hãy chia sẽ thật những cảm xúc thật của bản thân chính mình </Text>
                         <RatePlace item={item.rate} />

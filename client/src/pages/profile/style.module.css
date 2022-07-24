@@ -1,14 +1,15 @@
 .container {
-    display: flex;
-    width: 1200px;
+    display: block;
+    max-width: 1200px;
     margin: auto;
-    padding: 0 16px;
+    padding: 0;
 }
 .setting_left {
-    width: 340px;
+    max-width: unset;
     height: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 100%;
 }
 .setting_toolbar {
     position: relative;
@@ -90,8 +91,9 @@
     flex-grow: 1;
     max-width: 640px;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 0;
     margin-bottom: 20px;
+    width: 100%;
 }
 .setting_content {
     flex-grow: 1;
@@ -143,6 +145,9 @@
     text-align: center;
     background-color: #eee;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .setting_contentItem > div .top .action i {
     font-weight: 400;
@@ -158,4 +163,57 @@
     margin-left: 34px;
     margin-right: 60px;
     color: #474747;
+}
+.setting_contentItem > div .body .created {
+    cursor: pointer;
+    color: #05f;
+    font-size: 16px;
+}
+.setting_contentItem > div .body .created > i {
+    margin-right: 4px;
+}
+
+.setting_contentItem > div .form {
+    padding-left: 32px;
+}
+.setting_contentItem > div .form .input {
+    margin: 6px 0 10px;
+}
+.setting_contentItem > div .form .input input {
+    display: block;
+    width: 240px;
+    font-size: 16px;
+    color: #474747;
+    padding: 4px 10px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+.setting_contentItem > div .form .button {
+    margin-bottom: 10px;
+}
+.setting_contentItem > div .form .button button {
+    font-size: 14px;
+    padding: 2px 10px;
+    margin-right: 4px;
+    outline: none;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+.setting_contentItem > div .form .button button.submit {
+    color: #fff;
+    background: #e03;
+    border-color: #e03;
+}
+@media (min-width: 992px) {
+    .container {
+        display: flex;
+        padding: 0 16px;
+    }
+    .setting_right {
+        margin-left: 20px;
+    }
+    .setting_left {
+        max-width: 340px;
+    }
 }

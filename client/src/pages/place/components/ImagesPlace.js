@@ -51,6 +51,7 @@ const ImagesPlace = ({ images, loading }) => {
                   left="10px"
                   bottom={'10px'}>
                   <Button
+                    className='custom_btn'
                     color={"#fff"}
                     opacity={0.7}
                     onClick={() => toggleImageLightBox(0)}

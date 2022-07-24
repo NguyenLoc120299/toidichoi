@@ -18,7 +18,7 @@ export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
         <Center>
-            <Link to="/home">
+            <Link to="/home" className='custom_text'>
                 <span className={style.logo}>Tôi đi reviews</span>
             </Link>
         </Center>
@@ -65,12 +65,14 @@ const Navbar = () => {
                     </Center> */}
 
                     <Center h={"100%"}>
-                        <Button colorScheme='red' mr='3' borderRadius={"12px"} onClick={() => history.push('/add-review')}>
-                            <BsPencil style={{ marginRight: "5px" }} /> Viết review
+                        <Button className='custom_btn' mr='3' borderRadius={"12px"} onClick={() => history.push('/add-review')}>
+                            <BsPencil style={{ marginRight: "5px" }}
+
+                            /> Viết review
                         </Button>
                         {
                             !auth.token &&
-                            <Button colorScheme='red' mr='3' borderRadius={"12px"} variant='outline' onClick={() => dispatch({
+                            <Button className='custom_btn' mr='3' borderRadius={"12px"} onClick={() => dispatch({
                                 type: ALERT_ACTION.ALERT,
                                 payload: {
                                     modal: true
