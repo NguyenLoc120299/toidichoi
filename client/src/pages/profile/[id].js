@@ -38,7 +38,7 @@ const Setting = () => {
                     <input placeholder='Tên hiển thị' />
                 </div>
                 <div className={style.button}>
-                    <button className={style.submit}>Cập nhật</button>
+                    <button className={`${style.submit} custom_btn`}>Cập nhật</button>
                     <button onClick={() => toggleFormEdit({ name: type })}>Hủy</button>
                 </div>
             </div>
