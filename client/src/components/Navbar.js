@@ -130,9 +130,11 @@ const Navbar = () => {
                                         </Link>
                                         <MenuDivider />
                                         <MenuItem>
-                                            <Center>
-                                                <FaUserEdit /><Text fontWeight={'bold'} ml={2}> Chỉnh sửa trang cá nhân</Text>
-                                            </Center>
+                                            <Link to='/profile/setting'>
+                                                <Center>
+                                                    <FaUserEdit /><Text fontWeight={'bold'} ml={2}> Chỉnh sửa trang cá nhân</Text>
+                                                </Center>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
                                             <Center>

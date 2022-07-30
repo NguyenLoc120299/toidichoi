@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Grid, GridItem, Heading, SimpleGrid, Text, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
-import LIstReview from './ListReview'
+import LIstReview from './LIstReview'
 import ModalAddReview from './ModalAddReview'
 import RatePlace from './RatePlace'
 
