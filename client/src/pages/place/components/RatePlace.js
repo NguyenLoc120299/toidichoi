@@ -34,7 +34,10 @@ const RatePlace = ({ item }) => {
                     {auth.token ?
 
                         <Rate
-                            style={{ fontSize: "30px" }}
+                            style={{
+                                fontSize: "30px",
+                                background: '#fff', borderRadius: '12px', display: "flex", justifyContent: 'center', alignContent: 'center'
+                            }}
                             value={item && item.rateNumber}
                             allowHalf
                             disabled

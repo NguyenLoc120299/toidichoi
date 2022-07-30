@@ -91,7 +91,7 @@ const Setting = () => {
                         <div>
                             <div className={style.top}>
                                 <div className={style.title}>
-                                    <h2><i className="far fa-user"></i> Lộc Nguyễn</h2>
+                                    <h2><i className="far fa-user"></i>{user?.username}</h2>
                                 </div>
                                 {
                                     !isFlag.isUserName && <div className={style.action} onClick={() => toggleFormEdit({ name: "isUserName" })}>

@@ -19,7 +19,7 @@ const ExploreFee = ({ item }) => {
             marginBottom="20px"
             backgroundColor="#fff"
             borderRadius="10px"
-            box-shadow="0 2px 8px rgb(0 0 0 / 15%"
+            className='box-shadow'
         >
             <ReviewHeader item={item} />
             <ReviewBody item={item} />

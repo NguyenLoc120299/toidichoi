@@ -203,6 +203,7 @@ const Banner = () => {
                                 background: '#fff'
                             }}
                             onClick={onOpen}
+                            className="custom_btn"
                         >
                             <AiOutlineSearch style={{ marginRight: '10px' }} /> Tìm kiếm
                         </Button>
