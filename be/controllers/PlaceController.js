@@ -174,24 +174,11 @@ const PlaceCtrl = {
                 data.push(...places)
 
             }
-
-
             res.json({ data })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     }
-    // searchAllPlace: async (req, res) => {
-    //     try {
-    //         const places = await Places.find({
-    //             area: { $all: ["62530f1b0bb18e51db340049", "62530f1b0bb18e51db340049/"] }
-    //         })
-    //         res.json(places);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message })
-    //     }
-    // }
-
 }
 
 module.exports = PlaceCtrl
