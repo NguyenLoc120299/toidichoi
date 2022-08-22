@@ -17,9 +17,14 @@ const MenuMobile = () => {
         <div className='nav_mobile'>
             <div className='nav-content'>
                 <Link className={`Navbar_item ${isActive('/')}`} to="/"><i className="fas fa-home"></i><span>Trang chủ</span></Link>
-                <Link className={`Navbar_item ${isActive('/explore')}`} to="/explore"><i className="fas fa-fire"></i><span>Khám phá</span></Link>
+                <Link className={`Navbar_item ${isActive('/explore')}`} to="/explore"><i className="fas fa-fire"></i><span>Khám phá</span>
+                </Link>
                 <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"></i><span>khuyến mãi</span></Link>
-                <Link className={`Navbar_item ${isActive('')}`} to="#"><i className="fas fa-bell"></i><span>Thông báo</span></Link>
+                <Link className={`Navbar_item ${isActive('')}`} to="#"><i className="fas fa-bell"></i><span>Thông báo</span>
+                    <div className='notification'>
+                        1
+                    </div>
+                </Link>
                 {
                     user ? <Link className={`Navbar_item ${isActive('/profile')}`} to={`/profile`}><i className="fas fa-user"></i><span>Tài khoản</span></Link>
                         :

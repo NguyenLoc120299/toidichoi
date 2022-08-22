@@ -8,12 +8,12 @@ import { likeReview, unLikeReview } from '../../../redux/actions/reviewAction'
 const ReviewAction = ({ item }) => {
     const [isLike, setIsLike] = useState(false)
     const auth = useSelector(state => state.auth)
-
+    const socket=useSelector(state=>state.socket)
     const dispatch = useDispatch()
-    const likeAction = (auth, item) => {
-        if (isLike) dispatch(unLikeReview(auth, item))
+    const likeAction = (auth, item, socket) => {
+        if (isLike) dispatch(unLikeReview(auth, item, socket))
         else
-            dispatch(likeReview(auth, item))
+            dispatch(likeReview(auth, item, socket))
         setIsLike(!isLike)
     }
     useEffect(() => {
@@ -56,7 +56,7 @@ const ReviewAction = ({ item }) => {
                     background: "transparent",
                     boxShadow: 'unset'
                 }}
-                onClick={() => likeAction(auth, item)}
+                onClick={() => likeAction(auth, item, socket)}
             >
                 {
                     isLike ? <AiFillHeart style={{ marginRight: '5px', color: 'red' }} />

@@ -4,6 +4,7 @@ import { getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { uploadImage } from "../../untils/uploadImage"
 import { ALERT_ACTION } from "./alertAction"
 import { AUTH_ACTIONS, checkLogin } from "./authAction"
+import { createNotify } from "./notifyAction"
 
 
 export const REVIEW_ACTIONS = {
@@ -69,7 +70,7 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
     }
 }
 
-export const likeReview = (auth, review) => async (dispatch) => {
+export const likeReview = (auth, review,socket) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
             dispatch({
@@ -84,14 +85,24 @@ export const likeReview = (auth, review) => async (dispatch) => {
                 type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
                 payload: newReview
             })
+            const msg = {
+                id: auth.user._id,
+                text: 'like your review.',
+                recipients: [review.user._id],
+                url: null,
+                content:review.content,
+                image: review?.images[0]
+            }
+           dispatch(createNotify( msg, auth, socket ))
         }
     } catch (error) {
-        dispatch({
-            type: ALERT_ACTION.ALERT,
-            payload: {
-                err: error.response.data.msg
-            }
-        })
+        console.log(error);
+        // dispatch({
+        //     type: ALERT_ACTION.ALERT,
+        //     payload: {
+        //         err: error.response.data.msg
+        //     }
+        // })
     }
 }
 
