@@ -130,7 +130,7 @@
   left: 0;
   display: block;
   width: 100%;
-  z-index: 1000;
+  z-index: 99999;
   border-top: 1px solid #ddd;
   background-color: #fff;
 }

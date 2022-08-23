@@ -4,10 +4,8 @@ import { Link, useHistory } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
-import { AiOutlineMenu } from 'react-icons/ai'
 import { IconButton } from '@chakra-ui/react'
-import { useColorMode, useDisclosure } from '@chakra-ui/react';
-import { BsSun, BsMoonStarsFill } from 'react-icons/bs';
+import {useDisclosure } from '@chakra-ui/react';
 import LoginModal from './LoginModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaUserEdit, FaRegEnvelope, FaPowerOff } from 'react-icons/fa'
@@ -27,9 +25,7 @@ export const logo = (
 )
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const { colorMode, toggleColorMode } = useColorMode();
-    const { auth } = useSelector(state => state)
+    const auth = useSelector(state => state.auth)
     const history = useHistory()
     const dispatch = useDispatch()
     return (

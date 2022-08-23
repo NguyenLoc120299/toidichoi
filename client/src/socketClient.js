@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { NOTIFY_TYPES } from './redux/actions/notifyAction'
 
 const SocketClient = () => {
     const { socket, auth } = useSelector(state => state)
+    const dispatch = useDispatch()
     useEffect(() => {
         socket.emit('joinUser', auth.user)
     }, [socket, auth.user])
@@ -20,7 +22,7 @@ const SocketClient = () => {
     }
     useEffect(() => {
         socket.on('createNotifyToClient', msg => {
-            console.log(msg);
+            dispatch({ type: NOTIFY_TYPES.CREATE_NOTIFY, payload: msg })
             spawnNotification(
                 msg.user.username + ' ' + msg.text,
                 msg.user.avatar,
@@ -30,8 +32,16 @@ const SocketClient = () => {
         })
 
         return () => socket.off('createNotifyToClient')
-    }, [socket])
+    }, [socket, dispatch])
 
+
+    useEffect(() => {
+        socket.on('removeNotifyToClient', msg => {
+            dispatch({ type: NOTIFY_TYPES.REMOVE_NOTIFY, payload: msg })
+        })
+
+        return () => socket.off('removeNotifyToClient')
+    }, [socket, dispatch])
     return (
         <></>
     )

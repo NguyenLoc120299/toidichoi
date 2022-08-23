@@ -27,9 +27,7 @@ export const createNotify = (msg, auth, socket) => async (dispatch) => {
 
 export const getNotifies = (token) => async (dispatch) => {
     try {
-        console.log(token);
         const res = await getDataAPI('notifies', token)
-        console.log(res);
         dispatch({ type: NOTIFY_TYPES.GET_NOTIFIES, payload: res.data.notifies })
     } catch (err) {
         console.log(err);
