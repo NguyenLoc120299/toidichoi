@@ -1,4 +1,4 @@
-import { getDataAPI, postDataAPI } from "../../untils/fetchData"
+import { deleteDataAPI, getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { ALERT_ACTION } from "./alertAction"
 
 export const NOTIFY_TYPES = {
@@ -29,6 +29,22 @@ export const getNotifies = (token) => async (dispatch) => {
     try {
         const res = await getDataAPI('notifies', token)
         dispatch({ type: NOTIFY_TYPES.GET_NOTIFIES, payload: res.data.notifies })
+    } catch (err) {
+        console.log(err);
+    }
+}
+export const removeNotify = (msg, auth, socket) => async (dispatch) => {
+    try {
+        await deleteDataAPI(`notify/${msg.id}?url=${msg.url}`, auth.token)
+        socket.emit('removeNotify', msg)
+    } catch (err) {
+        console.log(err);
+    }
+}
+export const isReadNotify = ({ msg, auth }) => async (dispatch) => {
+    dispatch({ type: NOTIFY_TYPES.UPDATE_NOTIFY, payload: { ...msg, isRead: true } })
+    try {
+        await patchDataAPI(`/isReadNotify/${msg._id}`, null, auth.token)
     } catch (err) {
         console.log(err);
     }

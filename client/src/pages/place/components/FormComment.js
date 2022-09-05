@@ -5,10 +5,11 @@ import { useState } from 'react'
 import { createComment } from '../../../redux/actions/reviewAction'
 const FormComment = ({ reviewId, reviewUserId }) => {
     const auth = useSelector(state => state.auth)
+    const socket = useSelector(state => state.socket)
     const dispatch = useDispatch()
     const [content, setContent] = useState('')
     const onSubmitComment = () => {
-        dispatch(createComment(auth, content, reviewId, reviewUserId))
+        dispatch(createComment(auth, content, reviewId, reviewUserId, socket))
     }
     return (
         <Box my={5}  >

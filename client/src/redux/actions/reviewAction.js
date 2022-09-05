@@ -4,7 +4,7 @@ import { getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { uploadImage } from "../../untils/uploadImage"
 import { ALERT_ACTION } from "./alertAction"
 import { AUTH_ACTIONS, checkLogin } from "./authAction"
-import { createNotify } from "./notifyAction"
+import { createNotify, removeNotify } from "./notifyAction"
 
 
 export const REVIEW_ACTIONS = {
@@ -70,7 +70,7 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
     }
 }
 
-export const likeReview = (auth, review,socket) => async (dispatch) => {
+export const likeReview = (auth, review, socket) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
             dispatch({
@@ -87,13 +87,13 @@ export const likeReview = (auth, review,socket) => async (dispatch) => {
             })
             const msg = {
                 id: auth.user._id,
-                text: 'like your review.',
+                text: 'thích review của bạn',
                 recipients: [review.user._id],
-                url: null,
-                content:review.content,
+                url: `/review/${review._id}`,
+                content: review.content,
                 image: review?.images[0]
             }
-           dispatch(createNotify( msg, auth, socket ))
+            dispatch(createNotify(msg, auth, socket))
         }
     } catch (error) {
         console.log(error);
@@ -106,7 +106,7 @@ export const likeReview = (auth, review,socket) => async (dispatch) => {
     }
 }
 
-export const unLikeReview = (auth, review) => async (dispatch) => {
+export const unLikeReview = (auth, review, socket) => async (dispatch) => {
     try {
         await patchDataAPI(`review/${review._id}/unlike`, null, auth.token)
         const newReview = { ...review, likes: review.likes.filter(like => like !== auth.user._id) }
@@ -114,6 +114,15 @@ export const unLikeReview = (auth, review) => async (dispatch) => {
             type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
             payload: newReview
         })
+        const msg = {
+            id: auth.user._id,
+            text: 'bỏ thích review của bạn',
+            recipients: [review.user._id],
+            url: `/review/${review._id}`,
+            content: review.content,
+            image: review?.images[0]
+        }
+        dispatch(removeNotify(msg, auth, socket))
 
     } catch (error) {
         dispatch({
@@ -125,7 +134,7 @@ export const unLikeReview = (auth, review) => async (dispatch) => {
     }
 }
 
-export const createComment = (auth, content, reviewId, reviewUserId, location) => async (dispatch) => {
+export const createComment = (auth, content, reviewId, reviewUserId, location, socket) => async (dispatch) => {
     try {
         const res = await postDataAPI('comment', {
             content, reviewId, reviewUserId
@@ -148,6 +157,15 @@ export const createComment = (auth, content, reviewId, reviewUserId, location) =
                     payload: { ...res.data.newComment, user: auth.user }
                 })
             }
+        const msg = {
+            id: auth.user._id,
+            text: 'đã bình luận review của bạn',
+            recipients: [reviewUserId],
+            url: `/review/${reviewId}`,
+            content,
+            image: null
+        }
+        dispatch(createNotify(msg, auth, socket))
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,

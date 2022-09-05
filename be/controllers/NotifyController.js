@@ -3,7 +3,7 @@ const Notifies = require('../models/NotifyModel')
 const notifyCtrl = {
     createNotify: async (req, res) => {
         try {
-            const {id, recipients, url, text, content, image } = req.body
+            const { id, recipients, url, text, content, image } = req.body
             if (recipients.includes(req.user._id.toString())) return;
             const notify = new Notifies({
                 id, recipients, url, text, content, image, user: req.user._id
@@ -14,7 +14,7 @@ const notifyCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
-     removeNotify: async (req, res) => {
+    removeNotify: async (req, res) => {
         try {
             const notify = await Notifies.findOneAndDelete({
                 id: req.params.id, url: req.query.url

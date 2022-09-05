@@ -7,7 +7,7 @@ const SocketClient = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         socket.emit('joinUser', auth.user)
-    }, [socket, auth.user])
+    }, [socket, auth.user, dispatch])
 
     const spawnNotification = (body, icon, url, title) => {
         let options = {

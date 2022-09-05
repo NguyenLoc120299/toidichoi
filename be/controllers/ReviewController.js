@@ -238,6 +238,9 @@ const reviewCtrl = {
                     //sorting
 
                     { $sort: { "createdAt": -1 } },
+                    {
+                        $limit: 2
+                    }
 
 
                 ]

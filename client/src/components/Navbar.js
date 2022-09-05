@@ -1,17 +1,19 @@
-import { Avatar, Box, Button, Center, Container, Flex, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Container, Flex, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
 import { BsPencil } from 'react-icons/bs'
 import { IconButton } from '@chakra-ui/react'
-import {useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import LoginModal from './LoginModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaUserEdit, FaRegEnvelope, FaPowerOff } from 'react-icons/fa'
 import { logout } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 import DrawerNavbar from './DrawerNavbar'
+import { Notification } from './Notification'
+import SearchNavbar from './SearchNavbar'
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
@@ -26,6 +28,8 @@ export const logo = (
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const auth = useSelector(state => state.auth)
+    const { data } = useSelector(state => state.notify)
+    const notifyNotRead = data.filter(item => item.isRead === false)
     const history = useHistory()
     const dispatch = useDispatch()
     return (
@@ -38,6 +42,7 @@ const Navbar = () => {
                 <Box display={["none", "flex"]}>
                     <Center h={"100%"}>
                         <Flex justifyContent={"space-between"} alignItems="center">
+                            <SearchNavbar />
                             <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
                                 <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
                             </Link>
@@ -82,12 +87,22 @@ const Navbar = () => {
                     {auth.token &&
                         <>
                             <Center>
-                                <Button borderRadius={'50%'} mr="3">
-                                    <Image src='/assets/img/bookmark2.svg' alt='' className={style.icon} />
+                                <Button borderRadius={'50%'}
+                                    bg={"transparent"}
+                                    _focus={{
+                                        boxShadow: 'unset',
+                                        background: 'unset'
+                                    }}
+                                    _active={{
+                                        background: 'unset'
+                                    }}
+                                    _hover={{
+                                        background: 'unset'
+                                    }}
+                                >
+                                    <Image src='/assets/img/bookmark2.svg' alt='' className={style.icon} w={"20px"} />
                                 </Button>
-                                <Button borderRadius={'50%'} mr="3">
-                                    <Image src='/assets/img/bell2.svg' alt='' className={style.icon} />
-                                </Button>
+                                <Notification notifyNotRead={notifyNotRead} />
                             </Center>
 
                             <Center>
