@@ -67,7 +67,6 @@ const Banner = () => {
         setValueSearch(value)
         handleOnChange(value)
     }
-    console.log(valueSearch);
     const renderPlacesAll = () => {
         return (
             <Box width={['100%', '700px']} bg="#fff" p={"14px"} >

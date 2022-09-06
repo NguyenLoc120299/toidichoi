@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Center, Container, Flex, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
@@ -32,6 +32,10 @@ const Navbar = () => {
     const notifyNotRead = data.filter(item => item.isRead === false)
     const history = useHistory()
     const dispatch = useDispatch()
+    const [isToggle, setIsToggle] = useState(false)
+    const toggleBoxSearch = (type) => {
+        setIsToggle(type)
+    }
     return (
         <Container maxW={"100%"} className={style.nav}>
             <LoginModal />
@@ -42,13 +46,22 @@ const Navbar = () => {
                 <Box display={["none", "flex"]}>
                     <Center h={"100%"}>
                         <Flex justifyContent={"space-between"} alignItems="center">
-                            <SearchNavbar />
-                            <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
-                                <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
-                            </Link>
-                            <Link to="/promotion" className={style.links}>
-                                <span> <FaPercentage style={{ marginRight: '5px' }} />Khuyến mãi</span>
-                            </Link>
+                            <SearchNavbar
+                                isToggle={isToggle}
+                                toggleBoxSearch={toggleBoxSearch}
+                            />
+                            {
+                                !isToggle &&
+                                <>
+                                    <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
+                                        <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
+                                    </Link>
+                                    <Link to="/promotion" className={style.links}>
+                                        <span> <FaPercentage style={{ marginRight: '5px' }} />Khuyến mãi</span>
+                                    </Link>
+                                </>
+                            }
+
                         </Flex>
                     </Center>
                 </Box>
