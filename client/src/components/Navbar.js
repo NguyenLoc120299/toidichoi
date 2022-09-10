@@ -1,9 +1,9 @@
-import { Avatar, Box, Button, Center, Container, Flex, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Alert, Avatar, Box, Button, Center, Container, Flex, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
-import { BsPencil } from 'react-icons/bs'
+import { BsNewspaper, BsPencil } from 'react-icons/bs'
 import { IconButton } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react';
 import LoginModal from './LoginModal'
@@ -31,11 +31,16 @@ const Navbar = () => {
     const { data } = useSelector(state => state.notify)
     const notifyNotRead = data.filter(item => item.isRead === false)
     const history = useHistory()
+    const { pathname } = useLocation()
     const dispatch = useDispatch()
     const [isToggle, setIsToggle] = useState(false)
     const toggleBoxSearch = (type) => {
         setIsToggle(type)
     }
+    useEffect(() => {
+        if (pathname === '/' || pathname === '/home')
+            toggleBoxSearch(false)
+    }, [pathname])
     return (
         <Container maxW={"100%"} className={style.nav}>
             <LoginModal />
@@ -54,10 +59,13 @@ const Navbar = () => {
                                 !isToggle &&
                                 <>
                                     <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
-                                        <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
+                                        <span>  Khám phá</span>
                                     </Link>
-                                    <Link to="/promotion" className={style.links}>
-                                        <span> <FaPercentage style={{ marginRight: '5px' }} />Khuyến mãi</span>
+                                    <Link to="/promotion" style={{ marginRight: "1.5rem" }} className={style.links}>
+                                        <span>Khuyến mãi</span>
+                                    </Link>
+                                    <Link to="/blogs" className={style.links}>
+                                        <span>Blogs</span>
                                     </Link>
                                 </>
                             }
@@ -161,10 +169,12 @@ const Navbar = () => {
                                             </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <Center>
-                                                <FaRegEnvelope />
-                                                <Text fontWeight={"bold"} ml={2}> Liên hệ góp ý</Text>
-                                            </Center>
+                                            <Link to={'/contact'}>
+                                                <Center>
+                                                    <FaRegEnvelope />
+                                                    <Text fontWeight={"bold"} ml={2}> Liên hệ góp ý</Text>
+                                                </Center>
+                                            </Link>
                                         </MenuItem>
 
                                         <MenuItem>
@@ -179,7 +189,21 @@ const Navbar = () => {
                         </>
                     }
                 </Box>
-                <Box display={["flex", "none"]}>
+                <Box display={["flex", "none"]} gap={6}>
+                    <Center
+                        onClick={() => {
+                            dispatch({
+                                type: ALERT_ACTION.TOGGLESEARCH,
+                                payload: {
+                                    isShowModalSearch: true
+                                }
+                            })
+                        }}
+                    >
+                        <i className="fas fa-search" style={{ fontSize: '20px', color: '#e7444d' }}></i>
+                    </Center>
+
+
                     <Center>
                         <Menu
                         >
@@ -202,7 +226,7 @@ const Navbar = () => {
                                 }}
 
                             >
-                                <svg viewBox="0 0 120 100" width="20" height="18"><rect width="120" height="18" rx="14"></rect><rect y="40" x="30" width="90" height="20" rx="14"></rect><rect y="80" width="120" height="20" rx="14"></rect></svg>
+                                <svg viewBox="0 0 120 100" width="20" height="20" fill='#e7444d'><rect width="120" height="18" rx="14"></rect><rect y="40" x="30" width="90" height="20" rx="14"></rect><rect y="80" width="120" height="20" rx="14"></rect></svg>
                             </MenuButton>
                         </Menu>
 

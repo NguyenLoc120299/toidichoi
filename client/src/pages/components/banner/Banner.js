@@ -1,4 +1,4 @@
-import { Button, Center, Flex, FormControl, Input, Box, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, Image } from '@chakra-ui/react'
+import { Button, Center, Flex, FormControl, Input, Box, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, Image, Spinner } from '@chakra-ui/react'
 import React, { useEffect, useRef } from 'react'
 import styles from './baner.module.css'
 import Typewriter from 'typewriter-effect';
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { FaLocationArrow } from 'react-icons/fa'
 import { ALERT_ACTION } from '../../../redux/actions/alertAction';
 import { getDataAPI } from '../../../untils/fetchData';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useClickOutSide from '../../../customHooks/clickOutSide';
 const Banner = () => {
     const [isShowSearchBox, setIsShowSearchBox] = useState(false)
@@ -19,6 +19,7 @@ const Banner = () => {
     const [valueSearch, setValueSearch] = useState('')
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const alert = useSelector(state => state.alert)
     const getPlaceTrending = async () => {
         try {
             const res = await getDataAPI('place-outstanding')
@@ -65,21 +66,32 @@ const Banner = () => {
     const handleSearch = async (e) => {
         const value = e.target.value
         setValueSearch(value)
-        handleOnChange(value)
     }
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                handleOnChange(valueSearch)
+            }
+        };
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, [valueSearch]);
     const renderPlacesAll = () => {
         return (
             <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
                 <div className={styles.listPlace}>
                     {
-                        placeSearch.length > 0 && dataPlaceOffer.map((item, index) => (
-                            <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace} key={index}>
+                        placeSearch.length > 0 && placeSearch.map((item, index) => (
+                            <Link to={`/place/${item?._id}`} className={styles.searchItemPlace} key={index}>
                                 <div className={styles.image}>
-                                    <Image src={item.totalData.images[0]} alt={item.totalData.name} />
+                                    <Image src={item?.images[0]} alt={item?.name} />
                                 </div>
                                 <div className={styles.info}>
-                                    <div className={styles.name}>{item.totalData.name}</div>
-                                    <div className={styles.address}>{item.totalData.address}</div>
+                                    <div className={styles.name}>{item?.name}</div>
+                                    <div className={styles.address}>{item?.address}</div>
                                 </div>
 
                             </Link>
@@ -157,11 +169,18 @@ const Banner = () => {
                     <p className={styles.text1}>Khám phá những địa điểm ăn uống tại Sài Gòn</p>
                     <Center pt={3} >
                         <Flex display={['none', 'flex']} ref={searchRef} >
+
                             <FormControl mr={'3'} >
                                 {
                                     valueSearch.length > 0 &&
                                     <div className='desktop_btnReset' onClick={valueBtnReset}>
-                                        <i class="fas fa-times"></i>
+                                        {
+                                            loading ?
+                                                <Spinner size='xs' />
+                                                :
+                                                <i class="fas fa-times"></i>
+                                        }
+
                                     </div>
                                 }
 
@@ -187,10 +206,12 @@ const Banner = () => {
                             </FormControl>
                             <Button colorScheme='red' borderRadius={'8px'} size='lg' h={"65px"} w={"200px"}
                                 _focus={{ border: 'unset' }}
-                                ref={searchRef} className="custom_btn">
+                                ref={searchRef} className="custom_btn"
+                                onClick={() => handleOnChange(valueSearch)}
+                            >
                                 <i className="fas fa-search" style={{ marginRight: '5px' }}></i>  Tìm kiếm
                             </Button>
-                        </Flex>
+                        </Flex>8
                         <Button
                             borderRadius={'8px'} size='md'
                             minW={"250px"}
@@ -210,7 +231,7 @@ const Banner = () => {
 
                 </Flex>
             </Center >
-            <Drawer onClose={onClose} isOpen={isOpen} size={'full'} placement={"right"} >
+            <Drawer onClose={onClose} isOpen={isOpen || alert?.isShowModalSearch} size={'full'} placement={"right"} >
                 <DrawerOverlay />
                 <DrawerContent overflow="scroll">
                     <DrawerHeader>
@@ -268,7 +289,15 @@ const Banner = () => {
                                         <i class="fas fa-times-circle"></i></button>
                                 }
                             </Box>
-                            <h3 class="searchCancel" onClick={onClose}>Huỷ</h3>
+                            <h3 class="searchCancel" onClick={() => {
+                                onClose()
+                                dispatch({
+                                    type: ALERT_ACTION.TOGGLESEARCH,
+                                    payload: {
+                                        isShowModalSearch: false
+                                    }
+                                })
+                            }}>Huỷ</h3>
                         </Flex>
                     </DrawerHeader>
 

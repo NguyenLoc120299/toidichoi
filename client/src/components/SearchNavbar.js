@@ -1,4 +1,5 @@
-import { Box, Flex, Image, Input } from '@chakra-ui/react'
+import { Box, Flex, Image, Input, Spinner } from '@chakra-ui/react'
+import { async } from '@firebase/util'
 import React, { useEffect, useRef, useState } from 'react'
 import { FaLocationArrow } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
@@ -10,6 +11,9 @@ import { getDataAPI } from '../untils/fetchData'
 const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
     const { pathname } = useLocation()
     const [dataPlaceOffer, setdataPlaceOffer] = useState([])
+    const [valueSearch, setValueSearch] = useState('')
+    const [showListSearch, setShowListSearch] = useState(false)
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const searchRef = useRef(null);
     const styled = {
@@ -41,9 +45,38 @@ const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
         }
     }
     useClickOutSide(() => toggleBoxSearch(false), searchRef)
+    const onSubmitSearchPlace = async (value) => {
+        try {
+            setLoading(true)
+            const res = await getDataAPI(`places/search?name=${value}`)
+            if (res && res.data)
+                setShowListSearch(res.data.places)
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+    }
     useEffect(() => {
         getPlaceTrending()
     }, [])
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                onSubmitSearchPlace(valueSearch)
+            }
+        };
+        if (valueSearch !== '')
+            document.addEventListener('keydown', keyDownHandler);
+        else
+            setShowListSearch(false)
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, [valueSearch]);
+
     if (pathname === '/' || pathname === '/home')
         return <></>
     else
@@ -73,7 +106,13 @@ const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
                         border="1px solid transparent"
                         mb={3}
                     >
-                        <i className="fas fa-search" />
+                        {
+                            loading ?
+                                <Spinner size='xs' />
+                                :
+                                <i className="fas fa-search" />
+                        }
+
                         <Input
                             fontSize="16px"
                             color="#606770"
@@ -86,6 +125,8 @@ const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
                             position="relative"
                             placeholder='Tìm địa điểm'
                             onClick={() => toggleBoxSearch(true)}
+                            value={valueSearch}
+                            onChange={e => setValueSearch(e.target.value)}
                             _focus={{
                                 boxShadow: "unset"
                             }}
@@ -95,47 +136,77 @@ const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
                 </Flex>
                 {
                     isToggle &&
+
                     <Box mt={5} >
-                        <Link to={'/search'} className={styles.searchItem}>
-                            <FaLocationArrow style={{ marginRight: '10px', fontSize: '20px' }} />
-                            <span>Tìm quanh đây</span>
-                        </Link>
-                        <div className={styles.searchTitile}>
-                            Đề xuất
-                        </div>
-                        <div className={styles.listPlace}>
-                            {
-                                dataPlaceOffer.length > 0 && dataPlaceOffer.map((item, index) => (
-                                    <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace} key={index}>
-                                        <div className={styles.image}>
-                                            <Image src={item.totalData.images[0]} alt={item.totalData.name} />
-                                        </div>
-                                        <div className={styles.info}>
-                                            <div className={styles.name}>{item.totalData.name}</div>
-                                            <div className={styles.address}>{item.totalData.address}</div>
-                                        </div>
+                        {
+                            showListSearch ?
+                                <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
+                                    <div className={styles.listPlace}>
+                                        {
+                                            showListSearch.length > 0 && showListSearch.map((item, index) => (
+                                                <Link to={`/place/${item?._id}`} className={styles.searchItemPlace} key={index}>
+                                                    <div className={styles.image}>
+                                                        <Image src={item?.images[0]} alt={item?.name} />
+                                                    </div>
+                                                    <div className={styles.info}>
+                                                        <div className={styles.name}>{item?.name}</div>
+                                                        <div className={styles.address}>{item?.address}</div>
+                                                    </div>
 
+                                                </Link>
+                                            ))
+                                        }
+                                        <Link to='/search' className={styles.searchItemPlace}>
+                                            <i className="fas fa-search-plus"></i>
+                                            <span>Xem tất cả tìm kiếm cho "{valueSearch}"</span>
+                                        </Link>
+                                    </div>
+                                </Box >
+                                :
+                                <>
+                                    <Link to={'/search'} className={styles.searchItem}>
+                                        <FaLocationArrow style={{ marginRight: '10px', fontSize: '20px' }} />
+                                        <span>Tìm quanh đây</span>
                                     </Link>
-                                ))
-                            }
+                                    <div className={styles.searchTitile}>
+                                        Đề xuất
+                                    </div>
+                                    <div className={styles.listPlace}>
+                                        {
+                                            dataPlaceOffer.length > 0 && dataPlaceOffer.map((item, index) => (
+                                                <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace} key={index}>
+                                                    <div className={styles.image}>
+                                                        <Image src={item.totalData.images[0]} alt={item.totalData.name} />
+                                                    </div>
+                                                    <div className={styles.info}>
+                                                        <div className={styles.name}>{item.totalData.name}</div>
+                                                        <div className={styles.address}>{item.totalData.address}</div>
+                                                    </div>
 
-                        </div>
-                        <div className={styles.searchTitile}>
-                            Đã xem gần đây
-                        </div>
-                        <div className={styles.listPlace}>
-                            <Link to="#" className={styles.searchItemPlace}>
-                                <div className={styles.image}>
+                                                </Link>
+                                            ))
+                                        }
 
-                                </div>
-                                <div className={styles.info}>
-                                    <div className={styles.name}>Artemis Pastry & Coffee Shop</div>
-                                    <div className={styles.address}>20 Ngô Quyền, Tràng Tiền, Hoàn Kiếm, Hà Nội.</div>
-                                </div>
+                                    </div>
+                                    <div className={styles.searchTitile}>
+                                        Đã xem gần đây
+                                    </div>
+                                    <div className={styles.listPlace}>
+                                        <Link to="#" className={styles.searchItemPlace}>
+                                            <div className={styles.image}>
 
-                            </Link>
-                        </div>
+                                            </div>
+                                            <div className={styles.info}>
+                                                <div className={styles.name}>Artemis Pastry & Coffee Shop</div>
+                                                <div className={styles.address}>20 Ngô Quyền, Tràng Tiền, Hoàn Kiếm, Hà Nội.</div>
+                                            </div>
 
+                                        </Link>
+                                    </div>
+
+
+                                </>
+                        }
                     </Box>
                 }
             </Box>

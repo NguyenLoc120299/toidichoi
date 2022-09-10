@@ -196,9 +196,9 @@ export const getReviewByAuth = (auth) => async (dispatch) => {
     }
 }
 
-export const getListAllReviews = () => async (dispatch) => {
+export const getListAllReviews = (page, limit) => async (dispatch) => {
     try {
-        const res = await getDataAPI('listAll-reviews')
+        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
         if (res && res.data)
             dispatch({
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,

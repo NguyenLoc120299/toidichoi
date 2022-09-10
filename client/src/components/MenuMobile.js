@@ -30,9 +30,12 @@ const MenuMobile = () => {
                     onClick={onClose}
                 ><i className="fas fa-fire"></i><span>Khám phá</span>
                 </Link>
-                <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"
+                {/* <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"
                     onClick={onClose}
-                ></i><span>khuyến mãi</span></Link>
+                ></i><span>khuyến mãi</span></Link> */}
+                <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="far fa-newspaper"
+                    onClick={onClose}
+                ></i><span>Blogs</span></Link>
                 <Link className={`Navbar_item ${isActive('')}`} to="#"><i className="fas fa-bell" onClick={onOpen}></i><span>Thông báo</span>
                     {
                         notifyNotRead.length > 0 &&

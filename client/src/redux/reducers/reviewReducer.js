@@ -5,7 +5,8 @@ import { REVIEW_ACTIONS } from "../actions/reviewAction";
 const initialState = {
     list_review_place: [],
     result: 0,
-    explore: []
+    explore: [],
+    total: 0
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -31,7 +32,8 @@ const categoryReducer = (state = initialState, action) => {
         case REVIEW_ACTIONS.LISTS_ALL_REVIEWS:
             return {
                 ...state,
-                explore: action.payload
+                explore: [...state.explore, ...action.payload.places],
+                total: action.payload.total
             }
         default:
             return state;
