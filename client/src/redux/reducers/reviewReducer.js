@@ -12,6 +12,7 @@ const initialState = {
 const categoryReducer = (state = initialState, action) => {
 
     switch (action.type) {
+
         case REVIEW_ACTIONS.LIST_REVIEW_PLACE:
             return {
                 ...state,
@@ -33,6 +34,12 @@ const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
                 explore: [...state.explore, ...action.payload.places],
+                total: action.payload.total
+            }
+        case REVIEW_ACTIONS.LISTS_ALL_REVIEWS_FIRST:
+            return {
+                ...state,
+                explore: [...action.payload.places],
                 total: action.payload.total
             }
         default:

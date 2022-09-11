@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -19,7 +19,8 @@ import {
     Image,
     Center,
     Link,
-    Text
+    Text,
+    FormErrorMessage
 } from '@chakra-ui/react'
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -27,28 +28,45 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login, signup } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction';
 import { isMobile } from 'react-device-detect';
+import { isCheckFormInput } from '../pages/components/helper/ValidPlace';
 const LoginModal = () => {
     const { alert } = useSelector(state => state)
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false)
+    const [err, setErr] = useState({})
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
         confirmPassword: '',
     })
+
     const handleOnchange = (e) => {
         e.preventDefault()
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
+    // const checkForm = (formData) => {
+    //     const check = isCheckFormInput(formData.username, formData.email, formData.password, formData.confirmPassword)
+    //     if (check.errNumber > 0) return setErr(check.msg)
+    // }
+    // useEffect(() => {
+    //     checkForm(formData)
+    // }, [formData])
     const onsubmit = async () => {
         try {
+            //   const check = isCheckFormInput(formData.username, formData.email, formData.password, formData.confirmPassword)
             if (isSignup) {
-                dispatch(signup(formData))
+                const check = isCheckFormInput(formData.username, formData.email, formData.password, formData.confirmPassword)
+                if (check.errNumber > 0) return setErr(check.msg)
+                else
+                    dispatch(signup(formData))
             }
             else {
+                // const check = isCheckFormInput(formData.username, formData.email, formData.password, formData.confirmPassword)
+                // if (check.errNumber > 0) return setErr(check.msg)
+                // else
                 dispatch(login({
                     password: formData.password,
                     email: formData.email
@@ -57,7 +75,6 @@ const LoginModal = () => {
         } catch (error) {
             console.log(error);
         }
-
     }
     return (
         <Modal size={isMobile ? 'full' : 'lg'} isOpen={alert.modal} onClose={() => dispatch({
@@ -95,7 +112,7 @@ const LoginModal = () => {
                                     <Stack spacing={4}>
                                         {
                                             isSignup &&
-                                            <FormControl>
+                                            <FormControl isInvalid={err.username}>
                                                 <FormLabel>Tên người dùng</FormLabel>
                                                 <Input
                                                     type="text"
@@ -103,10 +120,11 @@ const LoginModal = () => {
                                                     value={formData.username}
                                                     onChange={handleOnchange}
                                                 />
+                                                {err.username && <FormErrorMessage>{err.username}</FormErrorMessage>}
                                             </FormControl>
                                         }
 
-                                        <FormControl >
+                                        <FormControl isInvalid={err.email} >
                                             <FormLabel>Email người dùng</FormLabel>
                                             <Input
                                                 type="email"
@@ -114,8 +132,9 @@ const LoginModal = () => {
                                                 value={formData.email}
                                                 onChange={handleOnchange}
                                             />
+                                            {err.email && <FormErrorMessage>{err.email}</FormErrorMessage>}
                                         </FormControl>
-                                        <FormControl >
+                                        <FormControl isInvalid={err.password}>
                                             <FormLabel>Mật khẩu</FormLabel>
                                             <InputGroup>
                                                 <Input
@@ -133,10 +152,11 @@ const LoginModal = () => {
                                                     </Button>
                                                 </InputRightElement>
                                             </InputGroup>
+                                            {err.password && <FormErrorMessage>{err.password}</FormErrorMessage>}
                                         </FormControl>
                                         {
                                             isSignup &&
-                                            <FormControl >
+                                            <FormControl isInvalid={err.confirmPassword} >
                                                 <FormLabel>Nhập lại mật khẩu</FormLabel>
                                                 <InputGroup>
                                                     <Input
@@ -155,6 +175,7 @@ const LoginModal = () => {
                                                         </Button>
                                                     </InputRightElement>
                                                 </InputGroup>
+                                                {err.confirmPassword && <FormErrorMessage>{err.confirmPassword}</FormErrorMessage>}
                                             </FormControl>
                                         }
 
@@ -174,7 +195,10 @@ const LoginModal = () => {
                                         {!isSignup && <Link color={'red.500'} textAlign="center" fontWeight={'bold'}>Quên mật khẩu?</Link>}
                                         <Text>{isSignup ? 'Bạn đã có tài khoản' : 'Bạn chưa có tài khoản'}
                                             <Link
-                                                className='custom_text' fontWeight={"bold"} onClick={() => setIsSignup(!isSignup)}>
+                                                className='custom_text' fontWeight={"bold"} onClick={() => {
+                                                    setIsSignup(!isSignup)
+                                                    setErr({})
+                                                }}>
                                                 {isSignup ? ' Đăng nhập' : ' Tạo tài khoản'}
                                             </Link></Text>
                                     </Stack>

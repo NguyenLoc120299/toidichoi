@@ -10,7 +10,7 @@ const DetailTop = (props) => {
                         <Heading size={'xl'} as='h1' py={1}>
                             {props.name}
                         </Heading>
-                        <Text fontSize={'lg'} py={1}>
+                        <Text fontSize={'lg'} py={1} whiteSpace={'break-spaces'}>
                             {props.intro}
                         </Text>
                         <Text fontSize={'lg'} py={1}>

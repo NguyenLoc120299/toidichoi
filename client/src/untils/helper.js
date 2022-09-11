@@ -1,5 +1,4 @@
 
-import { useHistory } from "react-router-dom";
 export const scrollToTop = () => {
     let scroll = 0;
     setTimeout(() => {

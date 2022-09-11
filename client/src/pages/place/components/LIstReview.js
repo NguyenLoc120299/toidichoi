@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link, Skeleton, SkeletonCircle } from '@chakra-ui/react'
+import { Box, Button, Flex, Link, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ReviewItem from './ReviewItem'
@@ -58,15 +58,21 @@ const LIstReview = () => {
         )
     } else {
         return (
-            <Box>
-                {
+            <Box
+                padding={'50px 10px'}
+            >
+                {/* {
                     [1, 2, 3, 4, 5].map((item, index) => (
                         <Flex mt={5} alignItems='center' key={index}>
                             <SkeletonCircle size='10' mr={5} />
                             <Skeleton height='30px' w={'50%'} />
                         </Flex>
                     ))
-                }
+                } */}
+                <Text as={'h3'} fontSize={'16px'} fontWeight={'700'}>
+                    Chưa có đánh giá nào cho. Hãy là người đầu tiên làm chuyện ấy!
+                </Text>
+
             </Box>
         )
     }

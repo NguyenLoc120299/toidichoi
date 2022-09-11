@@ -12,7 +12,8 @@ export const REVIEW_ACTIONS = {
     UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE",
     UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW",
     LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS",
-    UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE"
+    UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE",
+    LISTS_ALL_REVIEWS_FIRST: "LISTS_ALL_REVIEWS_FIRST"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -202,6 +203,23 @@ export const getListAllReviews = (page, limit) => async (dispatch) => {
         if (res && res.data)
             dispatch({
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,
+                payload: res.data
+            })
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+export const getListAllReviewsFirst = (page, limit) => async (dispatch) => {
+    try {
+        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        if (res && res.data)
+            dispatch({
+                type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS_FIRST,
                 payload: res.data
             })
     } catch (error) {

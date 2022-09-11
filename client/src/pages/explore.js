@@ -1,7 +1,7 @@
 import { Box, Container, Flex, grid, Grid, GridItem, SimpleGrid, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getListAllReviews } from '../redux/actions/reviewAction'
+import { getListAllReviews, getListAllReviewsFirst } from '../redux/actions/reviewAction'
 import ExploreFee from './components/explore/ExploreFeed'
 import ExplorerSidebar from './components/explore/ExplorerSidebar'
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -11,12 +11,14 @@ const Explore = () => {
     const [page, setPage] = useState(1)
     const limit = 5
     useEffect(() => {
-        dispatch(getListAllReviews(page, limit))
+        dispatch(getListAllReviewsFirst(page, limit))
     }, [])
     const onLoad = () => {
-        const currentPage = page + 1
-        dispatch(getListAllReviews(currentPage, limit))
-        setPage(currentPage)
+        if (!isHasMore()) {
+            const currentPage = page + 1
+            dispatch(getListAllReviews(currentPage, limit))
+            setPage(currentPage)
+        }
     }
     const isHasMore = () => {
         const result = limit * page

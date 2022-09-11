@@ -34,8 +34,8 @@ export const addPlace = (formInput, displayImage, auth) => async (dispatch) => {
                     max: formInput.time_max
                 },
                 price: {
-                    min: formInput.price_min,
-                    max: formInput.price_max
+                    min: +formInput.price_min,
+                    max: +formInput.price_max
                 },
                 type: formInput.typePlace,
                 utities: formInput.utities,
