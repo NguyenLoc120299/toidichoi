@@ -17,7 +17,7 @@ const notifyCtrl = {
      removeNotify: async (req, res) => {
         try {
             const notify = await Notifies.findOneAndDelete({
-                id: req.params.id, url: req.query.url
+                id: req.params.id
             })
 
             return res.json({ notify })

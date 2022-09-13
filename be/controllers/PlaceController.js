@@ -1,6 +1,7 @@
 const Places = require('../models/PlaceModel.js')
 const APIfeatures = require('../lib/features')
 const moment = require('moment')
+const MapPlaceModel = require('../models/MapPlaceModel.js')
 const PlaceCtrl = {
 
     getPlaces: async (req, res) => {
@@ -18,7 +19,7 @@ const PlaceCtrl = {
     },
     getPlaceSingle: async (req, res) => {
         try {
-            const place = await Places.findById(req.params.id).populate('type utities')
+            const place = await Places.findOne({ _id: req.params.id }).populate('type utities')
                 .populate({
                     path: "reviews",
                     populate: {
@@ -77,7 +78,13 @@ const PlaceCtrl = {
                 website,
                 images
             })
+            const newMapPlace = new MapPlaceModel({
+                long: "",
+                lat: "",
+                place: newPlace._id
+            })
             await newPlace.save()
+            await newMapPlace.save()
             res.json({
                 msg: 'Thêm địa điểm thành công',
                 newPlace: {
@@ -93,6 +100,14 @@ const PlaceCtrl = {
             const places = await Places.find({ name: { $regex: req.query.name } })
                 .limit(10)
             res.json({ places })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    getPlaceAll: async (req, res) => {
+        try {
+            const result = await MapPlaceModel.find()
+            res.json(result);
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }

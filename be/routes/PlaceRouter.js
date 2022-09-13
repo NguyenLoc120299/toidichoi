@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const placeCtrl = require('../controllers/PlaceController')
+const authAdmin = require('../middleware/admin')
+const auth = require('../middleware/auth')
 
 router.get('/places', placeCtrl.getPlaces)
 router.post('/places', placeCtrl.createPlaces)
@@ -7,5 +9,6 @@ router.get('/place/:id', placeCtrl.getPlaceSingle)
 router.get('/places/search', placeCtrl.searchPlaces)
 router.get('/place-outstanding', placeCtrl.getPlaceOutstanding)
 router.post('/search', placeCtrl.filterPlaces)
+router.get('/places-all', auth, authAdmin, placeCtrl.getPlaceAll)
 // router.post('/search', placeCtrl.searchAllPlace)
 module.exports = router
