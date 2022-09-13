@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 import useClickOutSide from '../customHooks/clickOutSide';
+import { formatTime } from '../pages/components/helper/moment'
 const MenuMobile = () => {
     const user = useSelector(state => state.auth.user)
     const navRef = useRef()
@@ -23,15 +24,18 @@ const MenuMobile = () => {
         <div className='nav_mobile'>
             <div className='nav-content'>
                 <Link className={`Navbar_item ${isActive('/')}`} to="/"><i className="fas fa-home"
-                onClick={onClose}
+                    onClick={onClose}
                 ></i><span>Trang chủ</span></Link>
                 <Link className={`Navbar_item ${isActive('/explore')}`} to="/explore"
                     onClick={onClose}
                 ><i className="fas fa-fire"></i><span>Khám phá</span>
                 </Link>
-                <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"
+                {/* <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"
                     onClick={onClose}
-                ></i><span>khuyến mãi</span></Link>
+                ></i><span>khuyến mãi</span></Link> */}
+                <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="far fa-newspaper"
+                    onClick={onClose}
+                ></i><span>Blogs</span></Link>
                 <Link className={`Navbar_item ${isActive('')}`} to="#"><i className="fas fa-bell" onClick={onOpen}></i><span>Thông báo</span>
                     {
                         notifyNotRead.length > 0 &&
@@ -59,23 +63,26 @@ const MenuMobile = () => {
             <Box >
                 <Drawer placement={'right'} onClose={onClose} isOpen={isOpen} size={'full'} >
                     <DrawerOverlay />
-                    <DrawerContent >
+                    <DrawerContent height={'90%'}>
                         <DrawerHeader borderBottomWidth='1px'>
                             <Text fontWeight={'bold'}>Thông báo</Text>
                         </DrawerHeader>
-                        <DrawerBody>
+                        <DrawerBody overflow={'scroll'}>
                             {
-                                data && data.map(item=>(
-                                    <Box mb={6} background={item.isRead ? "#cccc" : "#fff"}>
+                                data && data.map(item => (
+                                    <Box mb={6} background={item.isRead ? "#ffff" : "#dddd"}>
                                         <Flex gap={5}>
-                                           <Avatar size={'sm'} name={item?.user.username} src={item?.user.avatar} />
-                                           <Box>
-                                            <Text>
-                                               <span 
-                                                style={{fontWeight:'bold'}}
-                                               >{item?.user.username}</span> { item.text }
-                                            </Text>
-                                           </Box>
+                                            <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
+                                            <Box>
+                                                <Text>
+                                                    <span
+                                                        style={{ fontWeight: 'bold' }}
+                                                    >{item?.user.username}</span> {item.text}
+                                                </Text>
+                                                <Text>
+                                                    {formatTime(item.createdAt)}
+                                                </Text>
+                                            </Box>
                                         </Flex>
                                     </Box>
                                 ))

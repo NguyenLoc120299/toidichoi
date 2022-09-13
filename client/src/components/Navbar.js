@@ -1,17 +1,19 @@
-import { Avatar, Box, Button, Center, Container, Flex, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
-import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Alert, Avatar, Box, Button, Center, Container, Flex, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import style from './navbar.module.css'
 import { FaSlackHash, FaPercentage } from 'react-icons/fa'
-import { BsPencil } from 'react-icons/bs'
+import { BsNewspaper, BsPencil } from 'react-icons/bs'
 import { IconButton } from '@chakra-ui/react'
-import {useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import LoginModal from './LoginModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaUserEdit, FaRegEnvelope, FaPowerOff } from 'react-icons/fa'
 import { logout } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 import DrawerNavbar from './DrawerNavbar'
+import { Notification } from './Notification'
+import SearchNavbar from './SearchNavbar'
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
@@ -26,8 +28,19 @@ export const logo = (
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const auth = useSelector(state => state.auth)
+    const { data } = useSelector(state => state.notify)
+    const notifyNotRead = data.filter(item => item.isRead === false)
     const history = useHistory()
+    const { pathname } = useLocation()
     const dispatch = useDispatch()
+    const [isToggle, setIsToggle] = useState(false)
+    const toggleBoxSearch = (type) => {
+        setIsToggle(type)
+    }
+    useEffect(() => {
+        if (pathname === '/' || pathname === '/home')
+            toggleBoxSearch(false)
+    }, [pathname])
     return (
         <Container maxW={"100%"} className={style.nav}>
             <LoginModal />
@@ -38,12 +51,25 @@ const Navbar = () => {
                 <Box display={["none", "flex"]}>
                     <Center h={"100%"}>
                         <Flex justifyContent={"space-between"} alignItems="center">
-                            <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
-                                <span> <FaSlackHash style={{ marginRight: '5px' }} /> Khám phá</span>
-                            </Link>
-                            <Link to="/promotion" className={style.links}>
-                                <span> <FaPercentage style={{ marginRight: '5px' }} />Khuyến mãi</span>
-                            </Link>
+                            <SearchNavbar
+                                isToggle={isToggle}
+                                toggleBoxSearch={toggleBoxSearch}
+                            />
+                            {
+                                !isToggle &&
+                                <>
+                                    <Link to="/explore" style={{ marginRight: "1.5rem" }} className={style.links}>
+                                        <span>  Khám phá</span>
+                                    </Link>
+                                    <Link to="/promotion" style={{ marginRight: "1.5rem" }} className={style.links}>
+                                        <span>Khuyến mãi</span>
+                                    </Link>
+                                    <Link to="/blogs" className={style.links}>
+                                        <span>Blogs</span>
+                                    </Link>
+                                </>
+                            }
+
                         </Flex>
                     </Center>
                 </Box>
@@ -82,12 +108,22 @@ const Navbar = () => {
                     {auth.token &&
                         <>
                             <Center>
-                                <Button borderRadius={'50%'} mr="3">
-                                    <Image src='/assets/img/bookmark2.svg' alt='' className={style.icon} />
+                                <Button borderRadius={'50%'}
+                                    bg={"transparent"}
+                                    _focus={{
+                                        boxShadow: 'unset',
+                                        background: 'unset'
+                                    }}
+                                    _active={{
+                                        background: 'unset'
+                                    }}
+                                    _hover={{
+                                        background: 'unset'
+                                    }}
+                                >
+                                    <Image src='/assets/img/bookmark2.svg' alt='' className={style.icon} w={"20px"} />
                                 </Button>
-                                <Button borderRadius={'50%'} mr="3">
-                                    <Image src='/assets/img/bell2.svg' alt='' className={style.icon} />
-                                </Button>
+                                <Notification notifyNotRead={notifyNotRead} />
                             </Center>
 
                             <Center>
@@ -133,10 +169,12 @@ const Navbar = () => {
                                             </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <Center>
-                                                <FaRegEnvelope />
-                                                <Text fontWeight={"bold"} ml={2}> Liên hệ góp ý</Text>
-                                            </Center>
+                                            <Link to={'/contact'}>
+                                                <Center>
+                                                    <FaRegEnvelope />
+                                                    <Text fontWeight={"bold"} ml={2}> Liên hệ góp ý</Text>
+                                                </Center>
+                                            </Link>
                                         </MenuItem>
 
                                         <MenuItem>
@@ -151,7 +189,21 @@ const Navbar = () => {
                         </>
                     }
                 </Box>
-                <Box display={["flex", "none"]}>
+                <Box display={["flex", "none"]} gap={6}>
+                    <Center
+                        onClick={() => {
+                            dispatch({
+                                type: ALERT_ACTION.TOGGLESEARCH,
+                                payload: {
+                                    isShowModalSearch: true
+                                }
+                            })
+                        }}
+                    >
+                        <i className="fas fa-search" style={{ fontSize: '20px', color: '#e7444d' }}></i>
+                    </Center>
+
+
                     <Center>
                         <Menu
                         >
@@ -174,7 +226,7 @@ const Navbar = () => {
                                 }}
 
                             >
-                                <svg viewBox="0 0 120 100" width="20" height="18"><rect width="120" height="18" rx="14"></rect><rect y="40" x="30" width="90" height="20" rx="14"></rect><rect y="80" width="120" height="20" rx="14"></rect></svg>
+                                <svg viewBox="0 0 120 100" width="20" height="20" fill='#e7444d'><rect width="120" height="18" rx="14"></rect><rect y="40" x="30" width="90" height="20" rx="14"></rect><rect y="80" width="120" height="20" rx="14"></rect></svg>
                             </MenuButton>
                         </Menu>
 

@@ -6,6 +6,7 @@
     "build": "tar.exe -a -c -f ..\\toidichoi.zip be && scp -i D:\\projects\\key\\product\\thanhloc_key.pem ..\\toidichoi.zip thanhloc@20.106.103.225:~/ && deploy.bat"
   },
   "dependencies": {
+    "react-infinite-scroll-component": "^6.1.0",
     "three": "^0.134.0"
   }
 }

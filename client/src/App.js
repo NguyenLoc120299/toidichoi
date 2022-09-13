@@ -31,11 +31,11 @@ function App() {
     dispatch(getArea())
     dispatch(getPlaces())
 
-  }, [dispatch,token])
-  useEffect(()=>{
-    if(token)
+  }, [dispatch, token])
+  useEffect(() => {
+    if (token)
       dispatch(getNotifies(token))
-  },[token])
+  }, [token])
   return (
     <Router>
       <AlertModal />

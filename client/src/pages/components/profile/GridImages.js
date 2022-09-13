@@ -33,7 +33,7 @@ const GridImages = ({ images }) => {
         )
     if (images.length === 2) return (
         <Box>
-            <SimpleGrid columns={2} spacing={4} height={"600px"}>
+            <SimpleGrid columns={2} spacing={4} height={['300px', '600px']}>
                 <Box h={'100%'} onClick={() => toggleImageLightBox(0)}>
                     <Image src={images[0]}
                         alt="img0"
@@ -64,12 +64,12 @@ const GridImages = ({ images }) => {
     )
     if (images.length === 3) return (<Box>
         <Grid
-            h='600px'
+            h={['300px', '600px']}
             templateRows='repeat(2, 1fr)'
-            templateColumns='repeat(5, 1fr)'
+            templateColumns='repeat(6, 1fr)'
             gap={4}
         >
-            <GridItem rowSpan={2} colSpan={3} h={"100%"}>
+            <GridItem rowSpan={2} colSpan={4} h={"100%"}>
                 <Box h={"100%"} onClick={() => toggleImageLightBox(0)} >
                     <Image src={images[0]}
                         alt="img0"
@@ -80,7 +80,7 @@ const GridImages = ({ images }) => {
                     />
                 </Box>
             </GridItem>
-            <GridItem colSpan={2} h={'300px'} >
+            <GridItem colSpan={2} h={['150px', '300px']} >
                 <Box h={"100%"} onClick={() => toggleImageLightBox(1)} >
                     <Image src={images[1]}
                         alt="img0"
@@ -91,7 +91,7 @@ const GridImages = ({ images }) => {
                     />
                 </Box>
             </GridItem>
-            <GridItem colSpan={2} h={'300px'} >
+            <GridItem colSpan={2} h={['150px', '300px']}  >
                 <Box h={"100%"} onClick={() => toggleImageLightBox(2)} >
                     <Image src={images[2]}
                         alt="img0"
@@ -115,7 +115,7 @@ const GridImages = ({ images }) => {
     if (images.length === 4) return (
         <Box>
             <Grid
-                h='600px'
+                h={['300px', '600px']}
                 overflow={'hidden'}
                 templateRows='repeat(3, 1fr)'
                 templateColumns='repeat(5, 1fr)'
@@ -135,7 +135,7 @@ const GridImages = ({ images }) => {
                 </GridItem>
                 <GridItem colSpan={1} >
                     <Box
-                        height={'200px'}
+                        height={["150px", '200px']}
                         onClick={() => toggleImageLightBox(1)}
                     >
                         <Image src={images[1]}
@@ -149,7 +149,7 @@ const GridImages = ({ images }) => {
                 </GridItem>
                 <GridItem colSpan={1} >
                     <Box
-                        height={'200px'}
+                        height={["150px", '200px']}
                         onClick={() => toggleImageLightBox(2)}
                     >
                         <Image src={images[2]}
@@ -163,7 +163,7 @@ const GridImages = ({ images }) => {
                 </GridItem>
                 <GridItem colSpan={1} >
                     <Box
-                        height={'200px'}
+                        height={["150px", '200px']}
                         onClick={() => toggleImageLightBox(3)}
                     >
                         <Image src={images[3]}
@@ -187,8 +187,8 @@ const GridImages = ({ images }) => {
     )
     else
         return (
-            <Box height={'600px'}>
-                <SimpleGrid columns={2} spacing={4} height={"400px"}>
+            <Box height={['300px', '600px']}>
+                <SimpleGrid columns={2} spacing={4} height={['200px', "400px"]}>
                     <Box
                         onClick={() => toggleImageLightBox(0)}
                     >
@@ -210,8 +210,8 @@ const GridImages = ({ images }) => {
                         />
                     </Box>
                 </SimpleGrid>
-                <SimpleGrid columns={3} spacing={4} mt={4} height={'200px'}>
-                    <Box maxH={'200px'}
+                <SimpleGrid columns={3} spacing={4} mt={4} height={['100px', '200px']}>
+                    <Box maxH={['100px', '200px']}
                         onClick={() => toggleImageLightBox(2)}
                     >
                         <Image src={images[2]}
@@ -221,7 +221,7 @@ const GridImages = ({ images }) => {
                             objectFit={"cover"}
                         />
                     </Box>
-                    <Box maxH={'200px'}
+                    <Box maxH={['100px', '200px']}
                         onClick={() => toggleImageLightBox(3)}
                     >
                         <Image src={images[3]}
@@ -232,7 +232,7 @@ const GridImages = ({ images }) => {
                         />
                     </Box>
                     <Box
-                        maxH={'200px'}
+                        maxH={['100px', '200px']}
                         position="relative"
                         _before={{
                             content: "''",
@@ -258,14 +258,14 @@ const GridImages = ({ images }) => {
                             left='50%'
                             top="50%"
                             transform={'translate(-50%,-50%)'}
-                            fontSize='36px'
+                            fontSize={['20px', '36px']}
                             fontWeight='500'
                             color='#fff'
                         >
                             +{images.length}
                         </Text>
                     </Box>
-                </SimpleGrid>
+                </SimpleGrid >
                 <ImageLightbox
                     isOpen={isOpen}
                     photoIndex={photoIndex}
@@ -273,7 +273,7 @@ const GridImages = ({ images }) => {
                     setPhotoIndex={setPhotoIndex}
                     images={images}
                 />
-            </Box>
+            </Box >
         )
 }
 

@@ -1,4 +1,6 @@
 import { NOTIFY_TYPES } from "../actions/notifyAction";
+import { EditData } from "../actions/imageAction";
+
 
 const initialState = {
     loading: false,
@@ -22,9 +24,20 @@ const notifyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: state.data.filter(item => (
+<<<<<<< HEAD
                     item.id !== action.payload.id
                 ))
             };
+=======
+                    item.id !== action.payload.id || item.url !== action.payload.url
+                ))
+            };
+        case NOTIFY_TYPES.UPDATE_NOTIFY:
+            return {
+                ...state,
+                data: EditData(state.data, action.payload._id, action.payload)
+            };
+>>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
         default:
             return state;
     }

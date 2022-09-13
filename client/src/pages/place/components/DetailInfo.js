@@ -24,11 +24,11 @@ const DetailInfo = ({ infor, loading }) => {
                 !infor ? <SkeletonText noOfLines={4} spacing='4' />
                     : <Box>
                         <Heading as={'h3'} size='md' mb={5}>Thông tin chi tiết</Heading>
-                        <Flex alignItems='center' mb={3}>
+                        <Flex alignItems='center' mb={3} gap={6}>
                             <MdOutlineAttachMoney style={{ marginRight: '3px' }} />
                             <Text fontSize={'16px'}>{infor.price ? infor?.price?.min : 0}đ - {infor.price ? infor?.price?.max : 0}đ</Text>
                         </Flex>
-                        <Flex alignItems='center' mb={3}>
+                        <Flex alignItems='center' mb={3} gap={6}>
                             <BiTime style={{ marginRight: '3px', fontSize: '16px' }} />
                             <Box>
                                 <Text fontSize={'16px'} >
@@ -40,13 +40,13 @@ const DetailInfo = ({ infor, loading }) => {
                                     </span> - {infor.time ? infor.time.min : 0} - {infor.time ? infor.time.max : 0} </Text>
                             </Box>
                         </Flex>
-                        <Flex alignItems='center' mb={3}>
+                        <Flex alignItems='center' mb={3} gap={6}>
                             <AiFillPhone style={{ marginRight: '3px', fontSize: '16px' }} />
                             <Box>
                                 <Text fontSize={'16px'}>{infor.phone === '' ? 'Chưa có thông tin' : infor.phone}</Text>
                             </Box>
                         </Flex>
-                        <Flex alignItems='center' mb={3}>
+                        <Flex alignItems='center' mb={3} ga={6} gap={6}>
                             <GrMail style={{ marginRight: '3px', fontSize: '16px' }} />
                             <Box>
                                 <Text fontSize={'16px'}>{infor.email === '' ? 'Chưa có thông tin' : infor.email}</Text>

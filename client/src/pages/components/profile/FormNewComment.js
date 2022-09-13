@@ -6,12 +6,13 @@ import { BoxAvatar } from './styled'
 import { useLocation } from 'react-router-dom'
 const FormNewComment = ({ item }) => {
     const auth = useSelector(state => state.auth)
+    const socket = useSelector(state => state.socket)
     const dispatch = useDispatch()
     const [content, setContent] = useState('')
     const location = useLocation()
 
     const onSubmitComment = () => {
-        dispatch(createComment(auth, content, item._id, item.user._id, location.pathname))
+        dispatch(createComment(auth, content, item._id, item.user._id, location.pathname, socket))
 
     }
     const keyDownHandler = event => {

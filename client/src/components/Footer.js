@@ -4,6 +4,7 @@ import style from '../style.module.css'
 import { logo } from './Navbar'
 import { FaRegHandshake } from 'react-icons/fa'
 import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <div className={style.footer}>
@@ -15,9 +16,9 @@ const Footer = () => {
                         </Flex>
                     </Center>
                     <Center mt={10}>
-                        <div className={style.contact}>
+                        <a className={style.contact} href={'https://www.facebook.com/loc120299/'} target={"_blank"}>
                             <FaRegHandshake style={{ fontSize: "30px", marginRight: "10px" }} />  Hợp tác với chúng tôi
-                        </div>
+                        </a>
                     </Center>
 
                 </Box>
@@ -35,7 +36,9 @@ const Footer = () => {
                                     Giải đáp thắc mắc
                                 </li>
                                 <li>
-                                    Liên hệ
+                                    <Link to="/contact">
+                                        Liên hệ
+                                    </Link>
                                 </li>
                                 <li>
                                     Điều khoản sử dụng

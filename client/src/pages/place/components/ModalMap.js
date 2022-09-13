@@ -21,7 +21,6 @@ const ModalMap = ({ isOpen, onClose, info, lng, lat, setLng, setLat }) => {
 
 
     useEffect(() => {
-        console.log(mapContainerRef);
         if (mapContainerRef.current) { // initialize map only once
             const map = new mapboxgl.Map({
                 container: mapContainerRef.current,

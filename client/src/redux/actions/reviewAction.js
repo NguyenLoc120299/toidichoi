@@ -12,7 +12,8 @@ export const REVIEW_ACTIONS = {
     UPDATE_REVIEW_PLACE: "UPDATE_REVIEW_PLACE",
     UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW",
     LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS",
-    UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE"
+    UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE",
+    LISTS_ALL_REVIEWS_FIRST: "LISTS_ALL_REVIEWS_FIRST"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -70,7 +71,7 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
     }
 }
 
-export const likeReview = (auth, review,socket) => async (dispatch) => {
+export const likeReview = (auth, review, socket) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
             dispatch({
@@ -87,13 +88,13 @@ export const likeReview = (auth, review,socket) => async (dispatch) => {
             })
             const msg = {
                 id: auth.user._id,
-                text: 'like your review.',
+                text: 'thích review của bạn',
                 recipients: [review.user._id],
-                url: null,
-                content:review.content,
+                url: `/review/${review._id}`,
+                content: review.content,
                 image: review?.images[0]
             }
-           dispatch(createNotify( msg, auth, socket ))
+            dispatch(createNotify(msg, auth, socket))
         }
     } catch (error) {
         console.log(error);
@@ -106,7 +107,11 @@ export const likeReview = (auth, review,socket) => async (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 export const unLikeReview = (auth, review,socket) => async (dispatch) => {
+=======
+export const unLikeReview = (auth, review, socket) => async (dispatch) => {
+>>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
     try {
         await patchDataAPI(`review/${review._id}/unlike`, null, auth.token)
         const newReview = { ...review, likes: review.likes.filter(like => like !== auth.user._id) }
@@ -116,11 +121,22 @@ export const unLikeReview = (auth, review,socket) => async (dispatch) => {
         })
         const msg = {
             id: auth.user._id,
+<<<<<<< HEAD
             text: 'like your post.',
             recipients: [review.user._id],
             url: `/review/${review._id}`,
         }
         dispatch(removeNotify({ msg, auth, socket }))
+=======
+            text: 'bỏ thích review của bạn',
+            recipients: [review.user._id],
+            url: `/review/${review._id}`,
+            content: review.content,
+            image: review?.images[0]
+        }
+        dispatch(removeNotify(msg, auth, socket))
+
+>>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -131,7 +147,7 @@ export const unLikeReview = (auth, review,socket) => async (dispatch) => {
     }
 }
 
-export const createComment = (auth, content, reviewId, reviewUserId, location) => async (dispatch) => {
+export const createComment = (auth, content, reviewId, reviewUserId, location, socket) => async (dispatch) => {
     try {
         const res = await postDataAPI('comment', {
             content, reviewId, reviewUserId
@@ -154,6 +170,15 @@ export const createComment = (auth, content, reviewId, reviewUserId, location) =
                     payload: { ...res.data.newComment, user: auth.user }
                 })
             }
+        const msg = {
+            id: auth.user._id,
+            text: 'đã bình luận review của bạn',
+            recipients: [reviewUserId],
+            url: `/review/${reviewId}`,
+            content,
+            image: null
+        }
+        dispatch(createNotify(msg, auth, socket))
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -184,12 +209,29 @@ export const getReviewByAuth = (auth) => async (dispatch) => {
     }
 }
 
-export const getListAllReviews = () => async (dispatch) => {
+export const getListAllReviews = (page, limit) => async (dispatch) => {
     try {
-        const res = await getDataAPI('listAll-reviews')
+        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
         if (res && res.data)
             dispatch({
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,
+                payload: res.data
+            })
+    } catch (error) {
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
+export const getListAllReviewsFirst = (page, limit) => async (dispatch) => {
+    try {
+        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        if (res && res.data)
+            dispatch({
+                type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS_FIRST,
                 payload: res.data
             })
     } catch (error) {
