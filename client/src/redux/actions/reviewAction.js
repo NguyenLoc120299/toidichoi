@@ -4,7 +4,7 @@ import { getDataAPI, patchDataAPI, postDataAPI } from "../../untils/fetchData"
 import { uploadImage } from "../../untils/uploadImage"
 import { ALERT_ACTION } from "./alertAction"
 import { AUTH_ACTIONS, checkLogin } from "./authAction"
-import { createNotify } from "./notifyAction"
+import { createNotify, removeNotify } from "./notifyAction"
 
 
 export const REVIEW_ACTIONS = {
@@ -106,7 +106,7 @@ export const likeReview = (auth, review,socket) => async (dispatch) => {
     }
 }
 
-export const unLikeReview = (auth, review) => async (dispatch) => {
+export const unLikeReview = (auth, review,socket) => async (dispatch) => {
     try {
         await patchDataAPI(`review/${review._id}/unlike`, null, auth.token)
         const newReview = { ...review, likes: review.likes.filter(like => like !== auth.user._id) }
@@ -114,7 +114,13 @@ export const unLikeReview = (auth, review) => async (dispatch) => {
             type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
             payload: newReview
         })
-
+        const msg = {
+            id: auth.user._id,
+            text: 'like your post.',
+            recipients: [review.user._id],
+            url: `/review/${review._id}`,
+        }
+        dispatch(removeNotify({ msg, auth, socket }))
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,

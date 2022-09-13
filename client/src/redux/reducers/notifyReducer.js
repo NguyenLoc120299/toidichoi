@@ -18,6 +18,13 @@ const notifyReducer = (state = initialState, action) => {
                 ...state,
                 data: [action.payload, ...state.data]
             };
+        case NOTIFY_TYPES.REMOVE_NOTIFY:
+            return {
+                ...state,
+                data: state.data.filter(item => (
+                    item.id !== action.payload.id
+                ))
+            };
         default:
             return state;
     }
