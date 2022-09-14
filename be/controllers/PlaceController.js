@@ -2,6 +2,7 @@ const Places = require('../models/PlaceModel.js')
 const APIfeatures = require('../lib/features')
 const moment = require('moment')
 const MapPlaceModel = require('../models/MapPlaceModel.js')
+const { default: mongoose } = require('mongoose')
 const PlaceCtrl = {
 
     getPlaces: async (req, res) => {
@@ -54,7 +55,9 @@ const PlaceCtrl = {
                 instagram,
                 email,
                 website,
-                images
+                images,
+                long,
+                lat
             }
                 = req.body
 
@@ -79,8 +82,8 @@ const PlaceCtrl = {
                 images
             })
             const newMapPlace = new MapPlaceModel({
-                long: "",
-                lat: "",
+                long,
+                lat,
                 place: newPlace._id
             })
             await newPlace.save()
@@ -91,6 +94,55 @@ const PlaceCtrl = {
                     ...newPlace._doc
                 }
             })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    updatePlace: async (req, res) => {
+        try {
+            const {
+                id,
+                name,
+                area,
+                address,
+                direct,
+                intro,
+                owner,
+                time,
+                price,
+                type,
+                utities,
+                phone,
+                facbook,
+                instagram,
+                email,
+                website,
+                images,
+                long,
+                lat
+            }
+                = req.body
+    
+            const place = await Places.findOneAndUpdate({ _id: id} , {
+                name,
+                area,
+                address,
+                direct,
+                intro,
+                owner,
+                time,
+                price,
+                type,
+                utities,
+                phone,
+                facbook,
+                instagram,
+                email,
+                website,
+                images,
+            })
+            console.log(place);
+            res.json({ msg: "Updated a place" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -106,7 +158,7 @@ const PlaceCtrl = {
     },
     getPlaceAll: async (req, res) => {
         try {
-            const result = await MapPlaceModel.find()
+            const result = await MapPlaceModel.find().populate('place')
             res.json(result);
         } catch (error) {
             return res.status(500).json({ msg: error.message })
