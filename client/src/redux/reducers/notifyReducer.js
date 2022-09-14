@@ -24,11 +24,6 @@ const notifyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: state.data.filter(item => (
-<<<<<<< HEAD
-                    item.id !== action.payload.id
-                ))
-            };
-=======
                     item.id !== action.payload.id || item.url !== action.payload.url
                 ))
             };
@@ -37,7 +32,6 @@ const notifyReducer = (state = initialState, action) => {
                 ...state,
                 data: EditData(state.data, action.payload._id, action.payload)
             };
->>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
         default:
             return state;
     }
