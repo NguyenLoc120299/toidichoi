@@ -13,7 +13,9 @@ export const REVIEW_ACTIONS = {
     UPDATE_COMMENT_REVIEW: "UPDATE_COMMENT_REVIEW",
     LISTS_ALL_REVIEWS: "LISTS_ALL_REVIEWS",
     UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE",
-    LISTS_ALL_REVIEWS_FIRST: "LISTS_ALL_REVIEWS_FIRST"
+    LISTS_ALL_REVIEWS_FIRST: "LISTS_ALL_REVIEWS_FIRST",
+    UPDATE_REVIEW_PLACE_EXPLORER: "UPDATE_REVIEW_PLACE_EXPLORER",
+    UPDATE_COMMENT_REVIEW_EXPLORE:"UPDATE_COMMENT_REVIEW_EXPLORE"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -71,7 +73,7 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
     }
 }
 
-export const likeReview = (auth, review, socket) => async (dispatch) => {
+export const likeReview = (auth, review, socket, pathname) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
             dispatch({
@@ -80,12 +82,18 @@ export const likeReview = (auth, review, socket) => async (dispatch) => {
                     loading: true
                 }
             })
-            await patchDataAPI(`review/${review._id}/like`, null, auth.token)
             const newReview = { ...review, likes: [...review.likes, auth.user._id] }
-            dispatch({
-                type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
-                payload: newReview
-            })
+            if (pathname === '/explore')
+                dispatch({
+                    type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE_EXPLORER,
+                    payload: newReview
+                })
+            else
+                dispatch({
+                    type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
+                    payload: newReview
+                })
+            await patchDataAPI(`review/${review._id}/like`, null, auth.token)
             const msg = {
                 id: auth.user._id,
                 text: 'thích review của bạn',
@@ -107,27 +115,22 @@ export const likeReview = (auth, review, socket) => async (dispatch) => {
     }
 }
 
-<<<<<<< HEAD
-export const unLikeReview = (auth, review,socket) => async (dispatch) => {
-=======
-export const unLikeReview = (auth, review, socket) => async (dispatch) => {
->>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
+export const unLikeReview = (auth, review, socket, pathname) => async (dispatch) => {
     try {
-        await patchDataAPI(`review/${review._id}/unlike`, null, auth.token)
         const newReview = { ...review, likes: review.likes.filter(like => like !== auth.user._id) }
-        dispatch({
-            type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
-            payload: newReview
-        })
+        if (pathname === '/explore')
+            dispatch({
+                type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE_EXPLORER,
+                payload: newReview
+            })
+        else
+            dispatch({
+                type: REVIEW_ACTIONS.UPDATE_REVIEW_PLACE,
+                payload: newReview
+            })
+        await patchDataAPI(`review/${review._id}/unlike`, null, auth.token)
         const msg = {
             id: auth.user._id,
-<<<<<<< HEAD
-            text: 'like your post.',
-            recipients: [review.user._id],
-            url: `/review/${review._id}`,
-        }
-        dispatch(removeNotify({ msg, auth, socket }))
-=======
             text: 'bỏ thích review của bạn',
             recipients: [review.user._id],
             url: `/review/${review._id}`,
@@ -136,7 +139,6 @@ export const unLikeReview = (auth, review, socket) => async (dispatch) => {
         }
         dispatch(removeNotify(msg, auth, socket))
 
->>>>>>> b2f712abb1d77de8ae7b63aadfc97c673c95c40f
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -154,7 +156,6 @@ export const createComment = (auth, content, reviewId, reviewUserId, location, s
         }, auth.token)
         if (location === '/profile') {
             if (res && res.data) {
-
                 dispatch({
                     type: REVIEW_ACTIONS.UPDATE_REVIEW_PROFILE,
                     payload: res.data.newComment
@@ -162,7 +163,10 @@ export const createComment = (auth, content, reviewId, reviewUserId, location, s
             }
         }
         else if (location === '/explore') {
-            console.log(1);
+            dispatch({
+                type: REVIEW_ACTIONS.UPDATE_COMMENT_REVIEW_EXPLORE,
+                payload: { ...res.data.newComment, user: auth.user }
+            })
         } else
             if (res && res.data) {
                 dispatch({

@@ -51,9 +51,7 @@ const Explore = () => {
                                     <SkeletonText my='4' noOfLines={2} spacing='4' />
                                     <Skeleton height={250} borderBottom="1px solid #eee" mb={3} />
                                 </Box>
-                            }
-
-                        >
+                            }>
                             {
                                 explore.length > 0 ? explore.map(item => (
                                     <ExploreFee
@@ -80,9 +78,7 @@ const Explore = () => {
                     <GridItem colSpan={[0, 1]} display={['none', 'grid']}>
                         <ExplorerSidebar />
                     </GridItem>
-
                 </Grid>
-
             </Container>
         </Box>
     )

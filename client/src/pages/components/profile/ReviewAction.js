@@ -3,17 +3,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { BiComment, BiShare } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import { likeReview, unLikeReview } from '../../../redux/actions/reviewAction'
 
 const ReviewAction = ({ item }) => {
     const [isLike, setIsLike] = useState(false)
     const auth = useSelector(state => state.auth)
     const socket=useSelector(state=>state.socket)
+    const {pathname} = useLocation()
     const dispatch = useDispatch()
-    const likeAction = (auth, item, socket) => {
-        if (isLike) dispatch(unLikeReview(auth, item, socket))
+    const likeAction = (auth, item, socket, pathname) => {
+        if (isLike) dispatch(unLikeReview(auth, item, socket, pathname))
         else
-            dispatch(likeReview(auth, item, socket))
+            dispatch(likeReview(auth, item, socket, pathname))
         setIsLike(!isLike)
     }
     useEffect(() => {
@@ -35,6 +37,7 @@ const ReviewAction = ({ item }) => {
             marginTop="10px"
             borderTop="1px solid #eee"
             borderBottom="1px solid #eee"
+            fontSize={'#666'}
         >
             <Button
                 cursor="pointer"
@@ -56,7 +59,7 @@ const ReviewAction = ({ item }) => {
                     background: "transparent",
                     boxShadow: 'unset'
                 }}
-                onClick={() => likeAction(auth, item, socket)}
+                onClick={() => likeAction(auth, item, socket, pathname)}
             >
                 {
                     isLike ? <AiFillHeart style={{ marginRight: '5px', color: 'red' }} />

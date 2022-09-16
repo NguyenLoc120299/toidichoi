@@ -22,7 +22,8 @@ const ProfileNavigation = () => {
                     margin={"15px 0"}
                     position={["sticky", 'relative']}
                     top={0}
-                    className="list___wrapper">
+                    className="list___wrapper"
+                    >
                     <WrapItem>
                         <Link href='#'
                             className='active'
@@ -69,7 +70,7 @@ const ProfileNavigation = () => {
                         </Link>
                     </WrapItem>
                 </Wrap>
-                <Wrap>
+                <Wrap className='m_menu' display={'flex'} justifyContent={'center'}>
                     <WrapItem>
                         <Button
                             padding="6px 18px"

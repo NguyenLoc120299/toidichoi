@@ -1,4 +1,4 @@
-import { Box, Avatar } from '@chakra-ui/react'
+import { Box, Avatar, Textarea, Flex, Button } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createComment, updateReviewProfile } from '../../../redux/actions/reviewAction'
@@ -32,15 +32,25 @@ const FormNewComment = ({ item }) => {
             <Avatar src={item.user.avatar} name={item.user.name} size="sm" />
             <Box
                 w={'100%'}
+                className={'new_review'}
             >
-                <textarea className='new_review'
+                <Textarea
+                    border={'none'}
+                    mb={3}
+                    borderBottom={["none","1px solid #ccc"]}
+                    _focus={{
+                        boxShadow: 'unset'
+                    }}
                     placeholder='Viết bình luận ...'
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     onKeyDown={keyDownHandler}
                 >
 
-                </textarea>
+                </Textarea>
+                <Flex justifyContent={"end"} mb={3} display={['flex','none']}>
+                    <Button className='custom_btn' size={'sm'} onClick={onSubmitComment}>Bình luận</Button>
+                </Flex>
             </Box>
         </Box>
     )

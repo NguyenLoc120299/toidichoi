@@ -7,14 +7,14 @@ import RatePlace from './RatePlace'
 const ReviewPlace = ({ item }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" rounded={'md'} p={['3', '6']} mb={[0, 10]}>
+        <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" rounded={'md'} p={['1', '6']} mb={[0, 10]}>
             <ModalAddReview
                 isOpen={isOpen}
                 onClose={onClose}
                 place={item}
             />
             <Flex justifyContent={'space-between'} alignItems={'center'} py={3}>
-                <Heading as={'h3'} size={['lg']} >Đánh giá từ cộng đồng</Heading>
+                <Heading as={'h3'} size={['md','lg']} >Đánh giá từ cộng đồng</Heading>
                 {
                     !item.loading &&
                     <Button

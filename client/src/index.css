@@ -219,4 +219,7 @@ a.mapboxgl-ctrl-logo {
   .desktop {
     display: none;
   }
+  .exploreHeader{
+    top:43px
+  }
 }

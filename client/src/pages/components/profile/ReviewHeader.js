@@ -5,12 +5,13 @@ import { FaCaretRight } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { formatTime } from '../../components/helper/moment'
 import Rate from 'rc-rate';
-const ReviewHeader = ({ item }) => {
+const 
+ReviewHeader = ({ item }) => {
     const auth = useSelector(state => state.auth)
     return (
         <Box
             display={'flex'}
-            alignItems={'center'}
+            alignItems={["start",'center']}
             justifyContent={'flex-start'}
             position='relative'
         >
@@ -32,13 +33,6 @@ const ReviewHeader = ({ item }) => {
                     width="100%"
                     position="relative"
                 >
-                    {/* <Image src={item.user.avatar}
-                        backgroundPosition="50%"
-                        backgroundSize="cover"
-                        height="100%"
-                        width="100%"
-                        objectFit="cover"
-                    /> */}
                     <Avatar name={item.user.name} src={item.user.avatar} />
                 </Box>
             </Box>
@@ -56,7 +50,7 @@ const ReviewHeader = ({ item }) => {
                             display="flex"
                             alignItems="center"
                             justifyContent={['start', "center"]}
-                            fontSize="18px"
+                            fontSize={["14px","18px"]}
                             fontWeight="600"
                             letterSpacing=".4px"
                             marginRight="5px"
@@ -85,7 +79,7 @@ const ReviewHeader = ({ item }) => {
                 </Box>
                 <Center justifyContent={'flex-start'}>
                     <Rate
-                        style={{ fontSize: "15px" }}
+                        style={{ fontSize: "12px" }}
                         value={item.placeId.rate.rateNumber}
                         allowHalf
                         disabled
