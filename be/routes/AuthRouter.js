@@ -5,4 +5,5 @@ router.post('/register',authCtrl.resgister)
 router.post('/refresh_token',authCtrl.generateAccessToken)
 router.post('/login',authCtrl.login)
 router.post('/logout', authCtrl.logout)
+router.post('/active', authCtrl.activeAccount)
 module.exports=router
