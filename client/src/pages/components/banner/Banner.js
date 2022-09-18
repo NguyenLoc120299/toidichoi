@@ -10,6 +10,79 @@ import { ALERT_ACTION } from '../../../redux/actions/alertAction';
 import { getDataAPI } from '../../../untils/fetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import useClickOutSide from '../../../customHooks/clickOutSide';
+
+export const renderPlacesAll = (placeSearch, styles, valueSearch) => {
+    return (
+        <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
+            <div className={styles.listPlace}>
+                {
+                    placeSearch.length > 0 && placeSearch.map((item, index) => (
+                        <Link to={`/place/${item?._id}`} className={styles.searchItemPlace} key={index}>
+                            <div className={styles.image}>
+                                <Image src={item?.images[0]} alt={item?.name} />
+                            </div>
+                            <div className={styles.info}>
+                                <div className={styles.name}>{item?.name}</div>
+                                <div className={styles.address}>{item?.address}</div>
+                            </div>
+
+                        </Link>
+                    ))
+                }
+                <Link to='/search' className={styles.searchItemPlace}>
+                    <i className="fas fa-search-plus"></i>
+                    <span>Xem tất cả tìm kiếm cho "{valueSearch}"</span>
+                </Link>
+            </div>
+        </Box >
+    )
+}
+export const renderSearch = (dataPlaceOffer, styles) => {
+    return (
+        <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
+            <Link to={'/search'} className={styles.searchItem}>
+                <FaLocationArrow style={{ marginRight: '10px', fontSize: '30px' }} />
+                <span>Tìm quanh đây</span>
+            </Link>
+            <div className={styles.searchTitile}>
+                Đề xuất
+            </div>
+            <div className={styles.listPlace}>
+                {
+                    dataPlaceOffer.length > 0 && dataPlaceOffer.map((item, index) => (
+                        <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace} key={index}>
+                            <div className={styles.image}>
+                                <Image src={item.totalData.images[0]} alt={item.totalData.name} />
+                            </div>
+                            <div className={styles.info}>
+                                <div className={styles.name}>{item.totalData.name}</div>
+                                <div className={styles.address}>{item.totalData.address}</div>
+                            </div>
+
+                        </Link>
+                    ))
+                }
+
+            </div>
+            <div className={styles.searchTitile}>
+                Đã xem gần đây
+            </div>
+            <div className={styles.listPlace}>
+                <Link to="#" className={styles.searchItemPlace}>
+                    <div className={styles.image}>
+
+                    </div>
+                    <div className={styles.info}>
+                        <div className={styles.name}>Artemis Pastry & Coffee Shop</div>
+                        <div className={styles.address}>20 Ngô Quyền, Tràng Tiền, Hoàn Kiếm, Hà Nội.</div>
+                    </div>
+
+                </Link>
+            </div>
+
+        </Box>
+    )
+}
 const Banner = () => {
     const [isShowSearchBox, setIsShowSearchBox] = useState(false)
     const searchRef = useRef(null);
@@ -19,7 +92,6 @@ const Banner = () => {
     const [valueSearch, setValueSearch] = useState('')
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
-    const alert = useSelector(state => state.alert)
     const getPlaceTrending = async () => {
         try {
             const res = await getDataAPI('place-outstanding')
@@ -79,78 +151,6 @@ const Banner = () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
     }, [valueSearch]);
-    const renderPlacesAll = () => {
-        return (
-            <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
-                <div className={styles.listPlace}>
-                    {
-                        placeSearch.length > 0 && placeSearch.map((item, index) => (
-                            <Link to={`/place/${item?._id}`} className={styles.searchItemPlace} key={index}>
-                                <div className={styles.image}>
-                                    <Image src={item?.images[0]} alt={item?.name} />
-                                </div>
-                                <div className={styles.info}>
-                                    <div className={styles.name}>{item?.name}</div>
-                                    <div className={styles.address}>{item?.address}</div>
-                                </div>
-
-                            </Link>
-                        ))
-                    }
-                    <Link to='/search' className={styles.searchItemPlace}>
-                        <i className="fas fa-search-plus"></i>
-                        <span>Xem tất cả tìm kiếm cho "{valueSearch}"</span>
-                    </Link>
-                </div>
-            </Box >
-        )
-    }
-    const renderSearch = () => {
-        return (
-            <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
-                <Link to={'/search'} className={styles.searchItem}>
-                    <FaLocationArrow style={{ marginRight: '10px', fontSize: '30px' }} />
-                    <span>Tìm quanh đây</span>
-                </Link>
-                <div className={styles.searchTitile}>
-                    Đề xuất
-                </div>
-                <div className={styles.listPlace}>
-                    {
-                        dataPlaceOffer.length > 0 && dataPlaceOffer.map((item, index) => (
-                            <Link to={`/place/${item.totalData._id}`} className={styles.searchItemPlace} key={index}>
-                                <div className={styles.image}>
-                                    <Image src={item.totalData.images[0]} alt={item.totalData.name} />
-                                </div>
-                                <div className={styles.info}>
-                                    <div className={styles.name}>{item.totalData.name}</div>
-                                    <div className={styles.address}>{item.totalData.address}</div>
-                                </div>
-
-                            </Link>
-                        ))
-                    }
-
-                </div>
-                <div className={styles.searchTitile}>
-                    Đã xem gần đây
-                </div>
-                <div className={styles.listPlace}>
-                    <Link to="#" className={styles.searchItemPlace}>
-                        <div className={styles.image}>
-
-                        </div>
-                        <div className={styles.info}>
-                            <div className={styles.name}>Artemis Pastry & Coffee Shop</div>
-                            <div className={styles.address}>20 Ngô Quyền, Tràng Tiền, Hoàn Kiếm, Hà Nội.</div>
-                        </div>
-
-                    </Link>
-                </div>
-
-            </Box>
-        )
-    }
     return (
         <div className={`${styles.banner} ${isShowSearchBox && styles.showSearchBox}`}>
 
@@ -199,7 +199,7 @@ const Banner = () => {
 
 
                                 {
-                                    valueSearch.length > 0 && isShowSearchBox ? renderPlacesAll() : isShowSearchBox && renderSearch()
+                                    valueSearch.length > 0 && isShowSearchBox ? renderPlacesAll(placeSearch, styles, valueSearch) : isShowSearchBox && renderSearch(dataPlaceOffer, styles)
 
                                 }
 
@@ -231,79 +231,6 @@ const Banner = () => {
 
                 </Flex>
             </Center >
-            <Drawer onClose={onClose} isOpen={isOpen || alert?.isShowModalSearch} size={'full'} placement={"right"} >
-                <DrawerOverlay />
-                <DrawerContent overflow="scroll">
-                    <DrawerHeader>
-                        <Flex justifyContent={'space-between'}
-                            p={"12px"}
-                            alignItems="center"
-                        >
-                            <Box
-                                display={'flex'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                                height={"40px"}
-                                padding={'0 6px'}
-                                position="relative"
-                                backgroundColor="#f0f2f5"
-                                borderRadius="6px"
-                                flexGrow={'1'}
-                            >
-                                <Box
-
-                                    display="flex "
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                    width="100%"
-                                    height="30px"
-                                    padding="0 6px"
-                                    border="1px solid transparent"
-                                >
-                                    <i className="fas fa-search " style={{
-                                        fontSize: "18px",
-                                        color: "#606770"
-                                    }}></i>
-                                    <Input
-                                        _focus={{
-                                            border: 'none'
-                                        }}
-                                        placeholder="Nhập tên quán, khu vực, kiểu quán,..."
-                                        flex="1 1"
-                                        font-size="16px"
-                                        color="#606770"
-                                        outline="none"
-                                        border="none"
-                                        height="28px"
-                                        lineHeight="28px"
-                                        marginLeft="6px"
-                                        marginRight="16px"
-                                        background="transparent"
-                                        position="relative"
-                                        value={valueSearch}
-                                        onChange={handleSearch}
-                                    />
-                                </Box>
-                                {valueSearch.length > 0 &&
-                                    <button class="_btnReset" onClick={valueBtnReset}>
-                                        <i class="fas fa-times-circle"></i></button>
-                                }
-                            </Box>
-                            <h3 class="searchCancel" onClick={() => {
-                                onClose()
-                                dispatch({
-                                    type: ALERT_ACTION.TOGGLESEARCH,
-                                    payload: {
-                                        isShowModalSearch: false
-                                    }
-                                })
-                            }}>Huỷ</h3>
-                        </Flex>
-                    </DrawerHeader>
-
-                    {valueSearch.length > 0 ? renderPlacesAll() : renderSearch()}
-                </DrawerContent>
-            </Drawer>
         </div >
     )
 }

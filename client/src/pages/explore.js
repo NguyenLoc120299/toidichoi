@@ -5,12 +5,14 @@ import { getListAllReviews, getListAllReviewsFirst } from '../redux/actions/revi
 import ExploreFee from './components/explore/ExploreFeed'
 import ExplorerSidebar from './components/explore/ExplorerSidebar'
 import InfiniteScroll from "react-infinite-scroll-component";
+import { scrollToTop } from "../untils/helper"
 const Explore = () => {
     const dispatch = useDispatch()
     const { explore, total } = useSelector(state => state.review)
     const [page, setPage] = useState(1)
     const limit = 5
     useEffect(() => {
+        scrollToTop()
         dispatch(getListAllReviewsFirst(page, limit))
     }, [])
     const onLoad = () => {

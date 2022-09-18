@@ -209,7 +209,7 @@ a.mapboxgl-ctrl-logo {
   width: 100%;
   height: 220px;
   margin-bottom: 24px;
-  background: linear-gradient(180deg, #ffb8b8, #fbfbfb);
+  background: linear-gradient(180deg, #fca1bf, #fbfbfb);
   z-index: -1;
 }
 @media (max-width: 768px) {
@@ -219,7 +219,7 @@ a.mapboxgl-ctrl-logo {
   .desktop {
     display: none;
   }
-  .exploreHeader{
-    top:43px
+  .exploreHeader {
+    top: 43px;
   }
 }

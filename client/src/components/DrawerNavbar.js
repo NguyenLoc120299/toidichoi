@@ -8,6 +8,7 @@ import { logout } from '../redux/actions/authAction'
 const DrawerNavbar = ({ onClose, isOpen }) => {
 
     const user = useSelector(state => state.auth.user)
+    const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
     const MenuItem = ({ children }) => {
         return (
@@ -215,7 +216,7 @@ const DrawerNavbar = ({ onClose, isOpen }) => {
                             background="transparent"
                             border="1px solid #e03"
                             borderRadius="4px"
-                            onClick={() => dispatch(logout())}
+                            onClick={() => dispatch(logout(token))}
                         >
                             Đăng xuất
                         </Button>

@@ -34,6 +34,7 @@ const Navbar = () => {
     const { pathname } = useLocation()
     const dispatch = useDispatch()
     const [isToggle, setIsToggle] = useState(false)
+
     const toggleBoxSearch = (type) => {
         setIsToggle(type)
     }
@@ -64,9 +65,9 @@ const Navbar = () => {
                                     <Link to="/promotion" style={{ marginRight: "1.5rem" }} className={style.links}>
                                         <span>Khuyến mãi</span>
                                     </Link>
-                                    <Link to="/blogs" className={style.links}>
+                                    {/* <Link to="/blogs" className={style.links}>
                                         <span>Blogs</span>
-                                    </Link>
+                                    </Link> */}
                                 </>
                             }
 
@@ -162,7 +163,7 @@ const Navbar = () => {
                                         </Link>
                                         <MenuDivider />
                                         <MenuItem>
-                                            <Link to='/profile/setting'>
+                                            <Link to='/profile-edit'>
                                                 <Center>
                                                     <FaUserEdit /><Text fontWeight={'bold'} ml={2}> Chỉnh sửa trang cá nhân</Text>
                                                 </Center>
@@ -180,7 +181,7 @@ const Navbar = () => {
                                         <MenuItem>
                                             <Center>
                                                 <FaPowerOff />
-                                                <Text fontWeight={'bold'} ml={2} onClick={() => dispatch(logout())}>Đăng xuất</Text>
+                                                <Text fontWeight={'bold'} ml={2} onClick={() => dispatch(logout(auth.token))}>Đăng xuất</Text>
                                             </Center>
                                         </MenuItem>
                                     </MenuList>

@@ -37,7 +37,7 @@ const FormNewComment = ({ item }) => {
                 <Textarea
                     border={'none'}
                     mb={3}
-                    borderBottom={["none","1px solid #ccc"]}
+                    borderBottom={["1px solid #ccc", "none"]}
                     _focus={{
                         boxShadow: 'unset'
                     }}
@@ -48,7 +48,7 @@ const FormNewComment = ({ item }) => {
                 >
 
                 </Textarea>
-                <Flex justifyContent={"end"} mb={3} display={['flex','none']}>
+                <Flex justifyContent={"end"} mb={3} display={['flex', 'none']}>
                     <Button className='custom_btn' size={'sm'} onClick={onSubmitComment}>Bình luận</Button>
                 </Flex>
             </Box>

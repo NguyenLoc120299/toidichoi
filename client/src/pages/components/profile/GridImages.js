@@ -13,7 +13,7 @@ const GridImages = ({ images }) => {
     if (images.length === 1)
         return (
             <Box>
-                <Box h={'100%'} onClick={() => toggleImageLightBox(0)}>
+                <Box h={['400px', '600px']} onClick={() => toggleImageLightBox(0)}>
                     <Image src={images[0]}
                         alt="img0"
                         w={'100%'}

@@ -17,6 +17,7 @@ import io from 'socket.io-client'
 import { GLOBALTYPES } from './redux/actions/globalTypes';
 import SocketClient from './socketClient';
 import { getNotifies } from './redux/actions/notifyAction';
+import ModalSearch from './pages/components/banner/ModalSearch';
 function App() {
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.auth)
@@ -36,10 +37,20 @@ function App() {
     if (token)
       dispatch(getNotifies(token))
   }, [token])
+  useEffect(() => {
+    window.gapi.load('client:auth2', function () {
+      window.gapi.auth2.init({
+        client_id:
+          '180965278338-u7i3iha47praso9nhlfqc1gosopu18te.apps.googleusercontent.com',
+      });
+    });
+  }, []);
+
   return (
     <Router>
       <AlertModal />
       <MenuMobile />
+      <ModalSearch />
       <Box pb={['100px', 0]}>
         <Navbar />
         <Route exact path={'/'} component={Home} />

@@ -54,8 +54,8 @@ const Categories = () => {
                                 </SwiperSlide>
                             ))
                             :
-                            [1, 2, 3].map(item => (
-                                <SwiperSlide key={item._id}>
+                            [1, 2, 3].map((item, index) => (
+                                <SwiperSlide key={index}>
                                     <div className={style.card_slide}>
                                         <Skeleton />
                                     </div>

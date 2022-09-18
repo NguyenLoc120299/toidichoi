@@ -25,10 +25,11 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux'
-import { login, signup } from '../redux/actions/authAction'
+import { googleLogin, login, signup } from '../redux/actions/authAction'
 import { ALERT_ACTION } from '../redux/actions/alertAction';
 import { isMobile } from 'react-device-detect';
 import { isCheckFormInput } from '../pages/components/helper/ValidPlace';
+import axios from 'axios';
 const LoginModal = () => {
     const { alert } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -75,6 +76,12 @@ const LoginModal = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const onSuccess = async () => {
+        const auth = await window.gapi.auth2.getAuthInstance().signIn()
+        const { id_token } = auth.getAuthResponse()
+        dispatch(googleLogin(id_token))
     }
     return (
         <Modal size={isMobile ? 'full' : 'lg'} isOpen={alert.modal} onClose={() => dispatch({
@@ -191,6 +198,54 @@ const LoginModal = () => {
                                             >
                                                 {isSignup ? 'Tạo tài khoản' : 'Đăng nhập'}
                                             </Button>
+                                            {
+                                                !isSignup && (
+                                                    <>
+                                                        <Box
+                                                            position="relative"
+                                                            display="flex"
+                                                            text-align="center"
+                                                            white-space="nowrap"
+                                                            padding="8px"
+                                                            _before={{
+                                                                content: "''",
+                                                                top: "50%",
+                                                                width: "50%",
+                                                                position: "relative",
+                                                                borderTop: "1px solid #717171",
+                                                                transform: "translateY(50%)",
+                                                            }}
+                                                            _after={{
+                                                                content: "''",
+                                                                top: "50%",
+                                                                width: "50%",
+                                                                position: "relative",
+                                                                borderTop: "1px solid #717171",
+                                                                transform: "translateY(50%)",
+                                                            }}
+                                                        >
+                                                            <Text minW={'110px'} display={'flex'} justifyContent={'center'}>hoặc tiếp tục với</Text>
+                                                        </Box>
+                                                        <Box >
+                                                            <Box
+                                                                w={'100%'}
+                                                                backgroundColor="#fff"
+                                                                border="1px solid #717171"
+                                                                padding="5px"
+                                                                fontSize={'1.17rem'}
+                                                                textAlign="center"
+                                                                cursor="pointer"
+                                                                onClick={onSuccess}>
+                                                                <i className="fab fa-google" style={{ color: "#d54b3d" }} />
+                                                                <Text
+                                                                    color="#717171"
+                                                                    fontWeight="500"
+                                                                >Google</Text>
+                                                            </Box>
+                                                        </Box>
+                                                    </>
+                                                )
+                                            }
                                         </Stack>
                                         {!isSignup && <Link color={'red.500'} textAlign="center" fontWeight={'bold'}>Quên mật khẩu?</Link>}
                                         <Text>{isSignup ? 'Bạn đã có tài khoản' : 'Bạn chưa có tài khoản'}
@@ -205,9 +260,10 @@ const LoginModal = () => {
                                 </Box>
                             </Stack>
                         </Flex>
+
                     </Box>
-                </SimpleGrid>
-            </ModalContent>
+                </SimpleGrid >
+            </ModalContent >
         </Modal >
     )
 }

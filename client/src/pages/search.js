@@ -11,6 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Rate from 'rc-rate/lib/Rate'
 import moment from 'moment';
 import { isMobile } from 'react-device-detect';
+import { scrollToTop } from '../untils/helper'
 const { Panel } = Collapse;
 function useQuery() {
     const { search } = useLocation();
@@ -44,6 +45,9 @@ const Search = () => {
             ...filterData, priceData: newValue
         })
     };
+    useEffect(() => {
+        scrollToTop()
+    }, [])
     const isOpenning = (timeMin, timeMax) => {
         const currentHour = moment().format('HH:mm')
         if (moment(currentHour, 'HH:mm').isBefore(moment(timeMax, 'HH:mm')) &&

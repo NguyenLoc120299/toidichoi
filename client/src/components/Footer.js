@@ -55,15 +55,22 @@ const Footer = () => {
                                 Theo dõi chúng tôi trên
                             </div>
                             <ul className={style.text}>
-                                <li>
-                                    <span><FaFacebookF /> </span> Facebook
+                                <li >
+                                    <a href="#" className='facebook_icon'>
+                                        <i className="fab fa-facebook" style={{ paddingRight: "12px" }}></i> {" "}
+                                        <span>Facebook</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <span><FaInstagram /></span> Instagram
+                                <li className='instagram_icon'>
+                                    <a href="#" className='instagram_icon'>
+                                        <i className="fab fa-instagram" style={{ paddingRight: "12px" }}></i> {" "}
+                                        <span>Instagram</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <span><FaTiktok /></span>  Tiktok
-                                </li>
+                                <a href='#' className='tiktok_icon'>
+                                    <i className="fab fa-tiktok" style={{ paddingRight: "12px" }}></i> {" "}
+                                    <span >Tiktok</span>
+                                </a>
                             </ul>
                         </div>
 

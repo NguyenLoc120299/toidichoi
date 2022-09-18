@@ -1,4 +1,4 @@
-import { Avatar, Box, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Text, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Center, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
@@ -30,12 +30,12 @@ const MenuMobile = () => {
                     onClick={onClose}
                 ><i className="fas fa-fire"></i><span>Khám phá</span>
                 </Link>
-                {/* <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="fas fa-percent"
+                <Link className={`Navbar_item ${isActive('/promotion')}`} to="/promotion"><i className="fas fa-percent"
                     onClick={onClose}
-                ></i><span>khuyến mãi</span></Link> */}
-                <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="far fa-newspaper"
+                ></i><span>khuyến mãi</span></Link>
+                {/* <Link className={`Navbar_item ${isActive('/promo')}`} to="/promo"><i className="far fa-newspaper"
                     onClick={onClose}
-                ></i><span>Blogs</span></Link>
+                ></i><span>Blogs</span></Link> */}
                 <Link className={`Navbar_item ${isActive('')}`} to="#"><i className="fas fa-bell" onClick={onOpen}></i><span>Thông báo</span>
                     {
                         notifyNotRead.length > 0 &&
@@ -69,7 +69,7 @@ const MenuMobile = () => {
                         </DrawerHeader>
                         <DrawerBody overflow={'scroll'}>
                             {
-                                data && data.map(item => (
+                                data && data.length > 0 ? data.map(item => (
                                     <Box mb={6} background={item.isRead ? "#ffff" : "#dddd"}>
                                         <Flex gap={5}>
                                             <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
@@ -86,6 +86,8 @@ const MenuMobile = () => {
                                         </Flex>
                                     </Box>
                                 ))
+                                    :
+                                    <Center fontSize={'md'} fontWeight={500}>Không có thông báo</Center>
                             }
                         </DrawerBody>
                     </DrawerContent>
