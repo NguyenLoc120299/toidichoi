@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema({
     },
     followers: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
     following: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
+    type: {
+        type: String,
+        default: 'account',
+        required: true
+    },
+    rf_token: { type: String, select: false }
 }, {
     timestamps: true
 })
