@@ -3,13 +3,13 @@ import React from 'react'
 import { BsCameraFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile } from '../../../redux/actions/authAction'
-const AvatarProfile = () => {
+const AvatarProfile = ({ user }) => {
+
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-    const { user } = auth
     const handleOnchangeAvatar = (e) => {
         const files = [...e.target.files]
-        dispatch(updateProfile(auth.user.username, files, auth))
+        dispatch(updateProfile(user.username, files, auth))
     }
     return (
         <Box

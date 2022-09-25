@@ -25,10 +25,10 @@
         justify-content: center;
         align-items: center;
     }
-    .contact:hover {
+    /* .contact:hover {
         border: 2px solid rgb(236, 41, 41);
-        color: #ffff;
-    }
+        color: rgb(236, 41, 41); 
+    } */
     .title {
         font-size: 20px;
         line-height: 24px;

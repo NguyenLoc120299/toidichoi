@@ -42,8 +42,7 @@ const reviewCtrl = {
         }
     },
     getListReviewsByUser: async (req, res) => {
-        const { id } = req.user
-
+        const { id } = req.params
         try {
             const result = await Reviews.aggregate(
                 [

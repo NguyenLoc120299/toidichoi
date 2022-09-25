@@ -6,7 +6,7 @@ router.post('/review', auth, reviewCtrl.createReview)
 
 router.get('/review/:id', reviewCtrl.reviewSingle)
 
-router.get('/list-reviews', auth, reviewCtrl.getListReviewsByUser)
+router.get('/list-reviews/:id', reviewCtrl.getListReviewsByUser)
 
 router.get('/list-review/:placeId', reviewCtrl.reviewSingleByPlace)
 

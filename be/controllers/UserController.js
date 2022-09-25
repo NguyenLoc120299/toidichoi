@@ -1,7 +1,7 @@
 const Users = require('../models/UserModel')
 const Reviews = require('../models/ReviewModel')
 const userCtrl = {
-    getAllUser: async (req,res)=>{
+    getAllUser: async (req, res) => {
         try {
             const users = await Users.find()
             res.json({ users })
@@ -61,6 +61,9 @@ const userCtrl = {
                     $sort: { ct: -1 }
                 },
                 {
+                    $limit: 10
+                },
+                {
                     $project: {
                         password: 0,
                         _id: 0,
@@ -71,6 +74,15 @@ const userCtrl = {
 
             ])
             return res.json(result)
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    getProfile: async (req, res) => {
+        try {
+            const { id } = req.params
+            const user = await Users.findById(id)
+            return res.json(user)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }

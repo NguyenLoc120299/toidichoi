@@ -193,9 +193,9 @@ export const createComment = (auth, content, reviewId, reviewUserId, location, s
     }
 }
 
-export const getReviewByAuth = (auth) => async (dispatch) => {
+export const getReviewByAuth = (id) => async (dispatch) => {
     try {
-        const res = await getDataAPI('/list-reviews', auth.token)
+        const res = await getDataAPI(`list-reviews/${id}`,)
         if (res.data)
             dispatch({
                 type: AUTH_ACTIONS.REVIEW,

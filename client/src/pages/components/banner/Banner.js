@@ -222,8 +222,16 @@ const Banner = () => {
                                 border: 'unset',
                                 background: '#fff'
                             }}
-                            onClick={onOpen}
                             className="custom_btn"
+                            onClick={() => {
+                                dispatch({
+                                    type: ALERT_ACTION.TOGGLESEARCH,
+                                    payload: {
+                                        isShowModalSearch: true
+                                    }
+                                })
+                            }}
+
                         >
                             <AiOutlineSearch style={{ marginRight: '10px' }} /> Tìm kiếm
                         </Button>

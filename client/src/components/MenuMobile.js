@@ -6,7 +6,7 @@ import { ALERT_ACTION } from '../redux/actions/alertAction'
 import useClickOutSide from '../customHooks/clickOutSide';
 import { formatTime } from '../pages/components/helper/moment'
 const MenuMobile = () => {
-    const user = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.auth?.user)
     const navRef = useRef()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.notify)
@@ -45,7 +45,7 @@ const MenuMobile = () => {
                     }
                 </Link>
                 {
-                    user ? <Link className={`Navbar_item ${isActive('/profile')}`} to={`/profile`}><i className="fas fa-user"
+                    user ? <Link className={`Navbar_item ${isActive(`/profile/${user._id}`)}`} to={`/profile/${user._id}`}><i className="fas fa-user"
                         onClick={onClose}
                     ></i><span>Tài khoản</span></Link>
                         :

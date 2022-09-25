@@ -56,7 +56,7 @@ function App() {
         <Route exact path={'/'} component={Home} />
         <Route exact path={'/:page'} component={PageRender} />
         <Route exact path={'/:page/:id'} component={PageRender} />
-        {token && <SocketClient />}
+        {/* {token && <SocketClient />} */}
         <Footer />
       </Box>
     </Router>

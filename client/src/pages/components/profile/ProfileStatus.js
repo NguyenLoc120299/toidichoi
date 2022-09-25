@@ -5,9 +5,13 @@ import { useSelector } from 'react-redux'
 import { formatDay } from '../helper/moment'
 import { BoxProfile } from './styled'
 
-const ProfileStatus = () => {
-    const status = useSelector(state => state.auth.status)
-
+const ProfileStatus = ({ reviews, user }) => {
+    const status = {
+        totalReview: reviews?.dataReview.length || 0,
+        countLikes: reviews?.countLikes || 0,
+        countComments: reviews?.countComments || 0,
+        dateJoin: user?.createdAt || 0
+    }
     return (
         <BoxProfile>
             <Text

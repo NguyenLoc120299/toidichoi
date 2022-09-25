@@ -29,7 +29,7 @@ const FormNewComment = ({ item }) => {
             display="flex"
             padding="10px 6px 2px"
         >
-            <Avatar src={item.user.avatar} name={item.user.name} size="sm" />
+            <Avatar src={auth?.user.avatar} name={auth?.user.name} size="sm" />
             <Box
                 w={'100%'}
                 className={'new_review'}

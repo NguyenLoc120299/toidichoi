@@ -90,7 +90,6 @@ const Navbar = () => {
                     <Center h={"100%"}>
                         <Button className='custom_btn' mr='3' borderRadius={"12px"} onClick={() => history.push('/add-review')}>
                             <BsPencil style={{ marginRight: "5px" }}
-
                             /> Viết review
                         </Button>
                         {
@@ -144,7 +143,7 @@ const Navbar = () => {
                                         />
                                     </MenuButton>
                                     <MenuList>
-                                        <Link to="/profile" >
+                                        <Link to={`/profile/${auth.user._id}`} >
                                             <MenuItem  >
 
                                                 <Flex justifyContent={'space-between'} alignItems={"center"} >
@@ -163,7 +162,7 @@ const Navbar = () => {
                                         </Link>
                                         <MenuDivider />
                                         <MenuItem>
-                                            <Link to='/profile-edit'>
+                                            <Link to={`/profile-edit/${auth?.user._id}`}>
                                                 <Center>
                                                     <FaUserEdit /><Text fontWeight={'bold'} ml={2}> Chỉnh sửa trang cá nhân</Text>
                                                 </Center>

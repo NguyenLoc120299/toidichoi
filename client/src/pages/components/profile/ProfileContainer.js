@@ -1,26 +1,49 @@
 import { Box, Center, Grid, GridItem, Text } from '@chakra-ui/react'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { async } from '@firebase/util'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ALERT_ACTION } from '../../../redux/actions/alertAction'
+import { getDataAPI } from '../../../untils/fetchData'
 import ProfileStatus from './ProfileStatus'
 import ReviewItem from './ReviewItemProfile'
 import { BoxProfile } from './styled'
 
-const ProfileContainer = () => {
+const ProfileContainer = ({ user }) => {
     const auth = useSelector(state => state.auth)
-
+    const [reviews, setReviews] = useState(null)
+    const dispatch = useDispatch()
+    const getReviewByAuth = async (id) => {
+        try {
+            const res = await getDataAPI(`list-reviews/${id}`,)
+            if (res.data)
+                setReviews(res.data)
+        } catch (error) {
+            dispatch({
+                type: ALERT_ACTION.ALERT,
+                payload: {
+                    err: error.response.data.msg
+                }
+            })
+        }
+    }
+    useEffect(() => {
+        if (user)
+            getReviewByAuth(user._id)
+    }, [user])
     return (
         <Grid
             templateColumns={'repeat(3,1fr)'}
             gap={6}
         >
             <GridItem colSpan={[3, 1]} display={['grid', 'grid']}>
-                <ProfileStatus />
+                <ProfileStatus reviews={reviews} user={user} />
             </GridItem>
             <GridItem colSpan={[3, 2]}>
                 {
-                    auth.reviews ? (
-                        auth.reviews.length > 0 ?
-                            auth.reviews.map(item => (
+                    reviews?.dataReview ? (
+                        reviews?.dataReview.length > 0 ?
+                            reviews?.dataReview.map(item => (
                                 <BoxProfile key={item._id}>
                                     <ReviewItem reviewItem={item} />
                                 </BoxProfile>

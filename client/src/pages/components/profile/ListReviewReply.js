@@ -14,7 +14,7 @@ const ListReviewReply = ({ item }) => {
                             textAlign={'center'}
                             mr="6px"
                         >
-                            <Avatar src={item.user.avatar} name={item.user.name} size="sm" />
+                            <Avatar src={cmt.user.avatar} name={cmt.user.name} size="sm" />
                         </Box>
                         <Box
                             padding="8px 15px"

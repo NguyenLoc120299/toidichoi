@@ -8,24 +8,39 @@ import AvatarProfile from '../components/profile/AvatarProfile'
 import ProfileContainer from '../components/profile/ProfileContainer'
 import ProfileNavigation from '../components/profile/ProfileNavigation'
 import { scrollToTop } from '../../untils/helper'
+import { getDataAPI } from '../../untils/fetchData'
 const Profile = () => {
     const auth = useSelector(state => state.auth)
+    const [profile, setProfile] = useState(null)
+    const { id } = useParams()
     const dispatch = useDispatch()
-    const getReviewOfProfile = (auth) => {
-        dispatch(getReviewByAuth(auth))
+    const getReviewOfProfile = (id) => {
+        dispatch(getReviewByAuth(id))
+    }
+    const getProfileDetail = async (id) => {
+        try {
+            const res = await getDataAPI(`user/${id}`)
+            if (res && res.data)
+                setProfile(res.data)
+        } catch (error) {
+            console.log(error);
+        }
     }
     useEffect(() => {
-        if (auth.token)
-            getReviewOfProfile(auth)
-    }, [auth.token])
+        if (id) {
+            getProfileDetail(id)
+            getReviewOfProfile(id)
+        }
+    }, [id])
     useEffect(() => {
         scrollToTop()
+
     }, [])
     return (
         <Container maxW={'1280px'}>
-            <AvatarProfile />
+            <AvatarProfile user={profile} />
             <ProfileNavigation />
-            <ProfileContainer />
+            <ProfileContainer user={profile} />
         </Container>
     )
 }
