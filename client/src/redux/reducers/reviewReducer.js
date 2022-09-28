@@ -1,3 +1,4 @@
+import ReviewAction from "../../pages/components/profile/ReviewAction";
 import { EditData } from "../actions/imageAction";
 import { REVIEW_ACTIONS } from "../actions/reviewAction";
 
@@ -6,7 +7,8 @@ const initialState = {
     list_review_place: [],
     result: 0,
     explore: [],
-    total: 0
+    total: 0,
+    callbackReview: false
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -55,6 +57,11 @@ const categoryReducer = (state = initialState, action) => {
                 ...state,
                 explore: [...action.payload.places],
                 total: action.payload.total
+            }
+        case REVIEW_ACTIONS.CALLBACK_REVIEW:
+            return {
+                ...state,
+                callbackReview: !state.callbackReview
             }
         default:
             return state;

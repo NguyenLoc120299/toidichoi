@@ -18,11 +18,12 @@ const Single = () => {
   const { id } = useParams()
   const loading = false
   const detail_place = useSelector(state => state.detail_place)
+  const { callbackReview } = useSelector(state => state.review)
   const dispatch = useDispatch()
   useEffect(() => {
     if (id)
       dispatch(getPlaceSingle(id))
-  }, [id])
+  }, [id, callbackReview])
   useEffect(() => {
     scrollToTop()
   }, [])

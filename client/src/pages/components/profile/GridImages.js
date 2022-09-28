@@ -33,7 +33,7 @@ const GridImages = ({ images }) => {
         )
     if (images.length === 2) return (
         <Box>
-            <SimpleGrid columns={2} spacing={4} height={['300px', '600px']}>
+            <SimpleGrid columns={2} spacing={1} height={['300px', '600px']}>
                 <Box h={'100%'} onClick={() => toggleImageLightBox(0)}>
                     <Image src={images[0]}
                         alt="img0"
@@ -67,7 +67,7 @@ const GridImages = ({ images }) => {
             h={['300px', '600px']}
             templateRows='repeat(2, 1fr)'
             templateColumns='repeat(6, 1fr)'
-            gap={4}
+            gap={1}
         >
             <GridItem rowSpan={2} colSpan={4} h={"100%"}>
                 <Box h={"100%"} onClick={() => toggleImageLightBox(0)} >
@@ -119,11 +119,12 @@ const GridImages = ({ images }) => {
                 overflow={'hidden'}
                 templateRows='repeat(3, 1fr)'
                 templateColumns='repeat(5, 1fr)'
-                gap={4}
+                gap={1}
             >
                 <GridItem rowSpan={3}
                     colSpan={4}
                     onClick={() => toggleImageLightBox(0)}
+                    height={'100%'}
                 >
                     <Image src={images[0]}
                         alt="img0"
@@ -188,9 +189,11 @@ const GridImages = ({ images }) => {
     else
         return (
             <Box height={['300px', '600px']}>
-                <SimpleGrid columns={2} spacing={4} height={['200px', "400px"]}>
+                <SimpleGrid columns={2} spacing={1} height={['200px', "400px"]}>
                     <Box
                         onClick={() => toggleImageLightBox(0)}
+                        height={"100%"}
+                        overflow={"hidden"}
                     >
                         <Image src={images[0]}
                             alt="img0"
@@ -201,6 +204,8 @@ const GridImages = ({ images }) => {
                     </Box>
                     <Box
                         onClick={() => toggleImageLightBox(1)}
+                        height={"100%"}
+                        overflow={"hidden"}
                     >
                         <Image src={images[1]}
                             alt="img0"
@@ -210,7 +215,7 @@ const GridImages = ({ images }) => {
                         />
                     </Box>
                 </SimpleGrid>
-                <SimpleGrid columns={3} spacing={4} mt={4} height={['100px', '200px']}>
+                <SimpleGrid columns={3} spacing={1} mt={1} height={['100px', '200px']}>
                     <Box maxH={['100px', '200px']}
                         onClick={() => toggleImageLightBox(2)}
                     >

@@ -15,7 +15,8 @@ export const REVIEW_ACTIONS = {
     UPDATE_REVIEW_PROFILE: "UPDATE_REVIEW_PROFILE",
     LISTS_ALL_REVIEWS_FIRST: "LISTS_ALL_REVIEWS_FIRST",
     UPDATE_REVIEW_PLACE_EXPLORER: "UPDATE_REVIEW_PLACE_EXPLORER",
-    UPDATE_COMMENT_REVIEW_EXPLORE: "UPDATE_COMMENT_REVIEW_EXPLORE"
+    UPDATE_COMMENT_REVIEW_EXPLORE: "UPDATE_COMMENT_REVIEW_EXPLORE",
+    CALLBACK_REVIEW: "CALLBACK_REVIEW"
 }
 
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
@@ -34,7 +35,9 @@ export const createReview = (place, formData, images, rate, auth) => async (disp
                 rateNumber: rate,
                 placeId: place._id
             }, auth.token)
-
+            dispatch({
+                type: REVIEW_ACTIONS.CALLBACK_REVIEW,
+            })
             dispatch({
                 type: ALERT_ACTION.ALERT,
                 payload: {

@@ -14,9 +14,12 @@ const FormComment = ({ reviewId, reviewUserId }) => {
     return (
         <Box my={5}  >
             <Flex w={'100%'} >
-                <Box mr={5} display={['none', 'block']}>
-                    <Avatar size={'md'} name={auth.user.username} src={auth.user.avatar} />
-                </Box>
+                {
+                    auth.user && <Box mr={5} display={['none', 'block']}>
+                        <Avatar size={'md'} name={auth.user.username} src={auth.user.avatar} />
+                    </Box>
+                }
+
                 <Flex
                     direction={'column'}
                     w="100%"
