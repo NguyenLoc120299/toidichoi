@@ -27,7 +27,7 @@ const RateReview = ({ rate, setRate }) => {
                     onChange={handleOnchange}
                     character={<i className="fas fa-star"></i>}
                 />
-                <div className='rate__text'>
+                <div className='rate__text '>
                     <span>{rateText}</span>
                 </div>
             </Flex>

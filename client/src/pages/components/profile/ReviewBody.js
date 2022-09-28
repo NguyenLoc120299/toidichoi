@@ -25,7 +25,7 @@ const ReviewBody = ({ item }) => {
                 </Box>
                 {
                     item.images.length > 0 &&
-                    <Box mt={5} display={['none', 'block']}>
+                    <Box mt={5} >
                         {/* <ReactPhotoGrid
                             onImageClick={() => toggleImageLightBox()}
                             data={item.images}
@@ -41,13 +41,13 @@ const ReviewBody = ({ item }) => {
                         <GridImages images={item.images} />
                     </Box>
                 }
-                {item.images.length > 0 &&
+                {/* {item.images.length > 0 &&
                     <Box mt={5} display={['block', 'none']}>
                         <ImageSwipper
                             images={item.images}
                         />
                     </Box>
-                }
+                } */}
 
 
             </Box>

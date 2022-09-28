@@ -8,6 +8,8 @@ import auth from './authReducer'
 import place from './placeReducer'
 import detail_place from './detailPlaceReducer'
 import review from '../reducers/reviewReducer'
+import socket from '../reducers/socketReducer'
+import notify from '../reducers/notifyReducer'
 export default combineReducers({
     categories,
     alert,
@@ -17,5 +19,7 @@ export default combineReducers({
     auth,
     place,
     detail_place,
-    review
+    review,
+    socket,
+    notify
 })

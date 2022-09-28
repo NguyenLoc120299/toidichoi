@@ -14,6 +14,69 @@
 .text1 {
     display: none;
 }
+.showSearchBox::after {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    opacity: 0.7;
+    z-index: 2;
+    background: #232a31;
+}
+.searchItem {
+    justify-content: flex-start;
+    padding: 10px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.searchItem span {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.searchItem:hover {
+    background: #eee;
+}
+.searchTitile {
+    padding: 4px 16px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.searchItemPlace {
+    justify-content: flex-start;
+    padding: 10px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.searchItemPlace .image {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #aaa;
+}
+.searchItemPlace .info .name {
+    font-size: 18px;
+    font-weight: 500;
+}
+.searchItemPlace .info .address {
+    font-size: 14px;
+    color: #6b6b6b;
+}
+.searchItemPlace i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+.searchItemPlace span {
+    font-size: 18px;
+    font-weight: 500;
+}
 @media (min-width: 992px) {
     .banner {
         height: 500px;

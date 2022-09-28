@@ -7,6 +7,7 @@ const review = require('./ReviewRouter')
 const comment = require('./CommentRouter')
 const user = require('./UserRouter')
 const map = require('./MapRouter')
+const notify = require('./NotifyRouter')
 const routes = [
     areaRouter,
     categoryRouter,
@@ -16,7 +17,8 @@ const routes = [
     review,
     comment,
     user,
-    map
+    map,
+    notify
 
 ]
 

@@ -42,7 +42,7 @@ const ExplorerSidebar = () => {
                             padding="8px"
 
                         >
-                            <FaUserCheck /> <Text ml={'5px'}>Bài nổi bật</Text>
+                            <FaUserCheck /> <Text ml={'5px'}>Đang theo dõi</Text>
                         </Flex>
                     </Flex>
                 </Flex>

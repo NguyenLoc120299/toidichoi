@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import style from '../categories/categories.module.css'
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Area = () => {
     const { data } = useSelector(state => state.area)
@@ -41,7 +42,7 @@ const Area = () => {
                     {
                         data.map(item => (
                             <SwiperSlide key={item._id}>
-                                <div className={style.card_slide}>
+                                <Link to={`/search?area=${item.name}`} className={style.card_slide}>
                                     <img src={item.image} alt="Đọc Sách" />
                                     <div className={style.category}>
                                         <Center>
@@ -51,7 +52,7 @@ const Area = () => {
                                             </div>
                                         </Center>
                                     </div>
-                                </div>
+                                </Link>
                             </SwiperSlide>
                         ))
                     }

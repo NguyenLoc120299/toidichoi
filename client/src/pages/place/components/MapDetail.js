@@ -21,27 +21,36 @@ const MapDetail = ({ info }) => {
         getMapInfo()
     }, [info])
     return (
-        <Box boxShadow='md' rounded={'md'} p='6'
+        <Box boxShadow="0 2px 8px rgb(0,0,0,15%)" rounded={'md'} p='6'
             backgroundImage={"url(https://static.tacdn.com/img2/maps/img_map.png)"}
             position='relative'
+            backgroundPosition={'center'}
+            backgroundRepeat="no-repeat"
+            backgroundSize={'cover'}
         >
 
-            <Heading as={'h3'} size='md' mb={5}>Địa điểm cụ thể</Heading>
-            <Button
-                position="absolute"
-                fontWeight="700"
-                height="40px"
-                padding="2px 10px"
-                color="#000"
-                backgroundColor="#fff"
-                border="2px solid #000"
+            <Heading as={'h3'} size='md' mb={5} textAlign={"center"}>Địa điểm cụ thể</Heading>
+            <Box 
+                position={["unset", "absolute"]}
+                display="flex"
                 top="50%"
                 left="50%"
                 transform="translate(-50%,-50"
-                onClick={onOpen}
+                justifyContent={'center'}
             >
-                Xem bản đồ
-            </Button>
+                <Button
+
+                    fontWeight="700"
+                    height="40px"
+                    padding="2px 10px"
+                    color="#000"
+                    backgroundColor="#fff"
+                    border="2px solid #000"
+                    onClick={onOpen}
+                >
+                    Xem bản đồ
+                </Button>
+            </Box>    
             <ModalMap
                 info={info}
                 isOpen={isOpen}

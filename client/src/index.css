@@ -5,6 +5,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+.custom_btn {
+  background: linear-gradient(
+    214.02deg,
+    #d71479 6.04%,
+    #df2a65 26.68%,
+    #e7444d 49.32%,
+    #ef5939 68.78%,
+    #f87421 92.95%
+  ) !important;
+  color: #f5f5ff !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+.custom_text {
+  background: linear-gradient(214.02deg, #d71479 6.04%, #df2a65 26.68%, #e7444d 49.32%, #ef5939 68.78%, #f87421 92.95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 /* body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #f7e8e8;
@@ -20,7 +41,9 @@ code {
 
 .rc-rate-star-half .rc-rate-star-first,
 .rc-rate-star-full .rc-rate-star-second {
-  color: #c53030 !important;
+  background: linear-gradient(214.02deg, #d71479 6.04%, #df2a65 26.68%, #e7444d 49.32%, #ef5939 68.78%, #f87421 92.95%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .rc-rate-star {
   color: #aaa !important;
@@ -174,11 +197,29 @@ a.mapboxgl-ctrl-logo {
 .popup_info h3 {
   font-weight: 700;
 }
+.box-shadow {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+.exploreHeader {
+  position: absolute;
+  top: 60px;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  margin-bottom: 24px;
+  background: linear-gradient(180deg, #fca1bf, #fbfbfb);
+  z-index: -1;
+}
 @media (max-width: 768px) {
   .rc-rate-star {
     margin-right: 0 !important;
   }
   .desktop {
     display: none;
+  }
+  .exploreHeader {
+    top: 43px;
   }
 }

@@ -1,6 +1,8 @@
 const Places = require('../models/PlaceModel.js')
 const APIfeatures = require('../lib/features')
 const moment = require('moment')
+const MapPlaceModel = require('../models/MapPlaceModel.js')
+const { default: mongoose } = require('mongoose')
 const PlaceCtrl = {
 
     getPlaces: async (req, res) => {
@@ -18,7 +20,7 @@ const PlaceCtrl = {
     },
     getPlaceSingle: async (req, res) => {
         try {
-            const place = await Places.findById(req.params.id).populate('type utities')
+            const place = await Places.findOne({ _id: req.params.id }).populate('type utities')
                 .populate({
                     path: "reviews",
                     populate: {
@@ -53,7 +55,9 @@ const PlaceCtrl = {
                 instagram,
                 email,
                 website,
-                images
+                images,
+                long,
+                lat
             }
                 = req.body
 
@@ -77,7 +81,13 @@ const PlaceCtrl = {
                 website,
                 images
             })
+            const newMapPlace = new MapPlaceModel({
+                long,
+                lat,
+                place: newPlace._id
+            })
             await newPlace.save()
+            await newMapPlace.save()
             res.json({
                 msg: 'Thêm địa điểm thành công',
                 newPlace: {
@@ -88,11 +98,68 @@ const PlaceCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    updatePlace: async (req, res) => {
+        try {
+            const {
+                id,
+                name,
+                area,
+                address,
+                direct,
+                intro,
+                owner,
+                time,
+                price,
+                type,
+                utities,
+                phone,
+                facbook,
+                instagram,
+                email,
+                website,
+                images,
+                long,
+                lat
+            }
+                = req.body
+    
+            const place = await Places.findOneAndUpdate({ _id: id} , {
+                name,
+                area,
+                address,
+                direct,
+                intro,
+                owner,
+                time,
+                price,
+                type,
+                utities,
+                phone,
+                facbook,
+                instagram,
+                email,
+                website,
+                images,
+            })
+            console.log(place);
+            res.json({ msg: "Updated a place" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     searchPlaces: async (req, res) => {
         try {
             const places = await Places.find({ name: { $regex: req.query.name } })
                 .limit(10)
             res.json({ places })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    getPlaceAll: async (req, res) => {
+        try {
+            const result = await MapPlaceModel.find().populate('place')
+            res.json(result);
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
@@ -174,24 +241,11 @@ const PlaceCtrl = {
                 data.push(...places)
 
             }
-
-
             res.json({ data })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     }
-    // searchAllPlace: async (req, res) => {
-    //     try {
-    //         const places = await Places.find({
-    //             area: { $all: ["62530f1b0bb18e51db340049", "62530f1b0bb18e51db340049/"] }
-    //         })
-    //         res.json(places);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message })
-    //     }
-    // }
-
 }
 
 module.exports = PlaceCtrl

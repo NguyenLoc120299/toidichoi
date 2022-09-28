@@ -26,6 +26,7 @@ const ReviewItem = (props) => {
                         content={props.content}
                         createdAt={props.createdAt}
                         images={props.images}
+                        id={props.reviewUserId}
                     />
 
                     <ReviewAction

@@ -67,6 +67,39 @@ export const login = (formData) => async (dispatch) => {
         })
     }
 }
+export const googleLogin = (id_token) => async (dispatch) => {
+    try {
+        dispatch(
+            {
+                type: ALERT_ACTION.ALERT,
+                payload:
+                    { loading: true }
+            }
+        )
+        const res = await postDataAPI('googleLogin', { id_token })
+        console.log(res.data.user);
+        dispatch({
+            type: AUTH_ACTIONS.AUTH,
+            payload: {
+                token: res.data.access_token,
+                user: res.data.user
+            }
+        })
+        localStorage.setItem("firstLogin", true)
+        dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload: {}
+        })
+    } catch (error) {
+        return dispatch({
+            type: ALERT_ACTION.ALERT,
+            payload:
+            {
+                err: error.response.data.msg
+            }
+        })
+    }
+}
 export const refreshToken = () => async (dispatch) => {
     const firstLogin = localStorage.getItem("firstLogin")
     if (firstLogin) {
@@ -95,11 +128,11 @@ export const refreshToken = () => async (dispatch) => {
     }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = (token) => async (dispatch) => {
     try {
         localStorage.removeItem('firstLogin')
-        await postDataAPI('logout')
-        window.location.href = "/"
+        await postDataAPI('logout', null, token)
+        dispatch({ type: AUTH_ACTIONS.AUTH, payload: {} })
     } catch (err) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -128,6 +161,7 @@ export const updateProfile = (username, files, auth) => async (dispatch) => {
     try {
         const avatar = (await uploadImage(files))[0]
         const res = await patchDataAPI('profile', { username, avatar }, auth.token)
+        console.log(res.data);
         dispatch({
             type: AUTH_ACTIONS.UPDATE,
             payload: res.data

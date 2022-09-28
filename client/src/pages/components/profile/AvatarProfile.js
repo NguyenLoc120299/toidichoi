@@ -3,13 +3,13 @@ import React from 'react'
 import { BsCameraFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile } from '../../../redux/actions/authAction'
-const AvatarProfile = () => {
+const AvatarProfile = ({ user }) => {
+
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-    const { user } = auth
     const handleOnchangeAvatar = (e) => {
         const files = [...e.target.files]
-        dispatch(updateProfile(auth.user.username, files, auth))
+        dispatch(updateProfile(user.username, files, auth))
     }
     return (
         <Box
@@ -24,7 +24,7 @@ const AvatarProfile = () => {
                 padding={'20px 40px'}
                 borderBottomLeftRadius='16px'
                 borderBottomRightRadius='16px'
-                background='linear-gradient(180deg,#ffb8b8,#fafafa)'
+                className='custom_btn'
             >
                 <Center
                     flexDirection={'column'}

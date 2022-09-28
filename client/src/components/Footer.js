@@ -4,6 +4,7 @@ import style from '../style.module.css'
 import { logo } from './Navbar'
 import { FaRegHandshake } from 'react-icons/fa'
 import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <div className={style.footer}>
@@ -14,10 +15,10 @@ const Footer = () => {
                             {logo}
                         </Flex>
                     </Center>
-                    <Center >
-                        <div className={style.contact}>
+                    <Center mt={10}>
+                        <a className={style.contact} href={'https://www.facebook.com/loc120299/'} target={"_blank"}>
                             <FaRegHandshake style={{ fontSize: "30px", marginRight: "10px" }} />  Hợp tác với chúng tôi
-                        </div>
+                        </a>
                     </Center>
 
                 </Box>
@@ -35,7 +36,9 @@ const Footer = () => {
                                     Giải đáp thắc mắc
                                 </li>
                                 <li>
-                                    Liên hệ
+                                    <Link to="/contact">
+                                        Liên hệ
+                                    </Link>
                                 </li>
                                 <li>
                                     Điều khoản sử dụng
@@ -52,15 +55,22 @@ const Footer = () => {
                                 Theo dõi chúng tôi trên
                             </div>
                             <ul className={style.text}>
-                                <li>
-                                    <span><FaFacebookF /> </span> Facebook
+                                <li >
+                                    <a href="#" className='facebook_icon'>
+                                        <i className="fab fa-facebook" style={{ paddingRight: "12px" }}></i> {" "}
+                                        <span>Facebook</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <span><FaInstagram /></span> Instagram
+                                <li className='instagram_icon'>
+                                    <a href="#" className='instagram_icon'>
+                                        <i className="fab fa-instagram" style={{ paddingRight: "12px" }}></i> {" "}
+                                        <span>Instagram</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <span><FaTiktok /></span>  Tiktok
-                                </li>
+                                <a href='#' className='tiktok_icon'>
+                                    <i className="fab fa-tiktok" style={{ paddingRight: "12px" }}></i> {" "}
+                                    <span >Tiktok</span>
+                                </a>
                             </ul>
                         </div>
 

@@ -55,7 +55,12 @@ const PlaceSchema = new mongoose.Schema({
     reviews: [{
         type: mongoose.Types.ObjectId,
         ref: 'review'
-    }]
+    }],
+    isShow: {
+        type:Boolean,
+        required:true,
+        default:false
+    }
 
 
 

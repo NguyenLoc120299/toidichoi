@@ -3,6 +3,7 @@ const Places = require('../models/PlaceModel')
 const formatDate = require('../lib/moment')
 const { default: mongoose } = require('mongoose')
 const Users = require('../models/UserModel')
+const Pagination = require('../lib/pagination')
 const reviewCtrl = {
     createReview: async (req, res) => {
         try {
@@ -41,8 +42,7 @@ const reviewCtrl = {
         }
     },
     getListReviewsByUser: async (req, res) => {
-        const { id } = req.user
-
+        const { id } = req.params
         try {
             const result = await Reviews.aggregate(
                 [
@@ -171,79 +171,101 @@ const reviewCtrl = {
         }
     },
     getListReviews: async (req, res) => {
-
+        const { limit, skip } = Pagination(req)
         try {
-            const result = await Reviews.aggregate(
+            const result = await Reviews.aggregate([
+                {
+                    $facet: {
+                        totalData:
+                            [
 
-                [
-
-                    {
-                        $lookup: {
-                            from: "users",
-                            let: { user_id: "$user" },
-                            pipeline: [
-                                { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
-                                { $project: { username: 1, avatar: 1 } }
-                            ],
-                            as: "user"
-                        }
-                    },
-                    // array -> object
-                    { $unwind: "$user" },
-
-                    //place
-                    {
-                        $lookup: {
-                            from: "places",
-                            let: { place_id: "$placeId" },
-                            pipeline: [
-                                { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
-                                { $project: { name: 1, rate: 1 } }
-                            ],
-                            as: "placeId"
-                        }
-                    },
-                    //array -> Object
-                    { $unwind: "$placeId" },
-
-
-                    // comments
-                    {
-                        $lookup: {
-                            from: "comments",
-                            let: { cmts_id: "$comments" },
-                            pipeline: [
-                                { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
                                 {
                                     $lookup: {
                                         from: "users",
                                         let: { user_id: "$user" },
                                         pipeline: [
-                                            {
-                                                $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
-                                            }
+                                            { $match: { $expr: { $eq: ["$_id", "$$user_id"] } } },
+                                            { $project: { username: 1, avatar: 1 } }
                                         ],
                                         as: "user"
-                                    },
+                                    }
+                                },
+                                // array -> object
+                                { $unwind: "$user" },
+
+                                //place
+                                {
+                                    $lookup: {
+                                        from: "places",
+                                        let: { place_id: "$placeId" },
+                                        pipeline: [
+                                            { $match: { $expr: { $eq: ["$_id", "$$place_id"] } } },
+                                            { $project: { name: 1, rate: 1 } }
+                                        ],
+                                        as: "placeId"
+                                    }
+                                },
+                                //array -> Object
+                                { $unwind: "$placeId" },
+
+
+                                // comments
+                                {
+                                    $lookup: {
+                                        from: "comments",
+                                        let: { cmts_id: "$comments" },
+                                        pipeline: [
+                                            { $match: { $expr: { $in: ["$_id", "$$cmts_id"] } } },
+                                            {
+                                                $lookup: {
+                                                    from: "users",
+                                                    let: { user_id: "$user" },
+                                                    pipeline: [
+                                                        {
+                                                            $match: { $expr: { $eq: ["$_id", "$$user_id"] } },
+                                                        }
+                                                    ],
+                                                    as: "user"
+                                                },
+                                            },
+                                            {
+                                                $unwind: "$user"
+                                            }
+                                        ],
+                                        as: "comments"
+                                    }
+                                },
+
+
+                                //sorting
+
+                                { $sort: { "createdAt": -1 } },
+                                {
+                                    $skip: skip
                                 },
                                 {
-                                    $unwind: "$user"
-                                }
+                                    $limit: limit
+                                },
+
+
+
+
                             ],
-                            as: "comments"
-                        }
-                    },
+                        totalCount: [
+                            { $count: 'count' },
+                        ]
+                    }
+                }
 
-
-                    //sorting
-
-                    { $sort: { "createdAt": -1 } },
-
-
-                ]
+            ]
             )
+            // console.log(result[0].totalData);
+            const total = result[0].totalCount[0].count
+            res.json({
+                total,
+                places: result[0].totalData,
 
-            res.json(result)
+            })
         } catch (error) {
             return res.status(500).json({
                 msg: error.message

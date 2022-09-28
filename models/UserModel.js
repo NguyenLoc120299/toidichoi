@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: 'https://lh3.googleusercontent.com/a-/AOh14GiaOvzSFbQSM92HRkDoeiOU0vYCPM287Pif3iYaBg=s96-c',
+        default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png',
         required: true
     },
     role: {
@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema({
     },
     followers: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
     following: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
+    type: {
+        type: String,
+        default: 'account',
+        required: true
+    },
+    rf_token: { type: String, select: false }
 }, {
     timestamps: true
 })

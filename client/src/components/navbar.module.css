@@ -9,12 +9,20 @@
     width: 15px;
 }
 .links {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 500;
     font-family: "Paytone One", sans-serif;
 }
 .links span {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.nav {
+    box-shadow: 0 2px 4px 0 hsl(0deg 0% 71% / 50%);
+}
+@media (max-width: 678px) {
+    .logo {
+        font-size: 18px;
+    }
 }

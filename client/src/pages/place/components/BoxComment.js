@@ -1,5 +1,7 @@
 import { Avatar, Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { auth } from '../../../firebase'
 import { formatTime } from '../../components/helper/moment'
 import ImageLightbox from './ImageLightbox'
 
@@ -39,7 +41,9 @@ const BoxComment = (props) => {
                         mr={5}
                     />{' '}
                     <Box display={'flex'} justifyContent={'space-between'}>
-                        <Heading as={'h3'} size={'sm'} mb={1}>{props.username}</Heading>
+                        <Link to={`/profile/${props.id}`}>
+                            <Heading as={'h3'} size={'sm'} mb={1}>{props.username}</Heading>
+                        </Link>
                     </Box>
                 </Box>
 

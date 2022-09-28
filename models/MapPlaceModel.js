@@ -9,7 +9,7 @@ const mapSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    place: { type: mongoose.Types.ObjectId, ref: 'place' },
+    place: { type: mongoose.Types.ObjectId, ref: 'Place' },
 }, {
     timestamps: true
 })

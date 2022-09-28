@@ -4,6 +4,7 @@ import style from './categories.module.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const Categories = () => {
     const { categories } = useSelector(state => state)
 
@@ -17,7 +18,7 @@ const Categories = () => {
                     spaceBetween={30}
                     slidesPerView={3}
                     autoplay={{
-                        delay: 2500,
+                        delay: 2000,
                         disableOnInteraction: false,
                     }}
                     pagination={{
@@ -42,19 +43,19 @@ const Categories = () => {
                         categories.data.length > 0 ?
                             categories?.data.map(item => (
                                 <SwiperSlide key={item._id}>
-                                    <div className={style.card_slide}>
+                                    <Link to={`/search?type=${item.name}`} className={style.card_slide}>
                                         <img src={item.image} alt={item.image} />
                                         <div className={style.category}>
                                             <Center>
                                                 <span>{item.name}</span>
                                             </Center>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </SwiperSlide>
                             ))
                             :
-                            [1, 2, 3].map(item => (
-                                <SwiperSlide key={item._id}>
+                            [1, 2, 3].map((item, index) => (
+                                <SwiperSlide key={index}>
                                     <div className={style.card_slide}>
                                         <Skeleton />
                                     </div>

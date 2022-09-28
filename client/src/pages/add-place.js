@@ -125,7 +125,7 @@ const Place = () => {
                 <section >
                     <h3 className={style.text2}>Thông tin khác</h3>
                     <div className={style.content}>
-                        <Flex justifyContent={"space-between"} direction={['column', 'row']} mb={3}>
+                        <Flex justifyContent={"space-between"} direction={['column', 'row']} mb={3} gap={[0, 20]}>
                             <FormControl mb={3} display={['block', 'flex']} alignItems={'center'} isInvalid={err.time_min}>
                                 <FormLabel w={'150px'}>Thời gian mở cửa</FormLabel>
                                 <Box>
@@ -149,7 +149,7 @@ const Place = () => {
                                 </Box>
                             </FormControl>
                         </Flex>
-                        <Flex justifyContent={"space-between"} direction={['column', 'row']} mb={3}>
+                        <Flex justifyContent={"space-between"} direction={['column', 'row']} mb={3} gap={[0, 20]}>
                             <FormControl mb={3} display={['block', 'flex']} alignItems={'center'} isInvalid={err.price_min}>
                                 <FormLabel w={'150px'}>Khoảng giá</FormLabel>
                                 <Box>
@@ -263,7 +263,7 @@ const Place = () => {
                     <div>Chọn tối đa 20 ảnh</div>
                 </section> */}
                 <section>
-                    <Button colorScheme='red' size='lg' w={'100%'} mt={5} isLoading={alert.loading} onClick={() => onSubmit()}>
+                    <Button className="custom_btn" size='lg' w={'100%'} mt={5} isLoading={alert.loading} onClick={() => onSubmit()}>
                         + Thêm địa điểm
                     </Button>
                 </section>

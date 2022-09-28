@@ -6,12 +6,11 @@
         display: block;
         height: 30vh;
         width: 100%;
-        background: rgb(59, 56, 56);
+        background: rgb(26, 25, 25);
         position: relative;
         display: grid;
         align-items: center;
         padding: 0 20px;
-        font-family: "Paytone One", sans-serif;
     }
     .contact {
         border: 2px solid #fff;
@@ -26,22 +25,25 @@
         justify-content: center;
         align-items: center;
     }
-    .contact:hover {
+    /* .contact:hover {
         border: 2px solid rgb(236, 41, 41);
-    }
+        color: rgb(236, 41, 41); 
+    } */
     .title {
         font-size: 20px;
         line-height: 24px;
         color: #fff;
+        font-weight: 700;
     }
     ul.text li {
         list-style: none;
         font-size: 15px;
         color: #fff;
-        line-height: 24px;
+        line-height: 35px;
         display: flex;
         align-items: center;
         cursor: pointer;
+        font-weight: 500;
     }
     ul.text li span {
         font-size: 15px;
