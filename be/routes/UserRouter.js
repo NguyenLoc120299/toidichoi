@@ -14,4 +14,8 @@ router.get('/user-trending', userCtrl.getUserTrending)
 
 router.get('/user/:id', userCtrl.getProfile)
 
+router.patch('/user/:id/follow', auth, userCtrl.follow)
+
+router.patch('/user/:id/unfollow', auth, userCtrl.unfollow)
+
 module.exports = router

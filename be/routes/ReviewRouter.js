@@ -18,6 +18,6 @@ router.patch('/review/:id/unlike', auth, reviewCtrl.unLikeReview)
 
 router.get('/listAll-reviews', reviewCtrl.getListReviews)
 
-
+router.get('/viewsByFollowing', auth, reviewCtrl.getReviewByUserFollow)
 
 module.exports = router
