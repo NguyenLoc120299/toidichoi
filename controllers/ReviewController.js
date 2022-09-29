@@ -390,6 +390,15 @@ const reviewCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-
+    getReviewByUserFollow: async (req, res) => {
+        try {
+            const reviews = await Reviews.find({
+                user: [...req.user.following, req.user._id]
+            })
+            return res.json(reviews)
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    }
 }
 module.exports = reviewCtrl
