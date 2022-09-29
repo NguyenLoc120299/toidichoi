@@ -16,7 +16,7 @@ const ProfileContainer = ({ user }) => {
     const getReviewByAuth = async (id) => {
         try {
             const res = await getDataAPI(`list-reviews/${id}`,)
-            if (res.data)
+            if (res && res.data)
                 setReviews(res.data)
         } catch (error) {
             dispatch({

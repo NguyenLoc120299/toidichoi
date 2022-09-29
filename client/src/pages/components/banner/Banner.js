@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useClickOutSide from '../../../customHooks/clickOutSide';
 
 export const renderPlacesAll = (placeSearch, styles, valueSearch) => {
+  
     return (
         <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
             <div className={styles.listPlace}>
@@ -37,10 +38,10 @@ export const renderPlacesAll = (placeSearch, styles, valueSearch) => {
         </Box >
     )
 }
-export const renderSearch = (dataPlaceOffer, styles) => {
+export const renderSearch = (dataPlaceOffer, styles, closeDrawer) => {
     return (
-        <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
-            <Link to={'/search'} className={styles.searchItem}>
+        <Box width={['100%', '700px']} bg="#fff" p={"14px"} onClick={closeDrawer} >
+            <Link to={'/search'} className={styles.searchItem} >
                 <FaLocationArrow style={{ marginRight: '10px', fontSize: '30px' }} />
                 <span>Tìm quanh đây</span>
             </Link>
@@ -139,6 +140,14 @@ const Banner = () => {
         const value = e.target.value
         setValueSearch(value)
     }
+    const closeDrawer = () => {
+        dispatch({
+            type: ALERT_ACTION.TOGGLESEARCH,
+            payload: {
+                isShowModalSearch: false
+            }
+        })
+    }
     useEffect(() => {
         const keyDownHandler = event => {
             if (event.key === 'Enter') {
@@ -151,6 +160,7 @@ const Banner = () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
     }, [valueSearch]);
+    
     return (
         <div className={`${styles.banner} ${isShowSearchBox && styles.showSearchBox}`}>
 
@@ -199,7 +209,7 @@ const Banner = () => {
 
 
                                 {
-                                    valueSearch.length > 0 && isShowSearchBox ? renderPlacesAll(placeSearch, styles, valueSearch) : isShowSearchBox && renderSearch(dataPlaceOffer, styles)
+                                    valueSearch.length > 0 && isShowSearchBox ? renderPlacesAll(placeSearch, styles, valueSearch, closeDrawer) : isShowSearchBox && renderSearch(dataPlaceOffer, styles, closeDrawer)
 
                                 }
 
@@ -211,7 +221,7 @@ const Banner = () => {
                             >
                                 <i className="fas fa-search" style={{ marginRight: '5px' }}></i>  Tìm kiếm
                             </Button>
-                        </Flex>8
+                        </Flex>
                         <Button
                             borderRadius={'8px'} size='md'
                             minW={"250px"}

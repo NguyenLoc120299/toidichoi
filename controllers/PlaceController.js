@@ -7,7 +7,7 @@ const PlaceCtrl = {
 
     getPlaces: async (req, res) => {
         try {
-            const features = new APIfeatures(Places.find(), req.query).paginating()
+            const features = new APIfeatures(Places.find(), req.query).paginating().sorting()
             const places = await features.query
             res.json({
                 msg: 'Success',

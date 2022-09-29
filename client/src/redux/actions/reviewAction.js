@@ -18,7 +18,6 @@ export const REVIEW_ACTIONS = {
     UPDATE_COMMENT_REVIEW_EXPLORE: "UPDATE_COMMENT_REVIEW_EXPLORE",
     CALLBACK_REVIEW: "CALLBACK_REVIEW"
 }
-
 export const createReview = (place, formData, images, rate, auth) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
@@ -55,7 +54,6 @@ export const createReview = (place, formData, images, rate, auth) => async (disp
     }
 
 }
-
 export const getReviewByPlace = (placeId) => async (dispatch) => {
     try {
         if (placeId) {
@@ -75,7 +73,6 @@ export const getReviewByPlace = (placeId) => async (dispatch) => {
         })
     }
 }
-
 export const likeReview = (auth, review, socket, pathname) => async (dispatch) => {
     try {
         if (dispatch(checkLogin(auth))) {
@@ -109,12 +106,6 @@ export const likeReview = (auth, review, socket, pathname) => async (dispatch) =
         }
     } catch (error) {
         console.log(error);
-        // dispatch({
-        //     type: ALERT_ACTION.ALERT,
-        //     payload: {
-        //         err: error.response.data.msg
-        //     }
-        // })
     }
 }
 
@@ -141,7 +132,6 @@ export const unLikeReview = (auth, review, socket, pathname) => async (dispatch)
             image: review?.images[0]
         }
         dispatch(removeNotify(msg, auth, socket))
-
     } catch (error) {
         dispatch({
             type: ALERT_ACTION.ALERT,
@@ -151,7 +141,6 @@ export const unLikeReview = (auth, review, socket, pathname) => async (dispatch)
         })
     }
 }
-
 export const createComment = (auth, content, reviewId, reviewUserId, location, socket) => async (dispatch) => {
     try {
         const res = await postDataAPI('comment', {
@@ -195,28 +184,25 @@ export const createComment = (auth, content, reviewId, reviewUserId, location, s
         })
     }
 }
-
 export const getReviewByAuth = (id) => async (dispatch) => {
     try {
         const res = await getDataAPI(`list-reviews/${id}`,)
-        if (res.data)
+        if (res && res.data)
             dispatch({
                 type: AUTH_ACTIONS.REVIEW,
                 payload: res.data
             })
     } catch (error) {
-        dispatch({
-            type: ALERT_ACTION.ALERT,
-            payload: {
-                err: error.response.data.msg
-            }
-        })
+        console.log(error);
     }
 }
-
-export const getListAllReviews = (page, limit) => async (dispatch) => {
+export const getListAllReviews = (page, limit, typeExplore, auth) => async (dispatch) => {
     try {
-        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        let res
+        if (typeExplore === 1)
+            res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        else
+            res = await getDataAPI(`viewsByFollowing?page${page}&limit=${limit}`, auth.token)
         if (res && res.data)
             dispatch({
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS,
@@ -231,21 +217,27 @@ export const getListAllReviews = (page, limit) => async (dispatch) => {
         })
     }
 }
-export const getListAllReviewsFirst = (page, limit) => async (dispatch) => {
+export const getListAllReviewsFirst = (page, limit, typeExplore, auth) => async (dispatch) => {
     try {
-        const res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        let res
+        if (typeExplore === 1)
+            res = await getDataAPI(`listAll-reviews?page=${page}&limit=${limit}`)
+        else
+            res = await getDataAPI(`viewsByFollowing`, auth.token)
+        console.log(res.data);
         if (res && res.data)
             dispatch({
                 type: REVIEW_ACTIONS.LISTS_ALL_REVIEWS_FIRST,
                 payload: res.data
             })
     } catch (error) {
-        dispatch({
-            type: ALERT_ACTION.ALERT,
-            payload: {
-                err: error.response.data.msg
-            }
-        })
+        // dispatch({
+        //     type: ALERT_ACTION.ALERT,
+        //     payload: {
+        //         err: error.response.data.msg
+        //     }
+        // })
+        console.log(error);
     }
 }
 export const updateReviewProfile = (item, content) => dispatch => {

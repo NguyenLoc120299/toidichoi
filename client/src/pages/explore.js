@@ -11,17 +11,27 @@ const Explore = () => {
     const { explore, total } = useSelector(state => state.review)
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
-    const limit = 5
+    const [typeExplore, setTypeExplore] = useState(1)
+    const limit = 10
+    const auth= useSelector(state=>state.auth)
     const pageCount = Math.ceil(total / limit);
-
+    const [isScroll, setIsScroll] = useState(false)
     useEffect(() => {
         scrollToTop()
-        dispatch(getListAllReviewsFirst(page, limit))
+    
     }, [])
+    useEffect(()=>{
+        dispatch(getListAllReviewsFirst(page, limit, typeExplore, auth))
+    },[typeExplore])
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setIsScroll(window.scrollY > 20);
+        });
+    }, []);
     const fetchMoreData = () => {
         const currentPage = page + 1
-        dispatch(getListAllReviews(currentPage, limit))
-        // if (currentPage * limit >= total) setHasMore(false)
+        dispatch(getListAllReviews(currentPage, limit, typeExplore, auth))
+        if (pageCount===currentPage) setHasMore(false)
     };
     return (
         <Box
@@ -29,8 +39,33 @@ const Explore = () => {
             h="100%"
             minH={'calc(100vh - 360px)'}
         >
+            {
+                auth?.token &&
+                <Box w={"100%"} position={'sticky'} top={0} zIndex={99}>
+                    <Flex w={'100%'} justifyContent={'center'} gap={6} bg={isScroll && 'white'} padding={'15px 0'}>
+                        <Box
+                            fontSize={'16px'}
+                            fontWeight={700}
+                            color={"#000"}
+                            borderBottom={typeExplore === 1 && 'solid 2px #E33858'}
+                            cursor={'pointer'}
+                            onClick={() => setTypeExplore(1)}
+                        >Review nổi bật</Box>
+                        <Box
+                            fontSize={'16px'}
+                            fontWeight={700}
+                            color={"#000"}
+                            borderBottom={typeExplore === 2 && 'solid 2px #E33858'}
+                            cursor={'pointer'}
+                            onClick={() => setTypeExplore(2)}
+                        >Đang theo dõi</Box>
+                    </Flex>
+                </Box>
+            }
+            
             <Container maxW={'1280px'} py="10px">
                 <div class="exploreHeader"></div>
+
                 <Grid templateColumns={"repeat(3, 1fr)"} gap="20px">
                     <GridItem colSpan={[3, 2]}>
                         <InfiniteScroll

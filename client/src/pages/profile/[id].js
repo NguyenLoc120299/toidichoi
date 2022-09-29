@@ -1,4 +1,4 @@
-import { Box, Center, Container, Text, useDisclosure } from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -11,12 +11,14 @@ import { scrollToTop } from '../../untils/helper'
 import { getDataAPI } from '../../untils/fetchData'
 const Profile = () => {
     const auth = useSelector(state => state.auth)
+    const [callBack, setCallBack] = useState(false)
     const [profile, setProfile] = useState(null)
     const { id } = useParams()
     const dispatch = useDispatch()
     const getReviewOfProfile = (id) => {
         dispatch(getReviewByAuth(id))
     }
+
     const getProfileDetail = async (id) => {
         try {
             const res = await getDataAPI(`user/${id}`)
@@ -26,12 +28,14 @@ const Profile = () => {
             console.log(error);
         }
     }
+    const toggleCallBack = () => {
+        setCallBack(!callBack)
+    }
     useEffect(() => {
         if (id) {
-            getProfileDetail(id)
-            getReviewOfProfile(id)
+            Promise.all([getProfileDetail(id), getReviewOfProfile(id)])
         }
-    }, [id])
+    }, [id, callBack])
     useEffect(() => {
         scrollToTop()
 
@@ -39,8 +43,14 @@ const Profile = () => {
     return (
         <Container maxW={'1280px'}>
             <AvatarProfile user={profile} />
-            <ProfileNavigation />
-            <ProfileContainer user={profile} />
+            {
+                profile &&
+                <>
+                    <ProfileNavigation user={profile} toggleCallBack={toggleCallBack} />
+                    <ProfileContainer user={profile} />
+                </>
+            }
+
         </Container>
     )
 }

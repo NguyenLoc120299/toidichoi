@@ -12,12 +12,6 @@ const alertReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reviews: action.payload.dataReview,
-                status: {
-                    totalReview: action.payload.dataReview.length,
-                    countLikes: action.payload.countLikes,
-                    countComments: action.payload.countComments,
-                    dateJoin: state.user.createdAt
-                }
             }
         case AUTH_ACTIONS.UPDATE:
 

@@ -47,6 +47,14 @@ const ModalSearch = () => {
             handleOnChange(valueSearch)
         }
     }, [valueSearch])
+    const closeDrawer = () => {
+        dispatch({
+            type: ALERT_ACTION.TOGGLESEARCH,
+            payload: {
+                isShowModalSearch: false
+            }
+        })
+    }
     return (
         <Drawer isOpen={alert?.isShowModalSearch} size={'full'} placement={"right"} >
             <DrawerOverlay />
@@ -112,19 +120,12 @@ const ModalSearch = () => {
                             }
                         </Box>
 
-                        <h3 className="searchCancel" onClick={() => {
-                            dispatch({
-                                type: ALERT_ACTION.TOGGLESEARCH,
-                                payload: {
-                                    isShowModalSearch: false
-                                }
-                            })
-                        }}>Huỷ</h3>
+                        <h3 className="searchCancel" onClick={closeDrawer}>Huỷ</h3>
 
                     </Flex>
                 </DrawerHeader>
 
-                {valueSearch.length > 0 ? renderPlacesAll(placeSearch, styles, valueSearch) : renderSearch(dataPlaceOffer, styles)}
+                {valueSearch.length > 0 ? renderPlacesAll(placeSearch, styles, valueSearch, closeDrawer) : renderSearch(dataPlaceOffer, styles, closeDrawer)}
             </DrawerContent>
         </Drawer>
     )

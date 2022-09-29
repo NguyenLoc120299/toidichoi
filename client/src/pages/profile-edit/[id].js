@@ -5,6 +5,7 @@ import style from './style.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useToast } from '@chakra-ui/react'
 import NottFound from '../../components/NotFound'
+import { updateProfile } from '../../redux/actions/authAction'
 const Setting = () => {
     const toast = useToast()
     const auth = useSelector(state => state.auth)
@@ -15,6 +16,13 @@ const Setting = () => {
         isUserName: false,
         isPassword: false,
     })
+    const [valueInput,setValueInput] = useState({
+        username:''
+    })
+    const onSubmit=()=>{
+        dispatch(updateProfile(valueInput.username,false, auth))
+        toggleFormEdit()
+    }
     const msg = (text = "Chức năng sẽ được update sau") => {
         toast({
             title: text,
@@ -36,10 +44,10 @@ const Setting = () => {
         return (
             <div className={style.form}>
                 <div className={style.input}>
-                    <input placeholder='Tên hiển thị' />
+                    <input placeholder='Tên hiển thị' value={valueInput.username} onChange={e=>setValueInput({...valueInput,username:e.target.value})} />
                 </div>
                 <div className={style.button}>
-                    <button className={`${style.submit} custom_btn`}>Cập nhật</button>
+                    <button className={`${style.submit} custom_btn`} onClick={onSubmit}>Cập nhật</button>
                     <button onClick={() => toggleFormEdit({ name: type })}>Hủy</button>
                 </div>
             </div>

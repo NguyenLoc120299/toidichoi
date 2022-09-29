@@ -4,6 +4,7 @@ const formatDate = require('../lib/moment')
 const { default: mongoose } = require('mongoose')
 const Users = require('../models/UserModel')
 const Pagination = require('../lib/pagination')
+const APIfeatures = require('../lib/features')
 const reviewCtrl = {
     createReview: async (req, res) => {
         try {
@@ -311,6 +312,7 @@ const reviewCtrl = {
 
                 })
 
+
             // const review = await Reviews.aggregate([
             //     {
             //         $match:{
@@ -392,10 +394,17 @@ const reviewCtrl = {
     },
     getReviewByUserFollow: async (req, res) => {
         try {
-            const reviews = await Reviews.find({
+            // const reviews = await Reviews.find({
+            //     user: [...req.user.following, req.user._id]
+            // }).populate('placeId')
+            const features = new APIfeatures(Reviews.find({
                 user: [...req.user.following, req.user._id]
+            }).populate('placeId user'), req.query).paginating()
+            const reviews = await features.query
+            return res.json({
+                total: reviews.length,
+                places: reviews
             })
-            return res.json(reviews)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }

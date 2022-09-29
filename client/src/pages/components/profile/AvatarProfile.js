@@ -53,37 +53,40 @@ const AvatarProfile = ({ user }) => {
                             >
 
                             </Box>
-                            <Box
-                                background={"#ddd"}
-                                position={"absolute"}
-                                top="auto"
-                                right="20px"
-                                bottom={'10px'}
-                                left='auto'
-                                cursor={'pointer'}
-                                w={"38px"}
-                                h={'38px'}
-                                fontSize={"20px"}
-                                lineHeight={"38px"}
-                                textAlign={"center"}
-                                borderRadius={"50%"}
-                                color="#404040"
-                                display={'flex'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                            >
-                                <Center>
-                                    <label htmlFor='upload_avatar'>
-                                        <BsCameraFill style={{ cursor: 'pointer' }} />
-                                        <input type="file"
-                                            name='file'
-                                            multiple
-                                            style={{ display: "none" }}
-                                            onChange={handleOnchangeAvatar}
-                                            id='upload_avatar'></input>
-                                    </label>
-                                </Center>
-                            </Box>
+                                {
+                                auth && auth.user && auth.user._id === user._id && <Box
+                                    background={"#ddd"}
+                                    position={"absolute"}
+                                    top="auto"
+                                    right="20px"
+                                    bottom={'10px'}
+                                    left='auto'
+                                    cursor={'pointer'}
+                                    w={"38px"}
+                                    h={'38px'}
+                                    fontSize={"20px"}
+                                    lineHeight={"38px"}
+                                    textAlign={"center"}
+                                    borderRadius={"50%"}
+                                    color="#404040"
+                                    display={'flex'}
+                                    justifyContent={'center'}
+                                    alignItems={'center'}
+                                >
+                                    <Center>
+                                        <label htmlFor='upload_avatar'>
+                                            <BsCameraFill style={{ cursor: 'pointer' }} />
+                                            <input type="file"
+                                                name='file'
+                                                multiple
+                                                style={{ display: "none" }}
+                                                onChange={handleOnchangeAvatar}
+                                                id='upload_avatar'></input>
+                                        </label>
+                                    </Center>
+                                </Box>
+                                }
+                         
 
                         </Box> :
                             <SkeletonCircle
@@ -93,7 +96,6 @@ const AvatarProfile = ({ user }) => {
                                 borderRadius="50%"
                                 background="#fff"
                             />
-
                     }
                     {
                         user ? <Text as={'h1'}
@@ -107,9 +109,6 @@ const AvatarProfile = ({ user }) => {
                             :
                             <Skeleton height='20px' />
                     }
-
-
-
                 </Center>
             </Center>
         </Box>

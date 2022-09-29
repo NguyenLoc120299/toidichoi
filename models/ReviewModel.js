@@ -22,11 +22,14 @@ const reviewSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'user'
     },
-    comments:[{
-        type:mongoose.Types.ObjectId,
-        ref:'comment'
+    comments: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'comment'
     }],
-    placeId: mongoose.Types.ObjectId,
+    placeId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Place'
+    }
 }, {
     timestamps: true
 })
