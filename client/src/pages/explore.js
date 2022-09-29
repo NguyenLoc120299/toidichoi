@@ -41,7 +41,7 @@ const Explore = () => {
         >
             {
                 auth?.token &&
-                <Box w={"100%"} position={'sticky'} top={0} zIndex={99}>
+                <Box w={"100%"} position={'sticky'} top={0} zIndex={99} display={['block','none']}>
                     <Flex w={'100%'} justifyContent={'center'} gap={6} bg={isScroll && 'white'} padding={'15px 0'}>
                         <Box
                             fontSize={'16px'}
