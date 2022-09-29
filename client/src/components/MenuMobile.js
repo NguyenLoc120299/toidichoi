@@ -5,8 +5,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { ALERT_ACTION } from '../redux/actions/alertAction'
 import useClickOutSide from '../customHooks/clickOutSide';
 import { formatTime } from '../pages/components/helper/moment'
+import { isReadNotify } from '../redux/actions/notifyAction'
 const MenuMobile = () => {
-    const user = useSelector(state => state.auth?.user)
+    const auth = useSelector(state => state.auth)
+    const {user}= auth
     const navRef = useRef()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.notify)
@@ -19,6 +21,16 @@ const MenuMobile = () => {
         return ''
     }
     useClickOutSide(onClose, navRef)
+    const handleIsRead = (msg) => {
+        dispatch(isReadNotify({ msg, auth }))
+    }
+    const handleIsreadAl = () => {
+        data.forEach(element => {
+            if (!element.isRead) {
+                handleIsRead(element)
+            }
+        });
+    }
     return (
 
         <div className='nav_mobile'>
@@ -63,14 +75,20 @@ const MenuMobile = () => {
             <Box >
                 <Drawer placement={'right'} onClose={onClose} isOpen={isOpen} size={'full'} >
                     <DrawerOverlay />
-                    <DrawerContent height={'90%'}>
+                    <DrawerContent height={'95%'} >
                         <DrawerHeader borderBottomWidth='1px'>
-                            <Text fontWeight={'bold'}>Thông báo</Text>
+                            <Flex justifyContent={'space-between'}>
+                                <Text fontSize={'16px'}>Thông báo</Text>
+                                <Flex alignItems={'center'} gap={2} cursor={"pointer"}>
+                                    <i className="fas fa-check-double" style={{ fontSize: '16px' }} />
+                                    <span style={{ fontSize: '16px', cursor: 'pointer' }} onClick={handleIsreadAl}>Đánh dấu đã đọc</span>
+                                </Flex>
+                            </Flex>
                         </DrawerHeader>
-                        <DrawerBody overflow={'scroll'}>
+                        <DrawerBody overflow={'scroll'} p={0}>
                             {
                                 data && data.length > 0 ? data.map(item => (
-                                    <Box mb={6} background={item.isRead ? "#ffff" : "#dddd"}>
+                                    <Box p={6} background={item.isRead ? "#ffff" : "#dddd"} onClick={() => handleIsRead(item)}>
                                         <Flex gap={5}>
                                             <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
                                             <Box>

@@ -5,16 +5,27 @@ import { FaFacebook, FaInstagram, FaEllipsisH } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { checkLogin } from '../../../redux/actions/authAction'
+import { createNotify, removeNotify } from '../../../redux/actions/notifyAction'
 import { patchDataAPI } from '../../../untils/fetchData'
 const ProfileNavigation = ({ user, toggleCallBack }) => {
     console.log("check follow user", user);
     const history = useHistory()
     const auth = useSelector(state => state.auth)
+    const socket = useSelector(state => state.socket)
     const dispatch = useDispatch()
     const follow = async () => {
         try {
             if (dispatch(checkLogin(auth))) {
                 await patchDataAPI(`user/${user?._id}/follow`, null, auth.token)
+                const msg = {
+                    id: auth.user._id,
+                    text: 'đã bắt đầu theo dõi bạn',
+                    recipients: [user._id],
+                    url: `/profile/${user?._id}`,
+                    conten: "",
+                    image: null
+                }
+                dispatch(createNotify(msg, auth, socket))
             }
         } catch (error) {
             console.log(error);
@@ -23,7 +34,16 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
     const unFollow = async () => {
         try {
             if (dispatch(checkLogin(auth))) {
-                await patchDataAPI(`user/${user?._id}/unfollow`, null, auth.token)
+               await patchDataAPI(`user/${user?._id}/unfollow`, null, auth.token)
+                const msg = {
+                    id: auth.user._id,
+                    text: 'bỏ theo dõi  bạn',
+                    recipients: [user._id],
+                    url: `/profile/${user?._id}`,
+                    content: "",
+                    image: null
+                }
+                dispatch(removeNotify(msg, auth, socket))
             }
         } catch (error) {
             console.log(error);
@@ -94,7 +114,7 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             color="#000"
                             _focus={{ border: 'unset' }}
                         >
-                            {user?.followers.length} Người theo dõi 
+                            {user?.followers.length} Người theo dõi
                         </Link>
                     </WrapItem>
                     <WrapItem>
@@ -122,6 +142,13 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                                     fontWeight="500"
                                     color="#000"
                                     background="#efefef"
+                                    _focus={{
+                                        border: "unset",
+                                        background: "unset"
+                                    }}
+                                    _active={{
+                                        background: "transparent"
+                                    }}
                                     onClick={() => history.push(`/profile-edit/${user._id}`)}
                                 >
                                     Chỉnh sửa
@@ -135,6 +162,13 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                                     fontWeight="500"
                                     color="#000"
                                     background="#efefef"
+                                    _focus={{
+                                        border: "unset",
+                                        background: "unset"
+                                    }}
+                                    _active={{
+                                        background: "transparent"
+                                    }}
                                     onClick={onSubmitFollow}
                                 >
                                     {isFollow() ? "Đang theo dõi" : "Theo dõi"}
@@ -149,6 +183,13 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             marginTop="6px"
                             borderRadius="6px"
                             fontWeight="500"
+                            _focus={{
+                                border: "unset",
+                                background: "unset"
+                            }}
+                            _active={{
+                                background: "transparent"
+                            }}
 
                         >
                             <FaFacebook />
@@ -162,6 +203,13 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             marginTop="6px"
                             borderRadius="6px"
                             fontWeight="500"
+                            _focus={{
+                                border: "unset",
+                                background: "unset"
+                            }}
+                            _active={{
+                                background: "transparent"
+                            }}
                         >
                             <FaInstagram />
                         </Button>
@@ -174,6 +222,13 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             marginTop="6px"
                             borderRadius="6px"
                             fontWeight="500"
+                            _focus={{
+                                border: "unset",
+                                background: "unset"
+                            }}
+                            _active={{
+                                background: "transparent"
+                            }}
                         >
                             <FaEllipsisH />
                         </Button>

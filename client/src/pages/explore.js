@@ -31,7 +31,8 @@ const Explore = () => {
     const fetchMoreData = () => {
         const currentPage = page + 1
         dispatch(getListAllReviews(currentPage, limit, typeExplore, auth))
-        if (pageCount===currentPage) setHasMore(false)
+        console.log(pageCount,currentPage);
+        if (pageCount>=currentPage) setHasMore(false)
     };
     return (
         <Box
@@ -47,7 +48,7 @@ const Explore = () => {
                             fontSize={'16px'}
                             fontWeight={700}
                             color={"#000"}
-                            borderBottom={typeExplore === 1 && 'solid 2px #E33858'}
+                                borderBottom={typeExplore === 1 && 'solid 3px #e03 '}
                             cursor={'pointer'}
                             onClick={() => setTypeExplore(1)}
                         >Review nổi bật</Box>
@@ -55,7 +56,7 @@ const Explore = () => {
                             fontSize={'16px'}
                             fontWeight={700}
                             color={"#000"}
-                            borderBottom={typeExplore === 2 && 'solid 2px #E33858'}
+                                borderBottom={typeExplore === 2 && 'solid 3px #e03 '}
                             cursor={'pointer'}
                             onClick={() => setTypeExplore(2)}
                         >Đang theo dõi</Box>

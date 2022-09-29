@@ -10,7 +10,6 @@ export const NOTIFY_TYPES = {
     UPDATE_SOUND: 'UPDATE_SOUND',
     DELETE_ALL_NOTIFIES: 'DELETE_ALL_NOTIFIES'
 }
-
 export const createNotify = (msg, auth, socket) => async (dispatch) => {
     try {
         const res = await postDataAPI('notify', msg, auth.token)
