@@ -51,7 +51,7 @@ class PwaInstaller extends Component {
     render() {
         const { installed } = this.state;
         return (
-            installed && (
+            !installed && (
                 <div className="installer" onClick={this.download}>
                     <div className="installer__btn" >12121</div>
                 </div>

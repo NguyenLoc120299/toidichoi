@@ -6,6 +6,7 @@ import { ALERT_ACTION } from '../redux/actions/alertAction'
 import useClickOutSide from '../customHooks/clickOutSide';
 import { formatTime } from '../pages/components/helper/moment'
 import { isReadNotify } from '../redux/actions/notifyAction'
+import PwaInstaller from '../untils/PwaInstaller'
 const MenuMobile = () => {
     const auth = useSelector(state => state.auth)
     const {user}= auth
@@ -35,6 +36,7 @@ const MenuMobile = () => {
 
         <div className='nav_mobile'>
             <div className='nav-content'>
+                <PwaInstaller/>
                 <Link className={`Navbar_item ${isActive('/')}`} to="/"><i className="fas fa-home"
                     onClick={onClose}
                 ></i><span>Trang chủ</span></Link>
