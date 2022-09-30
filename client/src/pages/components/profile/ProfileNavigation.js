@@ -8,7 +8,6 @@ import { checkLogin } from '../../../redux/actions/authAction'
 import { createNotify, removeNotify } from '../../../redux/actions/notifyAction'
 import { patchDataAPI } from '../../../untils/fetchData'
 const ProfileNavigation = ({ user, toggleCallBack }) => {
-    console.log("check follow user", user);
     const history = useHistory()
     const auth = useSelector(state => state.auth)
     const socket = useSelector(state => state.socket)
@@ -34,7 +33,7 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
     const unFollow = async () => {
         try {
             if (dispatch(checkLogin(auth))) {
-               await patchDataAPI(`user/${user?._id}/unfollow`, null, auth.token)
+                await patchDataAPI(`user/${user?._id}/unfollow`, null, auth.token)
                 const msg = {
                     id: auth.user._id,
                     text: 'bỏ theo dõi  bạn',

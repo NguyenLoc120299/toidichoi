@@ -42,7 +42,7 @@ const Profile = () => {
     }, [])
     return (
         <Container maxW={'1280px'}>
-            <AvatarProfile  />
+            <AvatarProfile user={profile} toggleCallBack={toggleCallBack} />
             {
                 profile &&
                 <>

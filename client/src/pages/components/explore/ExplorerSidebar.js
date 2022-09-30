@@ -16,31 +16,33 @@ export const BoxCustom = ({ children }) => {
         </Box>
     )
 }
-const ExplorerSidebar = () => {
+const ExplorerSidebar = ({ typeExplore, setTypeExplore }) => {
     return (
         <Box>
             <BoxCustom>
                 <Flex justifyContent={'space-between'}>
                     <Flex
                         alignItems={'center'}
-                        color="#e03"
-                        borderBottom="4px solid #e03"
+                        color={typeExplore === 1 ? "#e03" : "#404040"}
+                        borderBottom={typeExplore === 1 && "4px solid #e03"}
                         fontWeight="500"
                         fontSize="18px"
                         padding="8px"
-
+                        onClick={() => setTypeExplore(1)}
+                        cursor={"pointer"}
                     >
                         <FaStar /> <Text ml={'5px'}>Bài nổi bật</Text>
                     </Flex>
                     <Flex justifyContent={'space-between'}>
                         <Flex
                             alignItems={'center'}
-                            color=" #404040"
-
+                            color={typeExplore === 2 ? "#e03" : "#404040"}
+                            borderBottom={typeExplore === 2 && "4px solid #e03"}
                             fontWeight="500"
                             fontSize="18px"
                             padding="8px"
-
+                            onClick={() => setTypeExplore(2)}
+                            cursor={"pointer"}
                         >
                             <FaUserCheck /> <Text ml={'5px'}>Đang theo dõi</Text>
                         </Flex>

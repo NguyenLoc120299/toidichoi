@@ -13,16 +13,16 @@ const Explore = () => {
     const [hasMore, setHasMore] = useState(true)
     const [typeExplore, setTypeExplore] = useState(1)
     const limit = 10
-    const auth= useSelector(state=>state.auth)
+    const auth = useSelector(state => state.auth)
     const pageCount = Math.ceil(total / limit);
     const [isScroll, setIsScroll] = useState(false)
     useEffect(() => {
         scrollToTop()
-    
+
     }, [])
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getListAllReviewsFirst(page, limit, typeExplore, auth))
-    },[typeExplore])
+    }, [typeExplore])
     useEffect(() => {
         window.addEventListener("scroll", () => {
             setIsScroll(window.scrollY > 20);
@@ -31,8 +31,8 @@ const Explore = () => {
     const fetchMoreData = () => {
         const currentPage = page + 1
         dispatch(getListAllReviews(currentPage, limit, typeExplore, auth))
-        console.log(pageCount,currentPage);
-        if (pageCount>=currentPage) setHasMore(false)
+        console.log(pageCount, currentPage);
+        if (pageCount >= currentPage) setHasMore(false)
     };
     return (
         <Box
@@ -42,13 +42,13 @@ const Explore = () => {
         >
             {
                 auth?.token &&
-                <Box w={"100%"} position={'sticky'} top={0} zIndex={99} display={['block','none']}>
+                <Box w={"100%"} position={'sticky'} top={0} zIndex={99} display={['block', 'none']}>
                     <Flex w={'100%'} justifyContent={'center'} gap={6} bg={isScroll && 'white'} padding={'15px 0'}>
                         <Box
                             fontSize={'16px'}
                             fontWeight={700}
                             color={"#000"}
-                                borderBottom={typeExplore === 1 && 'solid 3px #e03 '}
+                            borderBottom={typeExplore === 1 && 'solid 3px #e03 '}
                             cursor={'pointer'}
                             onClick={() => setTypeExplore(1)}
                         >Review nổi bật</Box>
@@ -56,14 +56,14 @@ const Explore = () => {
                             fontSize={'16px'}
                             fontWeight={700}
                             color={"#000"}
-                                borderBottom={typeExplore === 2 && 'solid 3px #e03 '}
+                            borderBottom={typeExplore === 2 && 'solid 3px #e03 '}
                             cursor={'pointer'}
                             onClick={() => setTypeExplore(2)}
                         >Đang theo dõi</Box>
                     </Flex>
                 </Box>
             }
-            
+
             <Container maxW={'1280px'} py="10px">
                 <div class="exploreHeader"></div>
 
@@ -110,7 +110,10 @@ const Explore = () => {
                         </InfiniteScroll>
                     </GridItem>
                     <GridItem colSpan={[0, 1]} display={['none', 'grid']}>
-                        <ExplorerSidebar />
+                        <ExplorerSidebar
+                            typeExplore={typeExplore}
+                            setTypeExplore={setTypeExplore}
+                        />
                     </GridItem>
                 </Grid>
             </Container>

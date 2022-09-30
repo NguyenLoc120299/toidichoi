@@ -397,10 +397,34 @@ const reviewCtrl = {
             // const reviews = await Reviews.find({
             //     user: [...req.user.following, req.user._id]
             // }).populate('placeId')
-            const features = new APIfeatures(Reviews.find({
-                user: [...req.user.following, req.user._id]
-            }).populate('placeId user'), req.query).paginating()
-            const reviews = await features.query
+            // const features = new APIfeatures(Reviews.find({
+            //     user: [...req.user.following, req.user._id]
+            // }).populate('placeId user ').populate({
+            //     path: "comments",
+            //     populate: {
+            //         path: "user",
+            //         select: "username avatar"
+            //     },
+
+            // }), req.query).paginating()
+            // const reviews = await features.query
+            const reviews = await Reviews.find({ user: [...req.user.following, req.user._id] })
+                .populate({
+                    path: "user",
+                    select: "-password"
+                })
+                .populate({
+                    path: "placeId"
+                })
+                .populate({
+                    path: "comments",
+                    populate: {
+                        path: "user",
+                        select: "username avatar"
+                    },
+
+                })
+            reviews.sort()
             return res.json({
                 total: reviews.length,
                 places: reviews

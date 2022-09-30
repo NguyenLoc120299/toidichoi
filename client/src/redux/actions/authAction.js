@@ -157,7 +157,7 @@ export const checkLogin = (auth) => (dispatch) => {
     }
 }
 
-export const updateProfile = (username, files, auth) => async (dispatch) => {
+export const updateProfile = (username, files, auth, toggleCallBack) => async (dispatch) => {
     try {
         let avatar
         if (files) {
@@ -168,14 +168,15 @@ export const updateProfile = (username, files, auth) => async (dispatch) => {
                 type: AUTH_ACTIONS.UPDATE,
                 payload: res.data
             })
-        }else{
-            const res = await patchDataAPI('profile', { username,avatar: auth?.user.avatar }, auth.token)
+            toggleCallBack()
+        } else {
+            const res = await patchDataAPI('profile', { username, avatar: auth?.user.avatar }, auth.token)
             dispatch({
                 type: AUTH_ACTIONS.UPDATE,
                 payload: res.data
             })
         }
-        
+
     } catch (error) {
         console.log(error);
         dispatch({

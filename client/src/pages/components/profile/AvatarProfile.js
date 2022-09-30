@@ -3,14 +3,14 @@ import React from 'react'
 import { BsCameraFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile } from '../../../redux/actions/authAction'
-const AvatarProfile = () => {
+const AvatarProfile = ({ user, toggleCallBack }) => {
 
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-    const {user}= auth
     const handleOnchangeAvatar = (e) => {
         const files = [...e.target.files]
-        dispatch(updateProfile(user.username, files, auth))
+        dispatch(updateProfile(user.username, files, auth, toggleCallBack))
+
     }
     return (
         <Box
@@ -54,7 +54,7 @@ const AvatarProfile = () => {
                             >
 
                             </Box>
-                                {
+                            {
                                 auth && auth.user && auth.user._id === user._id && <Box
                                     background={"#ddd"}
                                     position={"absolute"}
@@ -86,9 +86,7 @@ const AvatarProfile = () => {
                                         </label>
                                     </Center>
                                 </Box>
-                                }
-                         
-
+                            }
                         </Box> :
                             <SkeletonCircle
                                 width="200px"
