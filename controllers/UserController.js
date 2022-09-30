@@ -27,9 +27,11 @@ const userCtrl = {
             const { username, avatar } = req.body
             const user = await Users.findOneAndUpdate({ _id: req.user._id }, {
                 avatar, username
-            })
-            const newUser = { ...user, avatar, username }
-            res.json({ newUser })
+            }).select('-password')
+
+            const newUser = { ...user._doc, avatar, username }
+            console.log(newUser);
+            res.json(newUser)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }

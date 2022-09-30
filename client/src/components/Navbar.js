@@ -14,6 +14,7 @@ import { ALERT_ACTION } from '../redux/actions/alertAction'
 import DrawerNavbar from './DrawerNavbar'
 import { Notification } from './Notification'
 import SearchNavbar from './SearchNavbar'
+import PwaInstaller from '../untils/PwaInstaller'
 export const logo = (
     <>
         <img src='/assets/img/logo.png' style={{ maxWidth: '15%' }} alt='' />
@@ -70,6 +71,7 @@ const Navbar = () => {
                                     </Link> */}
                                 </>
                             }
+                      
 
                         </Flex>
                     </Center>
@@ -232,6 +234,7 @@ const Navbar = () => {
 
                     </Center>
                 </Box>
+
             </Flex>
             <DrawerNavbar
                 isOpen={isOpen}

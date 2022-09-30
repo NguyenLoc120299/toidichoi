@@ -42,7 +42,7 @@ const Profile = () => {
     }, [])
     return (
         <Container maxW={'1280px'}>
-            <AvatarProfile user={profile} />
+            <AvatarProfile  />
             {
                 profile &&
                 <>

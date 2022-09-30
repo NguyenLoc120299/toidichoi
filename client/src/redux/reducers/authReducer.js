@@ -14,10 +14,9 @@ const alertReducer = (state = initialState, action) => {
                 reviews: action.payload.dataReview,
             }
         case AUTH_ACTIONS.UPDATE:
-
             return {
                 ...state,
-                user: action.payload.newUser
+                user: action.payload
             }
         case REVIEW_ACTIONS.UPDATE_REVIEW_PROFILE:
             const review = state.reviews.find(item => item._id === action.payload.reviewId)

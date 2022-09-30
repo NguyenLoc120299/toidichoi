@@ -13,7 +13,7 @@ const LIstReview = () => {
 
     if (list_review_place.length > 0) {
         return (
-            <Box p={5}>
+            <Box p={[0,5]}>
                 {
                     showReview.map(item => (
                         <ReviewItem

@@ -21,7 +21,7 @@ const Setting = () => {
     })
     const onSubmit=()=>{
         dispatch(updateProfile(valueInput.username,false, auth))
-        toggleFormEdit()
+        toggleFormEdit({ name: "isUserName" })
     }
     const msg = (text = "Chức năng sẽ được update sau") => {
         toast({
