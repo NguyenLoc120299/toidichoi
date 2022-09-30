@@ -6,7 +6,6 @@ import { ALERT_ACTION } from '../redux/actions/alertAction'
 import { logout } from '../redux/actions/authAction'
 
 const DrawerNavbar = ({ onClose, isOpen }) => {
-
     const user = useSelector(state => state.auth.user)
     const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
@@ -21,7 +20,6 @@ const DrawerNavbar = ({ onClose, isOpen }) => {
                 fontSize="16px"
                 fontWeight={500}
             >
-
                 {children}
             </Box>
         )
@@ -29,9 +27,7 @@ const DrawerNavbar = ({ onClose, isOpen }) => {
     return (
         <Drawer onClose={onClose} isOpen={isOpen} size={'xs'} placement={"right"} >
             <DrawerOverlay />
-            <DrawerContent maxW={'280px'} overflow="scroll">
-
-
+            <DrawerContent maxW={'280px'} overflow="scroll" height={'95%'}>
                 {
                     user ?
                         <Box

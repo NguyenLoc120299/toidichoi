@@ -23,6 +23,7 @@ const ReviewItem = (props) => {
                     <BoxComment
                         username={props.username}
                         avatar={props.avatar}
+      
                         content={props.content}
                         createdAt={props.createdAt}
                         images={props.images}
