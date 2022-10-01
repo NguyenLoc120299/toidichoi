@@ -41,7 +41,7 @@ const ReviewReply = ({ item }) => {
             {
                 isShowComment &&
                 item.map(i => (
-                    <Flex key={i._id} mb={3}>
+                    <Box display={['block', 'flex']} key={i._id} mb={3}>
                         <Box mr={5} display={['none', 'block']}>
                             <Avatar size={'md'} name={i.user.username} src={i.user.avatar} />
                         </Box>
@@ -56,7 +56,7 @@ const ReviewReply = ({ item }) => {
                                 avatar={i.user.avatar}
                             />
                         </Flex>
-                    </Flex>
+                    </Box>
 
                 ))
             }

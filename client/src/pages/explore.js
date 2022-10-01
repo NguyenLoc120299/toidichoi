@@ -31,8 +31,7 @@ const Explore = () => {
     const fetchMoreData = () => {
         const currentPage = page + 1
         dispatch(getListAllReviews(currentPage, limit, typeExplore, auth))
-        console.log(pageCount, currentPage);
-        if (pageCount >= currentPage) setHasMore(false)
+        if (currentPage >= pageCount) return setHasMore(false)
     };
     return (
         <Box

@@ -212,6 +212,7 @@ a.mapboxgl-ctrl-logo {
   background: linear-gradient(180deg, #fca1bf, #fbfbfb);
   z-index: -1;
 }
+
 @media (max-width: 768px) {
   .rc-rate-star {
     margin-right: 0 !important;

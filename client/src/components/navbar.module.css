@@ -21,6 +21,7 @@
 .nav {
     box-shadow: 0 2px 4px 0 hsl(0deg 0% 71% / 50%);
 }
+
 @media (max-width: 678px) {
     .logo {
         font-size: 18px;

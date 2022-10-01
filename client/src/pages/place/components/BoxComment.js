@@ -15,6 +15,7 @@ const BoxComment = (props) => {
     return (
         <Box p={[3, 5]}
             position={'relative'}
+            marginLeft={props.isComment && ['30px', '0']}
             bg="gray.100"
             rounded={'xl'}
             _before={['', {
@@ -32,7 +33,12 @@ const BoxComment = (props) => {
                 transform: "translatey(-50%) rotate(-90deg)"
             }]}>
             <Box mb={5} >
-                <Box display={['flex']} alignItems="center">
+                <Box
+                    display={['flex']}
+                    alignItems="center"
+                    p={["10px 0"]}
+
+                >
                     <Avatar
                         size='md'
                         name={props.username}
@@ -56,8 +62,8 @@ const BoxComment = (props) => {
                             <Text color={'gray.500'} fontSize={"13px"}> Đã đánh giá {formatTime(props.createdAt)}</Text>
                     }
                 </Box>
-            </Box>
-            <Box>
+            </Box >
+            <Box >
                 <Text size={'md'}>{props.content}</Text>
             </Box>
             {
@@ -66,8 +72,8 @@ const BoxComment = (props) => {
                     {
                         props.images.map((item, index) => (
                             <Box
-                                width={'116px'}
-                                height={'116px'}
+                                width={'90px'}
+                                height={'90px'}
                                 display="flex"
                                 m={1}
                                 borderRadius={"md"}
@@ -96,7 +102,7 @@ const BoxComment = (props) => {
                 setIsOpen={setIsOpen}
                 setPhotoIndex={setPhotoIndex}
             />
-        </Box>
+        </Box >
     )
 }
 

@@ -71,7 +71,7 @@ const Navbar = () => {
                                     </Link> */}
                                 </>
                             }
-                      
+
 
                         </Flex>
                     </Center>

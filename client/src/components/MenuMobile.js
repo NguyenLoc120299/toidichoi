@@ -9,7 +9,7 @@ import { isReadNotify } from '../redux/actions/notifyAction'
 import PwaInstaller from '../untils/PwaInstaller'
 const MenuMobile = () => {
     const auth = useSelector(state => state.auth)
-    const {user}= auth
+    const { user } = auth
     const navRef = useRef()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.notify)
@@ -34,9 +34,11 @@ const MenuMobile = () => {
     }
     return (
 
-        <div className='nav_mobile'>
+        <div className='nav_mobile' style={{
+            zIndex: 999
+        }}>
             <div className='nav-content'>
-                <PwaInstaller/>
+                <PwaInstaller />
                 <Link className={`Navbar_item ${isActive('/')}`} to="/"><i className="fas fa-home"
                     onClick={onClose}
                 ></i><span>Trang chủ</span></Link>
@@ -72,23 +74,28 @@ const MenuMobile = () => {
                             })}
                         ><i className="fas fa-user"></i><span>Tài khoản</span></Link>
                 }
-         
+
 
             </div>
             <Box >
                 <Drawer placement={'right'} onClose={onClose} isOpen={isOpen} size={'full'} >
                     <DrawerOverlay />
-                    <DrawerContent height={'95%'} >
+                    <DrawerContent  >
                         <DrawerHeader borderBottomWidth='1px'>
                             <Flex justifyContent={'space-between'}>
                                 <Text fontSize={'16px'}>Thông báo</Text>
-                                <Flex alignItems={'center'} gap={2} cursor={"pointer"}>
-                                    <i className="fas fa-check-double" style={{ fontSize: '16px' }} />
-                                    <span style={{ fontSize: '16px', cursor: 'pointer' }} onClick={handleIsreadAl}>Đánh dấu đã đọc</span>
-                                </Flex>
+                                <Text
+                                    fontSize={'16px'}
+                                    cursor={"pointer"}
+                                    onClick={onClose}
+                                >Thoát</Text>
                             </Flex>
                         </DrawerHeader>
                         <DrawerBody overflow={'scroll'} p={0}>
+                            <Flex alignItems={'center'} gap={2} cursor={"pointer"} p={5}>
+                                <i className="fas fa-check-double" style={{ fontSize: '16px' }} />
+                                <span style={{ fontSize: '16px', cursor: 'pointer' }} onClick={handleIsreadAl}>Đánh dấu đã đọc</span>
+                            </Flex>
                             {
                                 data && data.length > 0 ? data.map(item => (
                                     <Box p={6} background={item.isRead ? "#ffff" : "#dddd"} onClick={() => handleIsRead(item)}>

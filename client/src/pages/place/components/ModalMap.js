@@ -90,7 +90,11 @@ const ModalMap = ({ isOpen, onClose, info, lng, lat, setLng, setLat }) => {
                     <div className='map_container'>
                         <div className='map_header'>
                             <div className='map_header_info'>
-                                <h1>
+                                <h1 style={{
+                                    overflow: "hidden",
+                                    whiteSpace: "nowrap",
+                                    textOverflow: "ellipsis"
+                                }}>
                                     <i className="fas fa-map-marker-alt"></i>
                                     {info.name}
                                 </h1>

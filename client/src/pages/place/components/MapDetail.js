@@ -30,12 +30,12 @@ const MapDetail = ({ info }) => {
         >
 
             <Heading as={'h3'} size='md' mb={5} textAlign={"center"}>Địa điểm cụ thể</Heading>
-            <Box 
+            <Box
                 position={["unset", "absolute"]}
                 display="flex"
                 top="50%"
                 left="50%"
-                transform="translate(-50%,-50"
+                transform="translate(-50%,-50)"
                 justifyContent={'center'}
             >
                 <Button
@@ -50,7 +50,7 @@ const MapDetail = ({ info }) => {
                 >
                     Xem bản đồ
                 </Button>
-            </Box>    
+            </Box>
             <ModalMap
                 info={info}
                 isOpen={isOpen}
