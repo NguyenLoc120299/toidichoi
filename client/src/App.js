@@ -18,6 +18,7 @@ import { GLOBALTYPES } from './redux/actions/globalTypes';
 import SocketClient from './socketClient';
 import { getNotifies } from './redux/actions/notifyAction';
 import ModalSearch from './pages/components/banner/ModalSearch';
+import { BackTop } from 'antd';
 function App() {
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.auth)
@@ -57,7 +58,8 @@ function App() {
         <Route exact path={'/:page'} component={PageRender} />
         <Route exact path={'/:page/:id'} component={PageRender} />
         {/* {token && <SocketClient />} */}
-        {/* <Footer /> */}
+        <Footer />
+        <BackTop className='backToTop' />
       </Box>
     </Router>
   );

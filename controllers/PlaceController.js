@@ -89,7 +89,7 @@ const PlaceCtrl = {
             await newPlace.save()
             await newMapPlace.save()
             res.json({
-                msg: 'Thêm địa điểm thành công',
+                msg: 'Cám ơn bạn đã đóng góp, chúng tôi sẽ xem xet địa điểm này',
                 newPlace: {
                     ...newPlace._doc
                 }
@@ -122,8 +122,8 @@ const PlaceCtrl = {
                 lat
             }
                 = req.body
-    
-            const place = await Places.findOneAndUpdate({ _id: id} , {
+
+            const place = await Places.findOneAndUpdate({ _id: id }, {
                 name,
                 area,
                 address,
@@ -149,7 +149,7 @@ const PlaceCtrl = {
     },
     searchPlaces: async (req, res) => {
         try {
-            const places = await Places.find({ name: { $regex: req.query.name } })
+            const places = await Places.find({ name: { $regex: req.query.name }, isShow: true })
                 .limit(10)
             res.json({ places })
         } catch (error) {
@@ -185,6 +185,9 @@ const PlaceCtrl = {
                             ],
                             as: "totalData"
                         }
+                    },
+                    {
+                        $limit: 8
                     },
                     {
                         $sort: { ct: -1 }
@@ -223,7 +226,7 @@ const PlaceCtrl = {
                 filter.push({ "price.max": { $lte: priceData[1] } })
             }
 
-            const places = await Places.find({ $and: filter })
+            const places = await Places.find({ $and: filter, isShow: true })
             const data = []
             if (isTimeOpen) {
                 for (let i = 0; i < places.length; i++) {

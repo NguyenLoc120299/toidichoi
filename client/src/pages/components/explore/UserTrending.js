@@ -87,6 +87,7 @@ const UserTrending = () => {
                 textAlign="center"
                 paddingBottom="14px"
                 borderBottom="1px solid #eee"
+                fontWeight={700}
             >Người dùng tích cực</Text>
             {
                 data && data.map(item => {
@@ -174,7 +175,10 @@ const UserTrending = () => {
 
 
             }
-
+            <Box display={'flex'} color={"#0770cd"}
+            >
+                <Link to="#">Xem tất cả</Link>
+            </Box>
         </BoxCustom>
     )
 }

@@ -166,7 +166,7 @@ const SearchNavbar = ({ isToggle, toggleBoxSearch }) => {
                                 <>
                                     <Link to={'/search'} className={styles.searchItem}>
                                         <FaLocationArrow style={{ marginRight: '10px', fontSize: '20px' }} />
-                                        <span>Tìm quanh đây</span>
+                                        <span>Xem tất cả</span>
                                     </Link>
                                     <div className={styles.searchTitile}>
                                         Đề xuất

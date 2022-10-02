@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useClickOutSide from '../../../customHooks/clickOutSide';
 
 export const renderPlacesAll = (placeSearch, styles, valueSearch) => {
-  
+
     return (
         <Box width={['100%', '700px']} bg="#fff" p={"14px"} >
             <div className={styles.listPlace}>
@@ -43,7 +43,7 @@ export const renderSearch = (dataPlaceOffer, styles, closeDrawer) => {
         <Box width={['100%', '700px']} bg="#fff" p={"14px"} onClick={closeDrawer} >
             <Link to={'/search'} className={styles.searchItem} >
                 <FaLocationArrow style={{ marginRight: '10px', fontSize: '30px' }} />
-                <span>Tìm quanh đây</span>
+                <span>Xem tất cả</span>
             </Link>
             <div className={styles.searchTitile}>
                 Đề xuất
@@ -160,7 +160,7 @@ const Banner = () => {
             document.removeEventListener('keydown', keyDownHandler);
         };
     }, [valueSearch]);
-    
+
     return (
         <div className={`${styles.banner} ${isShowSearchBox && styles.showSearchBox}`}>
 

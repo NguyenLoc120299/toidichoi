@@ -37,6 +37,7 @@ const PlaceTrending = () => {
                 textAlign="center"
                 paddingBottom="14px"
                 borderBottom="1px solid #eee"
+                fontWeight={'700'}
             >Địa điểm nổi bật</Text>
             {
                 data && data.map(item => {
@@ -100,7 +101,10 @@ const PlaceTrending = () => {
 
 
             }
-
+            <Box display={'flex'} color={"#0770cd"}
+            >
+                <Link to="/search">Xem tất cả</Link>
+            </Box>
         </BoxCustom>
     )
 }
