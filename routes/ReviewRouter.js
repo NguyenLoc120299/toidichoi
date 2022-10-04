@@ -20,4 +20,5 @@ router.get('/listAll-reviews', reviewCtrl.getListReviews)
 
 router.get('/viewsByFollowing', auth, reviewCtrl.getReviewByUserFollow)
 
+router.get('/getReviewSingle/:id', reviewCtrl.getReviewSingle)
 module.exports = router

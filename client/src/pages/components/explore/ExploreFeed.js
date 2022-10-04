@@ -1,8 +1,9 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
+import Rate from 'rc-rate'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllReviews } from '../../../redux/actions/reviewAction'
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import FormNewComment from '../profile/FormNewComment'
 import ListReviewReply from '../profile/ListReviewReply'
 import ReviewAction from '../profile/ReviewAction'
@@ -10,9 +11,9 @@ import ReviewBody from '../profile/ReviewBody'
 import ReviewHeader from '../profile/ReviewHeader'
 
 const ExploreFee = ({ item }) => {
-
     const auth = useSelector(state => state.auth)
     const [setLsComment, setShowLsComment] = useState(false)
+    const { pathname } = useLocation()
     return (
         <Box
             padding="12px 16px"
@@ -20,9 +21,43 @@ const ExploreFee = ({ item }) => {
             backgroundColor="#fff"
             borderRadius="10px"
             className='box-shadow'
+            position={'relative'}
         >
             <ReviewHeader item={item} />
             <ReviewBody item={item} />
+            {
+                pathname !== '/explore' &&
+                <Box
+                    display="flex"
+                    position="relative"
+                    marginTop="16px"
+                    marginBottom="10px"
+                    border="1px solid #d9d9d9"
+                    borderRadius="10px"
+                    overflow="hidden"
+                >
+                    <Box
+                        flexShrink="0"
+                        width="210px"
+                        minHeight="150px"
+                        maxHeight="150px"
+                        padding="10px"
+                        borderRadius="10px"
+
+                    >
+                        <Image src={item.placeId.images[0]} />
+                    </Box>
+                    <Box
+                        flex="1 1"
+                        padding="16px"
+                        overflow="hidden"
+                    >
+                        <Text fontSize={'18px'} fontWeight={700} color={"#000"}>{item.placeId.name}</Text>
+                        <Text>{item.placeId.address}</Text>
+                        <Rate value={5} allowHalf disabled character={<i className="far fa-star"></i>} />
+                    </Box>
+                </Box>
+            }
             <ReviewAction item={item} />
             {
                 auth.user && <FormNewComment item={item} />
@@ -51,7 +86,7 @@ const ExploreFee = ({ item }) => {
                 >Ẩn tất cả bình luận</Box>
             }
 
-        </Box>
+        </Box >
 
     )
 }

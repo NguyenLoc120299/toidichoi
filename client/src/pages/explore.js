@@ -66,7 +66,7 @@ const Explore = () => {
             <Container maxW={'1280px'} py="10px">
                 <div class="exploreHeader"></div>
 
-                <Grid templateColumns={"repeat(3, 1fr)"} gap="20px">
+                <Grid templateColumns={"repeat(3, 1fr)"} gap="20">
                     <GridItem colSpan={[3, 2]}>
                         <InfiniteScroll
                             dataLength={explore.length}

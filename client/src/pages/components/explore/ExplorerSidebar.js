@@ -10,7 +10,9 @@ export const BoxCustom = ({ children }) => {
             marginBottom="20px"
             backgroundColor="#fff"
             borderRadius="10px"
-            box-shadow="0 2px 8px rgb(0 0 0 / 15%"
+            style={{
+                boxShadow: '0 2px 8px rgb(0 0 0 / 15%)'
+            }}
         >
             {children}
         </Box>
