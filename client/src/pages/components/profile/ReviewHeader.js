@@ -15,9 +15,9 @@ const
                 justifyContent={'flex-start'}
                 position='relative'
             >
-                <Box position={'absolute'} right={5} zIndex={99} >
+                <Box  >
                     <Menu >
-                        <MenuButton color={"#aaa"}>
+                        <MenuButton color={"#aaa"} position={'absolute'} right={'5px'} zIndex={99}>
                             <i className="fas fa-ellipsis-h"></i>
                         </MenuButton>
                         <MenuList>
