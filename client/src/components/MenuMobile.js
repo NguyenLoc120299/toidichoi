@@ -98,21 +98,24 @@ const MenuMobile = () => {
                             </Flex>
                             {
                                 data && data.length > 0 ? data.map(item => (
-                                    <Box p={6} background={item.isRead ? "#ffff" : "#dddd"} onClick={() => handleIsRead(item)}>
-                                        <Flex gap={5}>
-                                            <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
-                                            <Box>
-                                                <Text>
-                                                    <span
-                                                        style={{ fontWeight: 'bold' }}
-                                                    >{item?.user.username}</span> {item.text}
-                                                </Text>
-                                                <Text>
-                                                    {formatTime(item.createdAt)}
-                                                </Text>
-                                            </Box>
-                                        </Flex>
-                                    </Box>
+                                    <Link to={item.url} onClick={onClose} key={item._id}>
+                                        <Box p={6} background={item.isRead ? "#ffff" : "#dddd"} onClick={() => handleIsRead(item)}>
+                                            <Flex gap={5}>
+                                                <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
+                                                <Box>
+                                                    <Text>
+                                                        <span
+                                                            style={{ fontWeight: 'bold' }}
+                                                        >{item?.user.username}</span> {item.text}
+                                                    </Text>
+
+                                                    <Text>
+                                                        {formatTime(item.createdAt)}
+                                                    </Text>
+                                                </Box>
+                                            </Flex>
+                                        </Box>
+                                    </Link>
                                 ))
                                     :
                                     <Center fontSize={'md'} fontWeight={500}>Không có thông báo</Center>

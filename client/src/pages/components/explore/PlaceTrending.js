@@ -60,7 +60,6 @@ const PlaceTrending = () => {
                                     marginRight=" 10px"
                                     borderRadius=" 6px"
                                     border=" none"
-                                    overflow=" hidden"
                                 >
                                     <Box
                                         w="50px"
