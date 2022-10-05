@@ -311,6 +311,9 @@ a:hover {
 .m_menu .chakra-wrap__listitem.css-1yp4ln {
   margin: 0;
 }
+.ant-back-top {
+  bottom: 85px !important;
+}
 .backToTop .ant-back-top-content {
   background: #e7444d;
   opacity: 0.8;
@@ -320,6 +323,12 @@ a:hover {
   opacity: 1;
 }
 @media (min-width: 992px) {
+  .ant-back-top {
+    bottom: 20px !important;
+  }
+  .backToTop .ant-back-top-content {
+    bottom: 20px;
+  }
   .notification {
     right: 10px;
   }
