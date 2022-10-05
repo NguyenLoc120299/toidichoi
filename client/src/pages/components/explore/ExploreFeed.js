@@ -1,15 +1,14 @@
 import { Box, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import Rate from 'rc-rate'
 import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import FormNewComment from '../profile/FormNewComment'
 import ListReviewReply from '../profile/ListReviewReply'
 import ReviewAction from '../profile/ReviewAction'
 import ReviewBody from '../profile/ReviewBody'
 import ReviewHeader from '../profile/ReviewHeader'
-
+import { Link } from 'react-router-dom'
 const ExploreFee = ({ item }) => {
     const auth = useSelector(state => state.auth)
     const [setLsComment, setShowLsComment] = useState(false)
@@ -23,17 +22,17 @@ const ExploreFee = ({ item }) => {
             className='box-shadow'
             position={'relative'}
         >
-            <Box position={'absolute'} right={5}  zIndex={99}>
+            <Box position={'absolute'} right={5} zIndex={99}>
                 <Menu >
                     <MenuButton color={"#aaa"}>
                         <i className="fas fa-ellipsis-h"></i>
                     </MenuButton>
                     <MenuList>
                         <MenuItem
-                        onClick={()=>{
+                            onClick={() => {
                                 navigator.clipboard.writeText(`${window.location.host}/review/${item._id}`);
-                        }}
-                        ><i className="fas fa-link" style={{marginRight:'10px'}}></i>Sao chép liên kết</MenuItem>
+                            }}
+                        ><i className="fas fa-link" style={{ marginRight: '10px' }}></i>Sao chép liên kết</MenuItem>
                         <MenuItem><i className="far fa-flag" style={{ marginRight: '10px' }}></i>Báo cáo</MenuItem>
                     </MenuList>
                 </Menu>
@@ -53,22 +52,28 @@ const ExploreFee = ({ item }) => {
                 >
                     <Box
                         flexShrink="0"
-                        width="210px"
-                        minHeight="150px"
-                        maxHeight="150px"
+                        width={["100px", "150px"]}
+                        minHeight={["100px", "150px"]}
+                        maxHeight={["100px", "150px"]}
                         padding="10px"
                         borderRadius="10px"
-
+                        overflow={'hidden'}
                     >
-                        <Image src={item.placeId.images[0]} />
+                        <Link to={`/place/${item.placeId._id}`}>
+                            <Image src={item.placeId.images[0]} w={"100%"} h={"100%"} />
+                        </Link>
                     </Box>
                     <Box
                         flex="1 1"
                         padding="16px"
                         overflow="hidden"
                     >
-                        <Text fontSize={'18px'} fontWeight={700} color={"#000"}>{item.placeId.name}</Text>
-                        <Text>{item.placeId.address}</Text>
+                        <Text fontSize={["14px", '18px']} fontWeight={700} color={"#000"} overflow="hidden"
+                            whiteSpace="nowrap"
+                            textOverflow="ellipsis">{item.placeId.name}</Text>
+                        <Text overflow="hidden"
+                            whiteSpace="nowrap"
+                            textOverflow="ellipsis" >{item.placeId.address}</Text>
                         <Rate value={5} allowHalf disabled character={<i className="far fa-star"></i>} />
                     </Box>
                 </Box>

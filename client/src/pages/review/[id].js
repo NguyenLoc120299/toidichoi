@@ -25,7 +25,7 @@ const ReviewDetail = () => {
             padding={'10px 0'}
         >
             <Container maxW={'1200px'}>
-                <Grid templateColumns={"repeat(3, 1fr)"} gap="20">
+                <Grid templateColumns={"repeat(3, 1fr)"} gap={["0","20"]}>
                     <GridItem colSpan={[3, 2]}>
                         {
                             detail ? (
