@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { formatTime } from '../pages/components/helper/moment'
 import style from './navbar.module.css'
 import { isReadNotify } from '../redux/actions/notifyAction'
+import { Link } from 'react-router-dom'
 export const Notification = ({ notifyNotRead }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const auth = useSelector(state => state.auth)
@@ -59,31 +60,33 @@ export const Notification = ({ notifyNotRead }) => {
                     <ModalBody p={'10px 5px'}>
                         {
                             data && data.length > 0 ? data.map(item => (
-                                <Box background={item.isRead ? "#fff" : "#dddd"}
-                                    padding='15px 10px'
-                                    cursor={'pointer'}
-                                    borderRadius={'5px'}
-                                    _hover={{
-                                        background: '#dddd',
+                                <Link to={`/review/item._id`} key={item._id}>
+                                    <Box background={item.isRead ? "#fff" : "#dddd"}
+                                        padding='15px 10px'
+                                        cursor={'pointer'}
+                                        borderRadius={'5px'}
+                                        _hover={{
+                                            background: '#dddd',
 
-                                    }}
-                                    onClick={() => handleIsRead(item)}
-                                >
-                                    <Flex gap={5}>
-                                        <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
-                                        <Box>
-                                            <Text>
-                                                <span
-                                                    style={{ fontWeight: 'bold' }}
-                                                >{item?.user.username}</span> {item.text}
-                                            </Text>
-                                            <Text>
-                                                {formatTime(item.createdAt)}
-                                            </Text>
-                                        </Box>
-                                    </Flex>
+                                        }}
+                                        onClick={() => handleIsRead(item)}
+                                    >
+                                        <Flex gap={5}>
+                                            <Avatar size={'md'} name={item?.user.username} src={item?.user.avatar} />
+                                            <Box>
+                                                <Text>
+                                                    <span
+                                                        style={{ fontWeight: 'bold' }}
+                                                    >{item?.user.username}</span> {item.text}
+                                                </Text>
+                                                <Text>
+                                                    {formatTime(item.createdAt)}
+                                                </Text>
+                                            </Box>
+                                        </Flex>
 
-                                </Box>
+                                    </Box>
+                                </Link>
                             ))
                                 :
                                 <Center py={3}>Không có thông báo</Center>
