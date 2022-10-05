@@ -22,6 +22,14 @@ export const signup = (formData) => async (dispatch) => {
         )
         const res = await postDataAPI('register', { ...formData })
         dispatch({
+            type: AUTH_ACTIONS.AUTH,
+            payload: {
+                token: res.data.access_token,
+                user: res.data.user
+            }
+        })
+        localStorage.setItem("firstLogin", true)
+        dispatch({
             type: ALERT_ACTION.ALERT,
             payload: { success: res.data.msg }
         })

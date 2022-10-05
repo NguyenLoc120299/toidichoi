@@ -1,4 +1,4 @@
-import { Box, Center, Avatar, Text, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Box, Center, Avatar, Text, Menu, MenuButton, MenuList, MenuItem, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { FaCaretRight } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import Rate from 'rc-rate';
 const
     ReviewHeader = ({ item }) => {
         const auth = useSelector(state => state.auth)
+        const toast = useToast()
         return (
             <Box
                 display={'flex'}
@@ -17,13 +18,20 @@ const
             >
                 <Box  >
                     <Menu >
-                        <MenuButton color={"#aaa"} position={'absolute'} right={'5px'} zIndex={99}>
+                        <MenuButton color={"#aaa"} position={'absolute'} right={'5px'} zIndex={99} top={0}>
                             <i className="fas fa-ellipsis-h"></i>
                         </MenuButton>
                         <MenuList>
                             <MenuItem
                                 onClick={() => {
                                     navigator.clipboard.writeText(`${window.location.host}/review/${item._id}`);
+                                    toast({
+                                        title: 'Sao chép liên kết thành công.',
+                                        status: 'success',
+                                        duration: 3000,
+                                        isClosable: true,
+                                        position: 'top'
+                                    })
                                 }}
                             ><i className="fas fa-link" style={{ marginRight: '10px' }}></i>Sao chép liên kết</MenuItem>
                             <MenuItem><i className="far fa-flag" style={{ marginRight: '10px' }}></i>Báo cáo</MenuItem>

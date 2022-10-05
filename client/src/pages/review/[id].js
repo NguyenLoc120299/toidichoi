@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Grid, GridItem, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { Box, Container, Flex, Grid, GridItem, Skeleton, SkeletonCircle, SkeletonText, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getDataAPI } from '../../untils/fetchData'
@@ -13,6 +13,7 @@ const ReviewDetail = () => {
         const res = await getDataAPI(`getReviewSingle/${id}`)
         setDetail(res.data);
     }
+
     useEffect(() => {
         if (id)
             getReviewSingle(id)
@@ -25,7 +26,7 @@ const ReviewDetail = () => {
             padding={'10px 0'}
         >
             <Container maxW={'1200px'}>
-                <Grid templateColumns={"repeat(3, 1fr)"} gap={["0","20"]}>
+                <Grid templateColumns={"repeat(3, 1fr)"} gap={["0", "20"]}>
                     <GridItem colSpan={[3, 2]}>
                         {
                             detail ? (

@@ -18,7 +18,6 @@ const Explore = () => {
     const [isScroll, setIsScroll] = useState(false)
     useEffect(() => {
         scrollToTop()
-
     }, [])
     useEffect(() => {
         dispatch(getListAllReviewsFirst(page, limit, typeExplore, auth))
@@ -51,14 +50,18 @@ const Explore = () => {
                             cursor={'pointer'}
                             onClick={() => setTypeExplore(1)}
                         >Review nổi bật</Box>
-                        <Box
-                            fontSize={'16px'}
-                            fontWeight={700}
-                            color={"#000"}
-                            borderBottom={typeExplore === 2 && 'solid 3px #e03 '}
-                            cursor={'pointer'}
-                            onClick={() => setTypeExplore(2)}
-                        >Đang theo dõi</Box>
+                        {
+                            typeExplore && explore.length > 0 &&
+
+                            <Box
+                                fontSize={'16px'}
+                                fontWeight={700}
+                                color={"#000"}
+                                borderBottom={typeExplore === 2 && 'solid 3px #e03 '}
+                                cursor={'pointer'}
+                                onClick={() => setTypeExplore(2)}
+                            >Đang theo dõi</Box>
+                        }
                     </Flex>
                 </Box>
             }
@@ -86,25 +89,13 @@ const Explore = () => {
 
                         >
                             {
-                                explore.length > 0 ? explore.map(item => (
+                                explore.length > 0 &&
+                                explore.map(item => (
                                     <ExploreFee
                                         item={item}
                                         key={item._id}
                                     />
-                                )) :
-                                    [1, 2, 3].map((item, index) => (
-                                        <Box padding="12px 16px" key={index}
-                                            marginBottom="20px"
-                                            backgroundColor="#fff"
-                                            borderRadius="10px"
-                                            className='box-shadow'>
-                                            <Flex>
-                                                <SkeletonCircle size='10' />
-                                            </Flex>
-                                            <SkeletonText my='4' noOfLines={2} spacing='4' />
-                                            <Skeleton height={250} borderBottom="1px solid #eee" mb={3} />
-                                        </Box>
-                                    ))
+                                ))
                             }
                         </InfiniteScroll>
                     </GridItem>
@@ -112,6 +103,7 @@ const Explore = () => {
                         <ExplorerSidebar
                             typeExplore={typeExplore}
                             setTypeExplore={setTypeExplore}
+                            explore={explore}
                         />
                     </GridItem>
                 </Grid>

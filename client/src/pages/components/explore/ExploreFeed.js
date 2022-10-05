@@ -1,4 +1,4 @@
-import { Box, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
 import Rate from 'rc-rate'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -13,6 +13,7 @@ const ExploreFee = ({ item }) => {
     const auth = useSelector(state => state.auth)
     const [setLsComment, setShowLsComment] = useState(false)
     const { pathname } = useLocation()
+
     return (
         <Box
             padding="12px 16px"
@@ -22,7 +23,7 @@ const ExploreFee = ({ item }) => {
             className='box-shadow'
             position={'relative'}
         >
-            
+
             <ReviewHeader item={item} />
             <ReviewBody item={item} />
             {
