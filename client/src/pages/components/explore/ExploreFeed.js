@@ -22,21 +22,7 @@ const ExploreFee = ({ item }) => {
             className='box-shadow'
             position={'relative'}
         >
-            <Box position={'absolute'} right={5} zIndex={99}>
-                <Menu >
-                    <MenuButton color={"#aaa"}>
-                        <i className="fas fa-ellipsis-h"></i>
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem
-                            onClick={() => {
-                                navigator.clipboard.writeText(`${window.location.host}/review/${item._id}`);
-                            }}
-                        ><i className="fas fa-link" style={{ marginRight: '10px' }}></i>Sao chép liên kết</MenuItem>
-                        <MenuItem><i className="far fa-flag" style={{ marginRight: '10px' }}></i>Báo cáo</MenuItem>
-                    </MenuList>
-                </Menu>
-            </Box>
+            
             <ReviewHeader item={item} />
             <ReviewBody item={item} />
             {

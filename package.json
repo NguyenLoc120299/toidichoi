@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "rebuild":"cd client && npm run build1 && xcopy build .. && cd .. && git add * && git commit -m rebuild && git push"
   },
   "author": "nguyen thanh loc",
   "license": "ISC",
