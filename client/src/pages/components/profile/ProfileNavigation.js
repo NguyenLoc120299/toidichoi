@@ -1,17 +1,21 @@
 import { Box, Button, Flex, Link, Wrap, WrapItem } from '@chakra-ui/react'
 import { async } from '@firebase/util'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaEllipsisH } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { checkLogin } from '../../../redux/actions/authAction'
 import { createNotify, removeNotify } from '../../../redux/actions/notifyAction'
 import { patchDataAPI } from '../../../untils/fetchData'
+import ModalFolower from './ModalFolower'
+import ModalFolowing from './ModalFolowing'
 const ProfileNavigation = ({ user, toggleCallBack }) => {
     const history = useHistory()
     const auth = useSelector(state => state.auth)
     const socket = useSelector(state => state.socket)
     const dispatch = useDispatch()
+    const [isModalFolower, setIsModalFolower] = useState(false)
+    const [isModalFolowing, setIsModalFolowing] = useState(false)
     const follow = async () => {
         try {
             if (dispatch(checkLogin(auth))) {
@@ -112,6 +116,7 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             padding="10px 14px"
                             color="#000"
                             _focus={{ border: 'unset' }}
+                            onClick={() => setIsModalFolower(true)}
                         >
                             {user?.followers.length} Người theo dõi
                         </Link>
@@ -124,6 +129,7 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                             padding="10px 14px"
                             color="#000"
                             _focus={{ border: 'unset' }}
+                            onClick={() => setIsModalFolowing(true)}
                         >
                             {user?.following.length} Đang theo dõi
                         </Link>
@@ -236,6 +242,16 @@ const ProfileNavigation = ({ user, toggleCallBack }) => {
                 </Wrap>
 
             </Box>
+            <ModalFolower
+                isOpen={isModalFolower}
+                onClose={() => setIsModalFolower(false)}
+                followers={user?.followers}
+            />
+            <ModalFolowing
+                isOpen={isModalFolowing}
+                onClose={() => setIsModalFolowing(false)}
+                following={user?.following}
+            />
         </Box>
     )
 }

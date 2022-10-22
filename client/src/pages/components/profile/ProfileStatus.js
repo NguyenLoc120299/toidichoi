@@ -10,7 +10,8 @@ const ProfileStatus = ({ reviews, user }) => {
         totalReview: reviews?.dataReview.length || 0,
         countLikes: reviews?.countLikes || 0,
         countComments: reviews?.countComments || 0,
-        dateJoin: user?.createdAt || 0
+        dateJoin: user?.createdAt || 0,
+        followers: user?.followers.length || 0
     }
     return (
         <BoxProfile>
@@ -112,7 +113,7 @@ const ProfileStatus = ({ reviews, user }) => {
                         display='flex'
                         alignItems={'center'}
                     >
-                        0
+                        {status ? status.followers : 0}
                     </Box>
                 </Flex>
                 <Flex justifyContent={'space-between'} mb={3}>
