@@ -30,7 +30,7 @@ mongoose.connect(URI,
         console.log('Connected to mongodb')
     })
 
-
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('build'))
     app.get('*', (req, res) => {
