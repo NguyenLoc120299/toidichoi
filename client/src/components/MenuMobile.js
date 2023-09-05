@@ -38,7 +38,7 @@ const MenuMobile = () => {
             zIndex: 999
         }}>
             <div className='nav-content'>
-                <PwaInstaller />
+                {/* <PwaInstaller /> */}
                 <Link className={`Navbar_item ${isActive('/')}`} to="/"><i className="fas fa-home"
                     onClick={onClose}
                 ></i><span>Trang chủ</span></Link>

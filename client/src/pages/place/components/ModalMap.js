@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import mapboxgl from "mapbox-gl";
 import Rate from 'rc-rate/lib/Rate'
 mapboxgl.accessToken =
-    'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
+    'pk.eyJ1IjoiaG9haXBoYW4iLCJhIjoiY2s4NjRuNm40MGUweDNwcGZ4azZhMTA1MCJ9.rExJxHGtG7JXWJwEjJTTCg';
 const ModalMap = ({ isOpen, onClose, info, lng, lat, setLng, setLat }) => {
     const mapContainerRef = useRef();
     const map = useRef(null);
